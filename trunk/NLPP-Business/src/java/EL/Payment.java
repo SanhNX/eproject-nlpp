@@ -8,6 +8,7 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,44 +29,44 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "PaymentID")
-    private Integer paymentID;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
-    @Column(name = "PaymentThrough")
-    private String paymentThrough;
+    @Column(name = "Name")
+    private String name;
     @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(mappedBy = "payment")
-    private List<EvtPayment> evtPaymentList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment")
+    private List<EvtUser> evtUserList;
 
     public Payment() {
     }
 
-    public Payment(Integer paymentID) {
-        this.paymentID = paymentID;
+    public Payment(Integer id) {
+        this.id = id;
     }
 
-    public Payment(Integer paymentID, String paymentThrough, String description) {
-        this.paymentID = paymentID;
-        this.paymentThrough = paymentThrough;
+    public Payment(Integer id, String name, String description) {
+        this.id = id;
+        this.name = name;
         this.description = description;
     }
 
-    public Integer getPaymentID() {
-        return paymentID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPaymentID(Integer paymentID) {
-        this.paymentID = paymentID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getPaymentThrough() {
-        return paymentThrough;
+    public String getName() {
+        return name;
     }
 
-    public void setPaymentThrough(String paymentThrough) {
-        this.paymentThrough = paymentThrough;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -76,18 +77,18 @@ public class Payment implements Serializable {
         this.description = description;
     }
 
-    public List<EvtPayment> getEvtPaymentList() {
-        return evtPaymentList;
+    public List<EvtUser> getEvtUserList() {
+        return evtUserList;
     }
 
-    public void setEvtPaymentList(List<EvtPayment> evtPaymentList) {
-        this.evtPaymentList = evtPaymentList;
+    public void setEvtUserList(List<EvtUser> evtUserList) {
+        this.evtUserList = evtUserList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paymentID != null ? paymentID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +99,7 @@ public class Payment implements Serializable {
             return false;
         }
         Payment other = (Payment) object;
-        if ((this.paymentID == null && other.paymentID != null) || (this.paymentID != null && !this.paymentID.equals(other.paymentID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -106,7 +107,7 @@ public class Payment implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.Payment[paymentID=" + paymentID + "]";
+        return "EL.Payment[id=" + id + "]";
     }
 
 }

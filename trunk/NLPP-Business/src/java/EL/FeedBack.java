@@ -32,51 +32,53 @@ public class FeedBack implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "FeedBackID")
-    private Integer feedBackID;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Subject")
     private String subject;
     @Basic(optional = false)
     @Lob
-    @Column(name = "FBQuestion")
-    private String fBQuestion;
+    @Column(name = "Question")
+    private String question;
     @Lob
-    @Column(name = "FBAnswer")
-    private String fBAnswer;
+    @Column(name = "Answer")
+    private String answer;
     @Basic(optional = false)
-    @Column(name = "DateQuestion")
+    @Column(name = "QuestionDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateQuestion;
-    @Column(name = "DateAnswer")
+    private Date questionDate;
+    @Column(name = "AnswerDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateAnswer;
+    private Date answerDate;
+    @Basic(optional = false)
     @Column(name = "Status")
     private String status;
     @JoinColumn(name = "Email", referencedColumnName = "Email")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
 
     public FeedBack() {
     }
 
-    public FeedBack(Integer feedBackID) {
-        this.feedBackID = feedBackID;
+    public FeedBack(Integer id) {
+        this.id = id;
     }
 
-    public FeedBack(Integer feedBackID, String subject, String fBQuestion, Date dateQuestion) {
-        this.feedBackID = feedBackID;
+    public FeedBack(Integer id, String subject, String question, Date questionDate, String status) {
+        this.id = id;
         this.subject = subject;
-        this.fBQuestion = fBQuestion;
-        this.dateQuestion = dateQuestion;
+        this.question = question;
+        this.questionDate = questionDate;
+        this.status = status;
     }
 
-    public Integer getFeedBackID() {
-        return feedBackID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFeedBackID(Integer feedBackID) {
-        this.feedBackID = feedBackID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSubject() {
@@ -87,36 +89,36 @@ public class FeedBack implements Serializable {
         this.subject = subject;
     }
 
-    public String getFBQuestion() {
-        return fBQuestion;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setFBQuestion(String fBQuestion) {
-        this.fBQuestion = fBQuestion;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getFBAnswer() {
-        return fBAnswer;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setFBAnswer(String fBAnswer) {
-        this.fBAnswer = fBAnswer;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public Date getDateQuestion() {
-        return dateQuestion;
+    public Date getQuestionDate() {
+        return questionDate;
     }
 
-    public void setDateQuestion(Date dateQuestion) {
-        this.dateQuestion = dateQuestion;
+    public void setQuestionDate(Date questionDate) {
+        this.questionDate = questionDate;
     }
 
-    public Date getDateAnswer() {
-        return dateAnswer;
+    public Date getAnswerDate() {
+        return answerDate;
     }
 
-    public void setDateAnswer(Date dateAnswer) {
-        this.dateAnswer = dateAnswer;
+    public void setAnswerDate(Date answerDate) {
+        this.answerDate = answerDate;
     }
 
     public String getStatus() {
@@ -138,7 +140,7 @@ public class FeedBack implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (feedBackID != null ? feedBackID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -149,7 +151,7 @@ public class FeedBack implements Serializable {
             return false;
         }
         FeedBack other = (FeedBack) object;
-        if ((this.feedBackID == null && other.feedBackID != null) || (this.feedBackID != null && !this.feedBackID.equals(other.feedBackID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -157,7 +159,7 @@ public class FeedBack implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.FeedBack[feedBackID=" + feedBackID + "]";
+        return "EL.FeedBack[id=" + id + "]";
     }
 
 }

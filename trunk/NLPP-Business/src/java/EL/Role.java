@@ -8,6 +8,7 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,42 +29,44 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "RoleID")
-    private Integer roleID;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
-    @Column(name = "RoleName")
-    private String roleName;
+    @Column(name = "Name")
+    private String name;
+    @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(mappedBy = "role")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private List<User> userList;
 
     public Role() {
     }
 
-    public Role(Integer roleID) {
-        this.roleID = roleID;
+    public Role(Integer id) {
+        this.id = id;
     }
 
-    public Role(Integer roleID, String roleName) {
-        this.roleID = roleID;
-        this.roleName = roleName;
+    public Role(Integer id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
-    public Integer getRoleID() {
-        return roleID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -85,7 +88,7 @@ public class Role implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (roleID != null ? roleID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -96,7 +99,7 @@ public class Role implements Serializable {
             return false;
         }
         Role other = (Role) object;
-        if ((this.roleID == null && other.roleID != null) || (this.roleID != null && !this.roleID.equals(other.roleID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -104,7 +107,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.Role[roleID=" + roleID + "]";
+        return "EL.Role[id=" + id + "]";
     }
 
 }

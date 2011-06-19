@@ -27,40 +27,40 @@ public class FAQ implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "FAQID")
-    private Integer faqid;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "Subject")
     private String subject;
     @Basic(optional = false)
     @Lob
-    @Column(name = "FAQQuestion")
-    private String fAQQuestion;
+    @Column(name = "Question")
+    private String question;
     @Basic(optional = false)
     @Lob
-    @Column(name = "FAQAnswer")
-    private String fAQAnswer;
+    @Column(name = "Answer")
+    private String answer;
 
     public FAQ() {
     }
 
-    public FAQ(Integer faqid) {
-        this.faqid = faqid;
+    public FAQ(Integer id) {
+        this.id = id;
     }
 
-    public FAQ(Integer faqid, String subject, String fAQQuestion, String fAQAnswer) {
-        this.faqid = faqid;
+    public FAQ(Integer id, String subject, String question, String answer) {
+        this.id = id;
         this.subject = subject;
-        this.fAQQuestion = fAQQuestion;
-        this.fAQAnswer = fAQAnswer;
+        this.question = question;
+        this.answer = answer;
     }
 
-    public Integer getFaqid() {
-        return faqid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFaqid(Integer faqid) {
-        this.faqid = faqid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSubject() {
@@ -71,26 +71,26 @@ public class FAQ implements Serializable {
         this.subject = subject;
     }
 
-    public String getFAQQuestion() {
-        return fAQQuestion;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setFAQQuestion(String fAQQuestion) {
-        this.fAQQuestion = fAQQuestion;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getFAQAnswer() {
-        return fAQAnswer;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setFAQAnswer(String fAQAnswer) {
-        this.fAQAnswer = fAQAnswer;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (faqid != null ? faqid.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -101,7 +101,7 @@ public class FAQ implements Serializable {
             return false;
         }
         FAQ other = (FAQ) object;
-        if ((this.faqid == null && other.faqid != null) || (this.faqid != null && !this.faqid.equals(other.faqid))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -109,7 +109,7 @@ public class FAQ implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.FAQ[faqid=" + faqid + "]";
+        return "EL.FAQ[id=" + id + "]";
     }
 
 }
