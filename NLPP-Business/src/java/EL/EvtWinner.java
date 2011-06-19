@@ -29,12 +29,12 @@ public class EvtWinner implements Serializable {
     @JoinColumn(name = "Email", referencedColumnName = "Email", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private User user;
-    @JoinColumn(name = "EvtAwardID", referencedColumnName = "EvtAwardID")
-    @ManyToOne
-    private EvtAward evtAward;
-    @JoinColumn(name = "EvtID", referencedColumnName = "EvtID", insertable = false, updatable = false)
+    @JoinColumn(name = "EvtID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Event event;
+    @JoinColumn(name = "AwardID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Award award;
 
     public EvtWinner() {
     }
@@ -63,20 +63,20 @@ public class EvtWinner implements Serializable {
         this.user = user;
     }
 
-    public EvtAward getEvtAward() {
-        return evtAward;
-    }
-
-    public void setEvtAward(EvtAward evtAward) {
-        this.evtAward = evtAward;
-    }
-
     public Event getEvent() {
         return event;
     }
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Award getAward() {
+        return award;
+    }
+
+    public void setAward(Award award) {
+        this.award = award;
     }
 
     @Override

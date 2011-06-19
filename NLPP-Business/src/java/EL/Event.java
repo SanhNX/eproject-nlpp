@@ -12,8 +12,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -36,124 +34,112 @@ import javax.persistence.TemporalType;
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "EvtID")
-    private Integer evtID;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
-    @Column(name = "EvtTitle")
-    private String evtTitle;
+    @Column(name = "Title")
+    private String title;
     @Basic(optional = false)
-    @Column(name = "EvtFee")
-    private int evtFee;
+    @Column(name = "Fee")
+    private int fee;
     @Basic(optional = false)
-    @Column(name = "EvtCriteria")
-    private String evtCriteria;
+    @Column(name = "Criteria")
+    private String criteria;
     @Basic(optional = false)
-    @Column(name = "EvtProcedures")
-    private String evtProcedures;
+    @Column(name = "Procedures")
+    private String procedures;
     @Basic(optional = false)
-    @Column(name = "DateStart")
+    @Column(name = "StartDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateStart;
+    private Date startDate;
     @Basic(optional = false)
-    @Column(name = "DateEnd")
+    @Column(name = "EndDate")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateEnd;
+    private Date endDate;
     @JoinTable(name = "tbl_EvtPresenter", joinColumns = {
-        @JoinColumn(name = "EvtID", referencedColumnName = "EvtID")}, inverseJoinColumns = {
-        @JoinColumn(name = "PresenterID", referencedColumnName = "PresenterID")})
+        @JoinColumn(name = "EvtID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "PreID", referencedColumnName = "ID")})
     @ManyToMany
     private List<Presenter> presenterList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    private List<EvtWinner> evtWinnerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<EvtUser> evtUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<EvtPayment> evtPaymentList;
-    @OneToMany(mappedBy = "event")
-    private List<EvtAward> evtAwardList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    private List<EvtWinner> evtWinnerList;
+    private List<Award> awardList;
 
     public Event() {
     }
 
-    public Event(Integer evtID) {
-        this.evtID = evtID;
+    public Event(Integer id) {
+        this.id = id;
     }
 
-    public Event(String evtTitle, int evtFee, String evtCriteria, String evtProcedures, Date dateStart, Date dateEnd) {
-        this.evtTitle = evtTitle;
-        this.evtFee = evtFee;
-        this.evtCriteria = evtCriteria;
-        this.evtProcedures = evtProcedures;
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
+    public Event(Integer id, String title, int fee, String criteria, String procedures, Date startDate, Date endDate) {
+        this.id = id;
+        this.title = title;
+        this.fee = fee;
+        this.criteria = criteria;
+        this.procedures = procedures;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Event(Integer evtID, String evtTitle, int evtFee, String evtCriteria, String evtProcedures, Date dateStart, Date dateEnd) {
-        this.evtID = evtID;
-        this.evtTitle = evtTitle;
-        this.evtFee = evtFee;
-        this.evtCriteria = evtCriteria;
-        this.evtProcedures = evtProcedures;
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getEvtID() {
-        return evtID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setEvtID(Integer evtID) {
-        this.evtID = evtID;
+    public String getTitle() {
+        return title;
     }
 
-    public String getEvtTitle() {
-        return evtTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setEvtTitle(String evtTitle) {
-        this.evtTitle = evtTitle;
+    public int getFee() {
+        return fee;
     }
 
-    public int getEvtFee() {
-        return evtFee;
+    public void setFee(int fee) {
+        this.fee = fee;
     }
 
-    public void setEvtFee(int evtFee) {
-        this.evtFee = evtFee;
+    public String getCriteria() {
+        return criteria;
     }
 
-    public String getEvtCriteria() {
-        return evtCriteria;
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
     }
 
-    public void setEvtCriteria(String evtCriteria) {
-        this.evtCriteria = evtCriteria;
+    public String getProcedures() {
+        return procedures;
     }
 
-    public String getEvtProcedures() {
-        return evtProcedures;
+    public void setProcedures(String procedures) {
+        this.procedures = procedures;
     }
 
-    public void setEvtProcedures(String evtProcedures) {
-        this.evtProcedures = evtProcedures;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public Date getDateStart() {
-        return dateStart;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public void setDateStart(Date dateStart) {
-        this.dateStart = dateStart;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public Date getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public List<Presenter> getPresenterList() {
@@ -164,30 +150,6 @@ public class Event implements Serializable {
         this.presenterList = presenterList;
     }
 
-    public List<EvtUser> getEvtUserList() {
-        return evtUserList;
-    }
-
-    public void setEvtUserList(List<EvtUser> evtUserList) {
-        this.evtUserList = evtUserList;
-    }
-
-    public List<EvtPayment> getEvtPaymentList() {
-        return evtPaymentList;
-    }
-
-    public void setEvtPaymentList(List<EvtPayment> evtPaymentList) {
-        this.evtPaymentList = evtPaymentList;
-    }
-
-    public List<EvtAward> getEvtAwardList() {
-        return evtAwardList;
-    }
-
-    public void setEvtAwardList(List<EvtAward> evtAwardList) {
-        this.evtAwardList = evtAwardList;
-    }
-
     public List<EvtWinner> getEvtWinnerList() {
         return evtWinnerList;
     }
@@ -196,10 +158,26 @@ public class Event implements Serializable {
         this.evtWinnerList = evtWinnerList;
     }
 
+    public List<EvtUser> getEvtUserList() {
+        return evtUserList;
+    }
+
+    public void setEvtUserList(List<EvtUser> evtUserList) {
+        this.evtUserList = evtUserList;
+    }
+
+    public List<Award> getAwardList() {
+        return awardList;
+    }
+
+    public void setAwardList(List<Award> awardList) {
+        this.awardList = awardList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (evtID != null ? evtID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -210,7 +188,7 @@ public class Event implements Serializable {
             return false;
         }
         Event other = (Event) object;
-        if ((this.evtID == null && other.evtID != null) || (this.evtID != null && !this.evtID.equals(other.evtID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -218,7 +196,7 @@ public class Event implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.Event[evtID=" + evtID + "]";
+        return "EL.Event[id=" + id + "]";
     }
 
 }

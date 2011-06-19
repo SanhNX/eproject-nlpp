@@ -28,76 +28,76 @@ public class Presenter implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "PresenterID")
-    private Integer presenterID;
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
-    @Column(name = "PresenterName")
-    private String presenterName;
+    @Column(name = "Name")
+    private String name;
     @Basic(optional = false)
-    @Column(name = "PresenterAddress")
-    private String presenterAddress;
+    @Column(name = "Address")
+    private String address;
     @Basic(optional = false)
-    @Column(name = "PresenterEmail")
-    private String presenterEmail;
+    @Column(name = "Email")
+    private String email;
     @Basic(optional = false)
-    @Column(name = "PresenterPhone")
-    private String presenterPhone;
+    @Column(name = "Phone")
+    private String phone;
     @ManyToMany(mappedBy = "presenterList")
     private List<Event> eventList;
 
     public Presenter() {
     }
 
-    public Presenter(Integer presenterID) {
-        this.presenterID = presenterID;
+    public Presenter(Integer id) {
+        this.id = id;
     }
 
-    public Presenter(Integer presenterID, String presenterName, String presenterAddress, String presenterEmail, String presenterPhone) {
-        this.presenterID = presenterID;
-        this.presenterName = presenterName;
-        this.presenterAddress = presenterAddress;
-        this.presenterEmail = presenterEmail;
-        this.presenterPhone = presenterPhone;
+    public Presenter(Integer id, String name, String address, String email, String phone) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
     }
 
-    public Integer getPresenterID() {
-        return presenterID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPresenterID(Integer presenterID) {
-        this.presenterID = presenterID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getPresenterName() {
-        return presenterName;
+    public String getName() {
+        return name;
     }
 
-    public void setPresenterName(String presenterName) {
-        this.presenterName = presenterName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPresenterAddress() {
-        return presenterAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPresenterAddress(String presenterAddress) {
-        this.presenterAddress = presenterAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getPresenterEmail() {
-        return presenterEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPresenterEmail(String presenterEmail) {
-        this.presenterEmail = presenterEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPresenterPhone() {
-        return presenterPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPresenterPhone(String presenterPhone) {
-        this.presenterPhone = presenterPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<Event> getEventList() {
@@ -111,7 +111,7 @@ public class Presenter implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (presenterID != null ? presenterID.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +122,7 @@ public class Presenter implements Serializable {
             return false;
         }
         Presenter other = (Presenter) object;
-        if ((this.presenterID == null && other.presenterID != null) || (this.presenterID != null && !this.presenterID.equals(other.presenterID))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -130,7 +130,7 @@ public class Presenter implements Serializable {
 
     @Override
     public String toString() {
-        return "EL.Presenter[presenterID=" + presenterID + "]";
+        return "EL.Presenter[id=" + id + "]";
     }
 
 }

@@ -6,8 +6,6 @@
 package EL;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -28,13 +26,13 @@ public class EvtUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EvtUserPK evtUserPK;
-    @Basic(optional = false)
-    @Column(name = "StatusPayment")
-    private boolean statusPayment;
     @JoinColumn(name = "Email", referencedColumnName = "Email", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private User user;
-    @JoinColumn(name = "EvtID", referencedColumnName = "EvtID", insertable = false, updatable = false)
+    @JoinColumn(name = "PaymentID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Payment payment;
+    @JoinColumn(name = "EvtID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Event event;
 
@@ -43,11 +41,6 @@ public class EvtUser implements Serializable {
 
     public EvtUser(EvtUserPK evtUserPK) {
         this.evtUserPK = evtUserPK;
-    }
-
-    public EvtUser(EvtUserPK evtUserPK, boolean statusPayment) {
-        this.evtUserPK = evtUserPK;
-        this.statusPayment = statusPayment;
     }
 
     public EvtUser(int evtID, String email) {
@@ -62,20 +55,20 @@ public class EvtUser implements Serializable {
         this.evtUserPK = evtUserPK;
     }
 
-    public boolean getStatusPayment() {
-        return statusPayment;
-    }
-
-    public void setStatusPayment(boolean statusPayment) {
-        this.statusPayment = statusPayment;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Event getEvent() {

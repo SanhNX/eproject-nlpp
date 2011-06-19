@@ -55,17 +55,15 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "Phone")
     private String phone;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<FeedBack> feedBackList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<EvtUser> evtUserList;
-    @JoinColumn(name = "RoleID", referencedColumnName = "RoleID")
-    @ManyToOne
-    private Role role;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<EvtPayment> evtPaymentList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EvtWinner> evtWinnerList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<EvtUser> evtUserList;
+    @JoinColumn(name = "RoleID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Role role;
 
     public User() {
     }
@@ -148,6 +146,14 @@ public class User implements Serializable {
         this.feedBackList = feedBackList;
     }
 
+    public List<EvtWinner> getEvtWinnerList() {
+        return evtWinnerList;
+    }
+
+    public void setEvtWinnerList(List<EvtWinner> evtWinnerList) {
+        this.evtWinnerList = evtWinnerList;
+    }
+
     public List<EvtUser> getEvtUserList() {
         return evtUserList;
     }
@@ -162,22 +168,6 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public List<EvtPayment> getEvtPaymentList() {
-        return evtPaymentList;
-    }
-
-    public void setEvtPaymentList(List<EvtPayment> evtPaymentList) {
-        this.evtPaymentList = evtPaymentList;
-    }
-
-    public List<EvtWinner> getEvtWinnerList() {
-        return evtWinnerList;
-    }
-
-    public void setEvtWinnerList(List<EvtWinner> evtWinnerList) {
-        this.evtWinnerList = evtWinnerList;
     }
 
     @Override
