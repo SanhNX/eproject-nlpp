@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author XuanSanh_IT
+ * @author XuanSanh_ITaaaaaa
  */
 @Stateless
 public class UserBLO implements UserBLORemote {
