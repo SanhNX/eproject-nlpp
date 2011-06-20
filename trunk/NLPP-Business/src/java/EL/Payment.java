@@ -8,7 +8,6 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,7 +36,7 @@ public class Payment implements Serializable {
     @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment")
+    @OneToMany(mappedBy = "payment")
     private List<EvtUser> evtUserList;
 
     public Payment() {

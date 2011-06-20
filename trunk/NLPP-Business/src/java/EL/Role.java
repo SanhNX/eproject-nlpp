@@ -8,7 +8,6 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,10 +33,9 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "Name")
     private String name;
-    @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    @OneToMany(mappedBy = "role")
     private List<User> userList;
 
     public Role() {
@@ -47,10 +45,9 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public Role(Integer id, String name, String description) {
+    public Role(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public Integer getId() {

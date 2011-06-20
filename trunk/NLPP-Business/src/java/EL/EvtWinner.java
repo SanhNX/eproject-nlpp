@@ -33,7 +33,7 @@ public class EvtWinner implements Serializable {
     @ManyToOne(optional = false)
     private Event event;
     @JoinColumn(name = "AwardID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Award award;
 
     public EvtWinner() {

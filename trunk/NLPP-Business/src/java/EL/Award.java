@@ -8,11 +8,8 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,17 +29,16 @@ import javax.persistence.Table;
 public class Award implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "award")
+    @OneToMany(mappedBy = "award")
     private List<EvtWinner> evtWinnerList;
     @JoinColumn(name = "EvtID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Event event;
 
     public Award() {

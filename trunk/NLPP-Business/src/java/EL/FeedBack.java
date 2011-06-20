@@ -51,11 +51,10 @@ public class FeedBack implements Serializable {
     @Column(name = "AnswerDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date answerDate;
-    @Basic(optional = false)
     @Column(name = "Status")
     private String status;
     @JoinColumn(name = "Email", referencedColumnName = "Email")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User user;
 
     public FeedBack() {
@@ -65,12 +64,11 @@ public class FeedBack implements Serializable {
         this.id = id;
     }
 
-    public FeedBack(Integer id, String subject, String question, Date questionDate, String status) {
+    public FeedBack(Integer id, String subject, String question, Date questionDate) {
         this.id = id;
         this.subject = subject;
         this.question = question;
         this.questionDate = questionDate;
-        this.status = status;
     }
 
     public Integer getId() {
