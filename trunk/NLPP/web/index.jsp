@@ -4,6 +4,7 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,6 +30,18 @@
                         txtMailing:{
                             required: true,
                             email:true
+                        }
+                    }   //end rules
+                });  //end validate
+            }); //end function
+            $(document).ready(function(){
+                $("#newsletter-form1").validate({
+                    rules:{
+                        txtEmail:{
+                            required: true
+                        },
+                        txtPassword:{
+                            required:true
                         }
                     }   //end rules
                 });  //end validate
@@ -72,8 +85,8 @@
                         <li><span><a href="#">Presenter Information</a></span></li>
                         <%
                                     HttpSession s = request.getSession();
-                                    String ses = (String) s.getAttribute("user");
-                                    if (ses == null) {
+                                    User user = (User)s.getAttribute("user");
+                                    if (user == null) {
                         %>
                         <li><span><a href="User-login.jsp">Login</a></span></li>
                         <li><span><a href="User-register.jsp">Register</a></span></li>
@@ -81,31 +94,29 @@
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
                     <%
-                                s = request.getSession();
-                                ses = (String) s.getAttribute("user");
-                                if (ses != null) {
+                                if (user == null) {
                     %>
-                    <form action="" id="newsletter-form1">
+                    <form action="UserCO?action=login" method="POST" id="newsletter-form1">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>Login Site</h2>
-                                <a style="color:#FFF">Username</a>
-                                <input type="text" value="">
+                                <a style="color:#FFF">Email</a>
+                                <input type="text" name="txtEmail" size="25">
                                 <a style="color:#FFF">Password</a>
-                                <input type="password" value="">
-                                <div class="clear"><a href="register.jsp" class="fleft">Register User</a><a href="#" class="fright">Submit</a></div>
+                                <input type="password" name="txtPassword" size="25">
+                                <br/><br/>
+                                <div><a href="register.jsp" class="fleft">Register User</a><input style="float: right; " type="submit" value="Submit" /></div>
                             </div>                            
                         </fieldset>
                     </form>
-                    <%                                            } else {
-                    %>
+                    <%} else { %>
                     <form action="" method="POST" id="newsletter-form2">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>You Are Sign In</h2>
-                                <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">sanh232003</a>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
                                 <br/><br/>
-                                <div><a href="#" class="fleft">My Profile</a><a href="#" class="fright">Logout</a></div>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
                             </div>
                         </fieldset>
                     </form>

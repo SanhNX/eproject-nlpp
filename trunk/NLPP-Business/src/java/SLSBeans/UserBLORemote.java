@@ -6,6 +6,7 @@
 package SLSBeans;
 
 import EL.User;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -16,6 +17,8 @@ import javax.ejb.Remote;
 @Remote
 public interface UserBLORemote {
 
-    List<User> checkLogin(String email, String password);
+    User checkUser(String email, String password);
+
+    boolean updateProfile(String email,String fullName, Date birthday, boolean gender, String address, String phone);
     
 }

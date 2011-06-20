@@ -36,7 +36,7 @@
             $(document).ready(function(){
                 $("#contacts-form").validate({
                     rules:{
-                        txtUsername:{
+                        txtEmail:{
                             required: true
                         },
                         txtPassword:{
@@ -78,16 +78,10 @@
                     <h3>Categories</h3>
                     <ul class="categories">
                         <li><span><a href="index.jsp">Home Page</a></span></li>
-                        <li><span><a href="#">Event Information</a></span></li>
+                        <li><span><a href="User-Events.jsp">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
                         <li><span><a href="#">Presenter Information</a></span></li>
-                        <%
-                        HttpSession s = request.getSession();
-                        String ses = (String) s.getAttribute("user");
-                        if (ses == null) {
-                        %>
                         <li><span><a href="User-register.jsp">Register</a></span></li>
-                        <%}%>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
 
@@ -122,15 +116,15 @@
                     <div class="inside1">
 
                         <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
-                        <form id="contacts-form" action="" method="POST">
+                        <form id="contacts-form" action="UserCO?action=login" method="POST">
                             <table cellpadding="110" cellspacing="15">
                                 <tr class="field">
                                     <td><b>Email Address &nbsp;</b></td>
-                                    <td><input type="text" name="txtUsername" value="" size="30"/></td>
+                                    <td><input type="text" name="txtEmail" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td><b>Password &nbsp;</b></td>
-                                    <td><input type="text" name="txtPassword" value="" size="30"/></td>
+                                    <td><input type="password" name="txtPassword" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td></td>

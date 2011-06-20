@@ -4,6 +4,9 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -122,39 +125,16 @@
                         <li><span><a href="#">Presenter Information</a></span></li>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
-                    <%
-                        HttpSession s = request.getSession();
-                        String ses = (String) s.getAttribute("user");
-                        if (ses != null) {
-                    %>
-                    <form action="" id="newsletter-form1">
+                    <form action="" method="POST" id="newsletter-form2">
                         <fieldset>
                             <div class="rowElem">
-                                <h2>Login Site</h2>
-                                <a style="color:#FFF">Username</a>
-                                <input type="text" value="">
-                                <a style="color:#FFF">Password</a>
-                                <input type="password" value="">
-                                <div class="clear"><a href="register.jsp" class="fleft">Register User</a><a href="#" class="fright">Submit</a></div>
+                                <h2>You Are Sign In</h2>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
+                                <br/><br/>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
                             </div>
                         </fieldset>
                     </form>
-                    <%
-                        }else{
-                    %>
-                        <form action="" method="POST" id="newsletter-form2">
-                            <fieldset>
-                                <div class="rowElem">
-                                    <h2>You Are Sign In</h2>
-                                    <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">sanh232003</a>
-                                    <br/><br/>
-                                    <div><a href="#" class="fleft">My Profile</a><a href="#" class="fright">Logout</a></div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    <%
-                        }
-                    %>
                     <h2>Fresh <span>News</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
@@ -175,15 +155,15 @@
                     </div>
                     <div class="inside1">
                         <h2><img src="images/icon_cube.png" width="64" height="95">Update Profile <span>Form</span></h2>
-                        <form id="contacts-form" action="" method="POST">
+                        <form id="contacts-form" action="UserCO?action=updateProfile" method="POST">
                             <table cellpadding="110" cellspacing="15">
                                 <tr class="field">
                                     <td>Birthday &nbsp;</td>
-                                    <td><input type="text" value="" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
+                                    <td><input type="text" value="${requestScope.birthday}" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Full Name &nbsp;</td>
-                                    <td><input type="text" name="txtFullname" value="" size="30"/></td>
+                                    <td><input type="text" name="txtFullname" value="${requestScope.user.fullName}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Gender &nbsp;</td>
@@ -194,11 +174,11 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Address &nbsp;</td>
-                                    <td><input type="text" name="txtAddress" value="" size="30"/></td>
+                                    <td><input type="text" name="txtAddress" value="${requestScope.user.address}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Phone Number &nbsp;</td>
-                                    <td><input type="text" name="txtPhone" value="" size="30"/></td>
+                                    <td><input type="text" name="txtPhone" value="${requestScope.user.phone}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td></td>
@@ -211,7 +191,7 @@
                             <table>
                                 <tr class="field">
                                     <td>New Password &nbsp;</td>
-                                    <td><input type="password" name="txtPass" value="" size="30"  id="txtPass"/></td>
+                                    <td><input type="password" name="txtPass" size="30"  id="txtPass"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Re-Password &nbsp;</td>
