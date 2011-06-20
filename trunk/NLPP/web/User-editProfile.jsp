@@ -92,6 +92,14 @@
         <title>National Level Paper Presentation</title>
     </head>
     <body id="page1">
+        <%
+                    HttpSession s = request.getSession();
+                    User user = (User) s.getAttribute("user");
+                    if (user == null) {
+        %>
+        <jsp:forward page="/User-login.jsp"/>
+        <%}%>
+
         <div class="wrap">
             <!-- header -->
             <header>

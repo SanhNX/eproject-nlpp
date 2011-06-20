@@ -17,24 +17,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
-        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
-        <script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
-        <script type="text/javascript">
-            window.onload = function(){
-                new JsDatePick({
-                    useMode:2,
-                    target:"inputField",
-                    isStripped:false,
-                    selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
-                    },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
-                });
-            };
-        </script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -60,34 +42,6 @@
                         }
                     }   //end rules
                 });  //end validate
-                $("#contacts-form").validate({
-                    rules:{
-                        txtPass:{
-                            required:true,
-                            rangelength:[6,25]
-                        },
-                        txtRePass:{
-                            equalTo:"#txtPass"
-                        },
-                        txtOldPass:{
-                            required:true
-                        },
-                        txtBirthday:{
-                            required:true
-                        },
-                        txtFullname:{
-                            required:true
-                        },
-                        txtAddress:{
-                            required:true
-                        },
-                        txtPhone:{
-                            required:true,
-                            phoneVN:true
-                        }
-                    }   //end rules
-                });  //end validate
-            }); //end function
         </script>
         <title>National Level Paper Presentation</title>
     </head>
