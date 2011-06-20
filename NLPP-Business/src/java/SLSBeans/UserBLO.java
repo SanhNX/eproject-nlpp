@@ -4,7 +4,9 @@
  */
 package SLSBeans;
 
+import EL.Role;
 import EL.User;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -47,15 +49,29 @@ public class UserBLO implements UserBLORemote {
         return true;
     }
 
-    public boolean add(User u) {
+    public boolean add(Role role, User user) {
         try {
-            em.persist(u);
+            //binding cho contact va customer thay nhau ( binding master va slave obj )
+            List<User> users = new ArrayList<User>();//Tao ra 1 List co 1 Order vi tham so truyen zo setCustOrderList la 1 cai List
+            users.add(user);
+            role.setUserList(users);
+            user.setRole(role);
+            //neu add 2 thang xuong 1 luc thi dung persit
+            //con truong hop nay da co thang customer trong DB nen ta se goi ham merge de update lai bang order
+            this.em.persist(user);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
         return true;
     }
+
+    public Role getRole(int roleID) {
+        Role role = em.find(Role.class, roleID);
+        return role;
+    }
+
+    
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

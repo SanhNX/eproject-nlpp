@@ -57,6 +57,9 @@ public class Event implements Serializable {
     @Column(name = "EndDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+    @Basic(optional = false)
+    @Column(name = "Description")
+    private String description;
     @JoinTable(name = "tbl_EvtPresenter", joinColumns = {
         @JoinColumn(name = "EvtID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "PreID", referencedColumnName = "ID")})
@@ -66,7 +69,7 @@ public class Event implements Serializable {
     private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     private List<EvtUser> evtUserList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(mappedBy = "event")
     private List<Award> awardList;
 
     public Event() {
@@ -76,7 +79,7 @@ public class Event implements Serializable {
         this.id = id;
     }
 
-    public Event(Integer id, String title, int fee, String criteria, String procedures, Date startDate, Date endDate) {
+    public Event(Integer id, String title, int fee, String criteria, String procedures, Date startDate, Date endDate, String description) {
         this.id = id;
         this.title = title;
         this.fee = fee;
@@ -84,6 +87,7 @@ public class Event implements Serializable {
         this.procedures = procedures;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.description = description;
     }
 
     public Integer getId() {
@@ -140,6 +144,14 @@ public class Event implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Presenter> getPresenterList() {

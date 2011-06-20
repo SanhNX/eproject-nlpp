@@ -80,7 +80,7 @@
                     <h3>Categories</h3>
                     <ul class="categories">
                         <li><span><a href="index.jsp">Home Page</a></span></li>
-                        <li><span><a href="#">Event Information</a></span></li>
+                        <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
                         <li><span><a href="#">Presenter Information</a></span></li>
                         <%
@@ -132,7 +132,7 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
-                        <form action="" method="POST" id="newsletter-form">
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
                             <fieldset>
                                 <div class="rowElem">
                                     <h2>Newsletter</h2>

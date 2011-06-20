@@ -5,6 +5,7 @@
 
 package SLSBeans;
 
+import EL.Role;
 import EL.User;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,10 @@ public interface UserBLORemote {
 
     boolean updatePass(String email, String password);
 
-    boolean add(User u);
+    boolean add(Role role, User user);
+
+    Role getRole(int roleID);
+
+    
     
 }

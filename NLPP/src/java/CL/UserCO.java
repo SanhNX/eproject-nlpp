@@ -139,32 +139,6 @@ public class UserCO extends HttpServlet {
                 ex.printStackTrace();
                 response.sendRedirect("User-ChangePassError.jsp");
             }
-        } else if (action.equalsIgnoreCase("register")) {
-            try {
-                String email = request.getParameter("txtEmail");
-                String pass = request.getParameter("txtPass");
-                DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-                Date birthday = (Date) dateFormat.parse(request.getParameter("txtBirthday").toString());
-                String fullName = request.getParameter("txtFullname");
-                String txtgender = request.getParameter("rbtType");
-                boolean gender = true;
-                if (txtgender.equalsIgnoreCase("Male")) {
-                    gender = true;
-                } else {
-                    gender = false;
-                }
-                String address = request.getParameter("txtAddress");
-                String phone = request.getParameter("txtPhone");
-                Role role = new Role();
-                role.getId();
-                User u = new User(email, pass, fullName, birthday, gender, address, phone,role);
-                boolean result = userBLO.add(u);
-                if(result){
-                    response.sendRedirect("User-login.jsp");
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
         }
     }
 

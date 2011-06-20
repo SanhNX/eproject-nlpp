@@ -4,9 +4,25 @@
         <servlet-name>UserCO</servlet-name>
         <servlet-class>CL.UserCO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VisiterCO</servlet-name>
+        <servlet-class>CL.VisiterCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserEventCO</servlet-name>
+        <servlet-class>CL.UserEventCO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserCO</servlet-name>
         <url-pattern>/UserCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisiterCO</servlet-name>
+        <url-pattern>/VisiterCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserEventCO</servlet-name>
+        <url-pattern>/UserEventCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

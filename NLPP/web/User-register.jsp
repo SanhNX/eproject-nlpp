@@ -169,7 +169,7 @@
                     <div class="inside1">
 
                         <h2><img src="images/icon_cube.png" width="64" height="95"/>Register <span>Form</span></h2>
-                        <form id="contacts-form" action="UserCO?action=register" method="POST">
+                        <form id="contacts-form" action="VisiterCO?action=register" method="POST">
                             <table cellpadding="110" cellspacing="15">
                                 <tr class="field">
                                     <td>Your E-mail &nbsp;</td>

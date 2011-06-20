@@ -30,7 +30,7 @@ public class EvtUser implements Serializable {
     @ManyToOne(optional = false)
     private User user;
     @JoinColumn(name = "PaymentID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Payment payment;
     @JoinColumn(name = "EvtID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)

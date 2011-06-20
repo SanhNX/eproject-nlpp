@@ -42,6 +42,7 @@
                         }
                     }   //end rules
                 });  //end validate
+            }); //end function
         </script>
         <title>National Level Paper Presentation</title>
     </head>

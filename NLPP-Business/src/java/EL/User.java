@@ -55,14 +55,14 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "Phone")
     private String phone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private List<FeedBack> feedBackList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<EvtUser> evtUserList;
     @JoinColumn(name = "RoleID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Role role;
 
     public User() {
@@ -72,7 +72,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone, Role role) {
+    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -80,7 +80,6 @@ public class User implements Serializable {
         this.gender = gender;
         this.address = address;
         this.phone = phone;
-        this.role = role;
     }
 
     public String getEmail() {

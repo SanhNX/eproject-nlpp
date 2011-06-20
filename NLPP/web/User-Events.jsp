@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -111,7 +112,7 @@
                     </form>
                     <%                                }
                     %>
-                    <h2>Fresh <span>News</span></h2>
+                    <h2>Featured <span>Events</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
                             <h4><a href="#">Sed ut perspiciatis unde</a></h4>
@@ -141,26 +142,19 @@
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div><div class="inner_copy">More <a href="http://www.templatemonster.com/">Website Templates</a> at TemplateMonster.com!</div>
                     <div class="inside">
+                        
                         <h2><img src="images/icon_cube.png" width="64" height="95">View All <span>Events</span></h2>
                         <ul class="articles">
+                            <c:forEach var="event" items="${requestScope.events}">
                             <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">About Template</a></h4>
-                                Free 1028X768 Optimized Website Template from TemplateMonster.com! We hope that you like this template and will use for your websites. </li>
-                            <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">Branch Office</a></h4>
-                                Sed ut perspiciatis unomnis iste natus error sit volup tatem accusantiu loremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</li>
-                            <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">Student’s Time</a></h4>
-                                Eque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</li>
-                            <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">About Template</a></h4>
-                                Free 1028X768 Optimized Website Template from TemplateMonster.com! We hope that you like this template and will use for your websites. </li>
-                            <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">Branch Office</a></h4>
-                                Sed ut perspiciatis unomnis iste natus error sit volup tatem accusantiu loremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</li>
-                            <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">Student’s Time</a></h4>
-                                Eque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore.</li>
+                                <h4><a href="User-Event.jsp">${event.title}</a></h4>
+                                ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                <a style="color: #0087c1;" href="#" class="fright">Read More</a>
+                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </section>
