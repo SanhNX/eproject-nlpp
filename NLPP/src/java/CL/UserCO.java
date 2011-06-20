@@ -9,12 +9,8 @@ import SLSBeans.UserBLORemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -78,10 +74,11 @@ public class UserCO extends HttpServlet {
             session.removeAttribute("user");
             response.sendRedirect("index.jsp");
         } else if (action.equalsIgnoreCase("myProfile")) {
-            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
             session = request.getSession();
             User user = (User) session.getAttribute("user");
+            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
             String birthday = dateFormat.format(user.getBirthday());
+            request.setAttribute("gender", user.getGender());
             request.setAttribute("user", user);
             request.setAttribute("birthday", birthday);
             RequestDispatcher rd = request.getRequestDispatcher("User-editProfile.jsp");
@@ -109,11 +106,37 @@ public class UserCO extends HttpServlet {
                 boolean result = userBLO.updateProfile(email, fullName, birthday, gender, address, phone);
 
                 if (result) {
+                    user = userBLO.checkUser(user.getEmail(), user.getPassword());
+                    String birthday1 = dateFormat.format(user.getBirthday());
+                    request.setAttribute("gender", user.getGender());
+                    request.setAttribute("user", user);
+                    request.setAttribute("birthday", birthday1);
                     RequestDispatcher rd = request.getRequestDispatcher("User-editProfile.jsp");
                     rd.forward(request, response);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
+            }
+        } else if (action.equalsIgnoreCase("updatePass")) {
+            try {
+                String Pass = request.getParameter("txtPass");
+                String rePass = request.getParameter("txtRePass");
+                String oldPass = request.getParameter("txtOldPass");
+                session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                User u = userBLO.checkUser(user.getEmail(), oldPass);
+                if (u != null) {
+                    boolean result = userBLO.updatePass(user.getEmail(), Pass);
+                    if (result) {
+                        System.out.println("------------------UPDATE PASS SUCCESSFUL----------------");// For Debug
+                        session = request.getSession();
+                        session.removeAttribute("user");
+                        response.sendRedirect("User-login-confirm.jsp");
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                response.sendRedirect("User-ChangePassError.jsp");
             }
         }
     }
