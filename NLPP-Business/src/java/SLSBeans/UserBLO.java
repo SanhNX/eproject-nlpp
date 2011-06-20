@@ -47,6 +47,16 @@ public class UserBLO implements UserBLORemote {
         return true;
     }
 
+    public boolean add(User u) {
+        try {
+            em.persist(u);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

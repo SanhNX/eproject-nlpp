@@ -72,7 +72,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone) {
+    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone, Role role) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -80,6 +80,7 @@ public class User implements Serializable {
         this.gender = gender;
         this.address = address;
         this.phone = phone;
+        this.role = role;
     }
 
     public String getEmail() {

@@ -22,5 +22,7 @@ public interface UserBLORemote {
     boolean updateProfile(String email,String fullName, Date birthday, boolean gender, String address, String phone);
 
     boolean updatePass(String email, String password);
+
+    boolean add(User u);
     
 }
