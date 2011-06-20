@@ -30,15 +30,23 @@ public class UserBLO implements UserBLORemote {
     }
 
     public boolean updateProfile(String email,String fullName, Date birthday, boolean gender, String address, String phone) {
-        String hql = "Update User AS u SET u.fullName = '"+ fullName +"',u.birthday = '"+birthday+"',"
-                + "u.gender = '"+gender+"',u.address = '"+address+"',u.phone = '"+phone+"' where u.email = '"+email+"'  ";
-        Query query = this.em.createQuery(hql);
-        int row = query.executeUpdate();
-        if(row>0){
-            return true;
-        }
-        return false;
+        User u = em.find(User.class, email);
+        u.setFullName(fullName);
+        u.setBirthday(birthday);
+        u.setGender(gender);
+        u.setAddress(address);
+        u.setPhone(phone);
+        em.persist(u);
+        return true;
     }
+
+    public boolean updatePass(String email, String password) {
+        User u = em.find(User.class, email);
+        u.setPassword(password);
+        em.persist(u);
+        return true;
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

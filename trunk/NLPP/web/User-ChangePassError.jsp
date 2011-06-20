@@ -155,50 +155,10 @@
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div>
                     <div class="inside1">
-                        <h2><img src="images/icon_cube.png" width="64" height="95">Update Profile <span>Form</span></h2>
-                        <form id="contacts-form" action="UserCO?action=updateProfile" method="POST">
-                            <table cellpadding="110" cellspacing="15">
-                                <tr class="field">
-                                    <td>Birthday &nbsp;</td>
-                                    <td><input type="text" value="${requestScope.birthday}" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td>Full Name &nbsp;</td>
-                                    <td><input type="text" name="txtFullname" value="${requestScope.user.fullName}" size="30"/></td>
-                                </tr>
-                                <c:if test="${requestScope.gender==true}">
-                                    <tr class="field">
-                                        <td>Gender &nbsp;</td>
-                                        <td>
-                                            <input type="radio" name="rbtType" value="Male" checked="true"> Male
-                                            <input type="radio" name="rbtType" value="FeMale"> FeMale
-                                        </td>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${requestScope.gender==false}">
-                                    <tr class="field">
-                                        <td>Gender &nbsp;</td>
-                                        <td>
-                                            <input type="radio" name="rbtType" value="Male" > Male
-                                            <input type="radio" name="rbtType" value="FeMale" checked="true"> FeMale
-                                        </td>
-                                    </tr>
-                                </c:if>
-                                <tr class="field">
-                                    <td>Address &nbsp;</td>
-                                    <td><input type="text" name="txtAddress" value="${requestScope.user.address}" size="30"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td>Phone Number &nbsp;</td>
-                                    <td><input type="text" name="txtPhone" value="${requestScope.user.phone}" size="30"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td></td>
-                                    <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Update Now"></td>
-                                </tr>
-                            </table>
-                        </form>
                         <h2><img src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
+                        <h4><span>The Problems did happened in the process of the change password</span></h4>
+                        <h4><span>Please Try Again Or </span><u><a href="index.jsp">Back To Index </a></u></h4>
+                        <br/>
                         <form id="contacts-form1" action="UserCO?action=updatePass" method="POST">
                             <table>
                                 <tr class="field">
