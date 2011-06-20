@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : Jun 6, 2011, 11:02:14 PM
-    Author     : XuanSanh_ITaaaaaaaaaaa
+    Author     : XuanSanh_IT
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
