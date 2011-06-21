@@ -26,8 +26,13 @@ public class EventBLO implements EventBLORemote {
         Query query = this.em.createQuery(hql);
         List<Event> events = query.getResultList();
         return events;
-
     }
+
+    public Event getByID(int evtID) {
+        Event evt = em.find(Event.class, evtID);
+        return evt;
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 

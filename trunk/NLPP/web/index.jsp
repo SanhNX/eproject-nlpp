@@ -149,7 +149,7 @@
                 <section id="content">
                     <div id="banner">
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
-                    </div><div class="inner_copy">More <a href="http://www.templatemonster.com/">Website Templates</a> at TemplateMonster.com!</div>
+                    </div>
                     <div class="inside">
                         <h2>Recent <span>Events</span></h2>
                         <ul class="list">
