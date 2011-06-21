@@ -6,9 +6,13 @@
 package CL;
 
 import EL.Event;
+import EL.Presenter;
 import SLSBeans.EventBLORemote;
+import SLSBeans.PresenterBLORemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserEventCO extends HttpServlet {
     EventBLORemote eventBLO;
+    PresenterBLORemote preBLO;
 
     @Override
     public void init() throws ServletException {
@@ -34,6 +39,7 @@ public class UserEventCO extends HttpServlet {
             props.load(new java.io.FileInputStream(jndiFileName));
             InitialContext ctx = new InitialContext(props);
             eventBLO = (EventBLORemote) ctx.lookup("EventBLO/remote");
+            preBLO = (PresenterBLORemote) ctx.lookup("PresenterBLO/remote");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -59,8 +65,18 @@ public class UserEventCO extends HttpServlet {
         } else if(action.equalsIgnoreCase("event")){
             String id = request.getParameter("id");
             Event event = eventBLO.getByID(Integer.parseInt(id));
+            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            String startDate = dateFormat.format(event.getStartDate());
+            String endDate = dateFormat.format(event.getEndDate());
             request.setAttribute("event", event);
+            request.setAttribute("startDate", startDate);
+            request.setAttribute("endDate", endDate);
             RequestDispatcher rd = request.getRequestDispatcher("User-Event.jsp");
+            rd.forward(request, response);
+        } else if(action.equalsIgnoreCase("listPresnter")){
+            List<Presenter> presenters = preBLO.getAll();
+            request.setAttribute("presenters", presenters);
+            RequestDispatcher rd = request.getRequestDispatcher("User-ListPresenter.jsp");
             rd.forward(request, response);
         }
     } 

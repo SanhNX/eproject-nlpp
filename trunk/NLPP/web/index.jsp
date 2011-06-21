@@ -55,7 +55,6 @@
             <header>
                 <div class="container">
                     <img src="images/logo_96.png" width="270" height="270"/>
-                    <!--                    <h1><a href="index.jsp">Student's site</a></h1>-->
                     <nav>
                         <ul>
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
@@ -82,10 +81,10 @@
                         <li><span><a href="index.jsp">Home Page</a></span></li>
                         <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
-                        <li><span><a href="#">Presenter Information</a></span></li>
+                        <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
                         <%
                                     HttpSession s = request.getSession();
-                                    User user = (User)s.getAttribute("user");
+                                    User user = (User) s.getAttribute("user");
                                     if (user == null) {
                         %>
                         <li><span><a href="User-login.jsp">Login</a></span></li>
@@ -109,7 +108,7 @@
                             </div>                            
                         </fieldset>
                     </form>
-                    <%} else { %>
+                    <%} else {%>
                     <form action="" method="POST" id="newsletter-form2">
                         <fieldset>
                             <div class="rowElem">
@@ -120,8 +119,7 @@
                             </div>
                         </fieldset>
                     </form>
-                    <%                                }
-                    %>
+                    <%}%>
                     <h2>Fresh <span>News</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
