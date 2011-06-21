@@ -31,6 +31,13 @@ public class UserBLO implements UserBLORemote {
         return user;
     }
 
+
+     public User checkAdmin(String email, String password) {
+        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 8 ";
+        Query query = this.em.createQuery(hql);
+        User user = (User) query.getSingleResult();
+        return user;
+    }
     public boolean updateProfile(String email,String fullName, Date birthday, boolean gender, String address, String phone) {
         User u = em.find(User.class, email);
         u.setFullName(fullName);
