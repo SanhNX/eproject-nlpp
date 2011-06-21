@@ -4,7 +4,9 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -14,8 +16,6 @@
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="css/style-table.css" />
-        <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
-        <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -45,7 +45,6 @@
             <header>
                 <div class="container">
                     <img src="images/logo_96.png" width="270" height="270"/>
-                    <!--                    <h1><a href="index.jsp">Student's site</a></h1>-->
                     <nav>
                         <ul>
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
@@ -75,8 +74,8 @@
                         <li><span><a href="#">Presenter Information</a></span></li>
                         <%
                                     HttpSession s = request.getSession();
-                                    String ses = (String) s.getAttribute("user");
-                                    if (ses == null) {
+                                    User user = (User) s.getAttribute("user");
+                                    if (user == null) {
                         %>
                         <li><span><a href="User-login.jsp">Login</a></span></li>
                         <li><span><a href="User-register.jsp">Register</a></span></li>
@@ -84,31 +83,29 @@
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
                     <%
-                                s = request.getSession();
-                                ses = (String) s.getAttribute("user");
-                                if (ses != null) {
+                                if (user == null) {
                     %>
-                    <form action="" id="newsletter-form1">
+                    <form action="UserCO?action=login" method="POST" id="newsletter-form1">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>Login Site</h2>
-                                <a style="color:#FFF">Username</a>
-                                <input type="text" value="">
+                                <a style="color:#FFF">Email</a>
+                                <input type="text" name="txtEmail" size="25">
                                 <a style="color:#FFF">Password</a>
-                                <input type="password" value="">
-                                <div class="clear"><a href="register.jsp" class="fleft">Register User</a><a href="#" class="fright">Submit</a></div>
-                            </div>                            
+                                <input type="password" name="txtPassword" size="25">
+                                <br/><br/>
+                                <div><a href="register.jsp" class="fleft">Register User</a><input style="float: right; " type="submit" value="Submit" /></div>
+                            </div>
                         </fieldset>
                     </form>
-                    <%                                            } else {
-                    %>
+                    <%} else {%>
                     <form action="" method="POST" id="newsletter-form2">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>You Are Sign In</h2>
-                                <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">sanh232003</a>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
                                 <br/><br/>
-                                <div><a href="#" class="fleft">My Profile</a><a href="#" class="fright">Logout</a></div>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
                             </div>
                         </fieldset>
                     </form>
@@ -124,7 +121,7 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
-                        <form action="" method="POST" id="newsletter-form">
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
                             <fieldset>
                                 <div class="rowElem">
                                     <h2>Newsletter</h2>
@@ -135,7 +132,6 @@
                                 </div>
                             </fieldset>
                         </form>
-
                     </ul>
                 </aside>
                 <!-- content -->
@@ -148,23 +144,52 @@
                         <div class="img-box"><img src="images/logo_event.png" width="130" height="130" class="png"><span class="txt1">${requestScope.event.description}</span>
                             ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description}</div>
                         <table id="rounded-corner">
+                            <tr>
+                                <td width="20%" align="right"><span class="txt1">Procedures : </span></td>
+                                <td width="80%">${requestScope.event.procedures} ${requestScope.event.procedures} ${requestScope.event.procedures}
+                                    ${requestScope.event.procedures} ${requestScope.event.procedures} ${requestScope.event.procedures}</td>
+                            </tr>
+                            <tr>
+                                <td width="20%" align="right"><span class="txt1">Criteria : </span></td>
+                                <td width="80%">${requestScope.event.criteria} ${requestScope.event.criteria} ${requestScope.event.criteria}
+                                    ${requestScope.event.criteria} ${requestScope.event.criteria} ${requestScope.event.criteria}</td>
+                            </tr>
+                            <tr>
+                                <td width="20%" align="right"><span class="txt1">Fee : </span></td>
+                                <td width="80%">${requestScope.event.fee} $</td>
+                            </tr>
+                            <tr>
+                                <td width="20%" align="right"><span class="txt1">Start : </span></td>
+                                <td width="80%">${requestScope.startDate}</td>
+                            </tr>
+                            <tr>
+                                <td width="20%" align="right"><span class="txt1">End : </span></td>
+                                <td width="80%">${requestScope.endDate}</td>
+                            </tr>
+                        </table>
+                        <table id="rounded-corner">
+                            <caption><span class="txt1">List Presenter</span></caption>
                             <thead>
                                 <tr>
-                                    <th scope="col" class="rounded">Criteria</th>
-                                    <th scope="col" class="rounded">Procedures</th>
-                                    <th scope="col" class="rounded">Fee</th>
-                                    <th scope="col" class="rounded">Start Date</th>
-                                    <th scope="col" class="rounded">End Date</th>
+                                    <th scope="col" class="rounded" width="5%">No.</th>
+                                    <th scope="col" class="rounded" width="20%">Name</th>
+                                    <th scope="col" class="rounded" width="40%">Address</th>
+                                    <th scope="col" class="rounded" width="20%">Email</th>
+                                    <th scope="col" class="rounded" width="15%">Phone</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="pre" items="">
+                                    <c:set var="count" value="${count + 1}"/>
                                 <tr>
-                                    <td>${requestScope.event.criteria}</td>
-                                    <td>${requestScope.event.procedures}</td>
-                                    <td>${requestScope.event.fee}$</td>
-                                    <td>${requestScope.event.startDate}</td>
-                                    <td>${requestScope.event.endDate}</td>
+                                    <td >${count}</td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
                                 </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>

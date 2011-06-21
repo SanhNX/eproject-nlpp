@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="css/style-table.css" />
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -35,6 +36,18 @@
                     }   //end rules
                 });  //end validate
             }); //end function
+            $(document).ready(function(){
+                $("#newsletter-form1").validate({
+                    rules:{
+                        txtEmail:{
+                            required: true
+                        },
+                        txtPassword:{
+                            required:true
+                        }
+                    }   //end rules
+                });  //end validate
+            }); //end function
         </script>
         <title>National Level Paper Presentation</title>
     </head>
@@ -44,7 +57,6 @@
             <header>
                 <div class="container">
                     <img src="images/logo_96.png" width="270" height="270"/>
-                    <!--                    <h1><a href="index.jsp">Student's site</a></h1>-->
                     <nav>
                         <ul>
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
@@ -109,8 +121,7 @@
                             </div>
                         </fieldset>
                     </form>
-                    <%                                }
-                    %>
+                    <%}%>
                     <h2>Featured <span>Events</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
@@ -132,7 +143,6 @@
                                 </div>
                             </fieldset>
                         </form>
-
                     </ul>
                 </aside>
                 <!-- content -->
@@ -141,35 +151,58 @@
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div>
                     <div class="inside">
-                        <h2><img src="images/icon_cube.png" width="64" height="95">View All <span>Events</span></h2>
-                        <ul class="articles">
-                            <c:forEach var="event" items="${requestScope.events}">
-                                <li><img src="images/logo_event.png" width="130" height="130">
-                                    <h4><a href="UserEventCO?action=event&id=${event.id}">${event.title}</a></h4>
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    <a style="color: #0087c1;" href="UserEventCO?action=event&id=${event.id}" class="fright">Read More</a>
-                                </li>
-                            </c:forEach>
-                        </ul>
+                        <h2><img src="images/icon_cube.png" width="64" height="95">List <span>Presenters</span></h2>
+                        <table id="rounded-corner">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded" width="5%">No.</th>
+                                    <th scope="col" class="rounded" width="20%">Name</th>
+                                    <th scope="col" class="rounded" width="40%">Address</th>
+                                    <th scope="col" class="rounded" width="20%">Email</th>
+                                    <th scope="col" class="rounded" width="15%">Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="pre" items="${requestScope.presenters}">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <c:if test="${count%2==1}">
+                                        <tr style="background-color: #d2e7f0;">
+                                            <td >${count}</td>
+                                            <td >${pre.name}</td>
+                                            <td >${pre.address}</td>
+                                            <td >${pre.email}</td>
+                                            <td >${pre.phone}</td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="${count%2==0}">
+                                        <tr>
+                                            <td >${count}</td>
+                                            <td >${pre.name}</td>
+                                            <td >${pre.address}</td>
+                                            <td >${pre.email}</td>
+                                            <td >${pre.phone}</td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
-                </section>
+            </div>
+        </section>
+    </div>
+    <!-- footer -->
+<footer>
+    <div class="container">
+        <div class="inside">
+            <div class="wrapper">
+                <div class="fleft">24/7 User Support <span>(+84).938.086.255</span></div>
+                <div class="aligncenter"><a href="#" class="new_window">NLPP University</a> designed by Group 2 - FAT3<br>
+                    <a href="#" class="new_window">CSS</a> provided by Team Leader</div>
             </div>
         </div>
-        <!-- footer -->
-    <footer>
-        <div class="container">
-            <div class="inside">
-                <div class="wrapper">
-                    <div class="fleft">24/7 User Support <span>(+84).938.086.255</span></div>
-                    <div class="aligncenter"><a href="#" class="new_window">NLPP University</a> designed by Group 2 - FAT3<br>
-                        <a href="#" class="new_window">CSS</a> provided by Team Leader</div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script type="text/javascript"> Cufon.now(); </script>
+    </div>
+</footer>
+<script type="text/javascript"> Cufon.now(); </script>
 </body>
 </html>
