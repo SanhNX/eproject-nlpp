@@ -71,6 +71,11 @@ public class UserBLO implements UserBLORemote {
         return role;
     }
 
+    public User getByEmail(String email) {
+        User user = em.find(User.class, email);
+        return user;
+    }
+
     
 
     // Add business logic below. (Right-click in editor and choose

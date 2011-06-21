@@ -17,5 +17,7 @@ import javax.ejb.Remote;
 public interface EventBLORemote {
 
     List<Event> getAllEvent();
+
+    Event getByID(int evtID);
     
 }

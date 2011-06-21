@@ -28,6 +28,6 @@ public interface UserBLORemote {
 
     Role getRole(int roleID);
 
-    
-    
+    User getByEmail(String email);
+
 }

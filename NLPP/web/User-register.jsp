@@ -11,8 +11,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.min.css" />
-        <script type="text/javascript" src="jsDatePick.min.1.3.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
         <script type="text/javascript">
             window.onload = function(){
                 new JsDatePick({
@@ -56,7 +56,8 @@
                     rules:{
                         txtEmail:{
                             required: true,
-                            email:true
+                            email:true,
+                            remote:"checkEmail.jsp"
                         },
                         txtPass:{
                             required:true,

@@ -56,6 +56,12 @@ public class UserEventCO extends HttpServlet {
             request.setAttribute("events", events);
             RequestDispatcher rd = request.getRequestDispatcher("User-Events.jsp");
             rd.forward(request, response);
+        } else if(action.equalsIgnoreCase("event")){
+            String id = request.getParameter("id");
+            Event event = eventBLO.getByID(Integer.parseInt(id));
+            request.setAttribute("event", event);
+            RequestDispatcher rd = request.getRequestDispatcher("User-Event.jsp");
+            rd.forward(request, response);
         }
     } 
 

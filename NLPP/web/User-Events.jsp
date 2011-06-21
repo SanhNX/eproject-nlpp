@@ -140,19 +140,18 @@
                 <section id="content">
                     <div id="banner">
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
-                    </div><div class="inner_copy">More <a href="http://www.templatemonster.com/">Website Templates</a> at TemplateMonster.com!</div>
+                    </div>
                     <div class="inside">
-                        
                         <h2><img src="images/icon_cube.png" width="64" height="95">View All <span>Events</span></h2>
                         <ul class="articles">
                             <c:forEach var="event" items="${requestScope.events}">
                             <li><img src="images/logo_event.png" width="130" height="130">
-                                <h4><a href="User-Event.jsp">${event.title}</a></h4>
+                                <h4><a href="UserEventCO?action=event&id=${event.id}">${event.title}</a></h4>
                                 ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
                                 ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
                                 ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
                                 ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                <a style="color: #0087c1;" href="#" class="fright">Read More</a>
+                                <a style="color: #0087c1;" href="UserEventCO?action=event&id=${event.id}" class="fright">Read More</a>
                             </li>
                             </c:forEach>
                         </ul>
