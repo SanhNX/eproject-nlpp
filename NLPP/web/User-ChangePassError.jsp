@@ -56,7 +56,7 @@
                         <ul>
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
-                            <li><a href="about-us.jsp" class="m2">Feedback Us</a></li>
+                            <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
                             <li><a href="contact-us.jsp" class="m4">FAQ</a></li>
                             <li class="last"><a href="admin.jsp" class="m5">Administrator</a></li>
                         </ul>
@@ -76,9 +76,9 @@
                     <h3>Categories</h3>
                     <ul class="categories">
                         <li><span><a href="index.jsp">Home Page</a></span></li>
-                        <li><span><a href="#">Event Information</a></span></li>
+                        <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
-                        <li><span><a href="#">Presenter Information</a></span></li>
+                        <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
                     <form action="" method="POST" id="newsletter-form2">
