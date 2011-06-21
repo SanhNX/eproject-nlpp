@@ -44,17 +44,17 @@
             <div class="login_form">
                 <h3>Admin Panel Login</h3>
                 <a href="#" class="forgot_pass">Forgot password</a>
-                <form action="" method="post" id="login-admin">
+                <form action="AdminCO?action=login" method="post" id="login-admin">
                     <fieldset>
                         <br/>
                         <br/>
                         <dl>
-                            <dt><label for="email">Email Address &nbsp;</label></dt>
+                            <dt><label for="email">Username &nbsp;</label></dt>
                             <dd><input type="text" name="txtUsername" id="" size="40" /></dd>
                         </dl>
                         <dl>
                             <dt><label for="password">Password &nbsp;</label></dt>
-                            <dd><input type="text" name="txtPassword" id="" size="40" /></dd>
+                            <dd><input type="password" name="txtPassword" id="" size="40" /></dd>
                         </dl>
                         <dl>
                             <dt><label></label></dt>

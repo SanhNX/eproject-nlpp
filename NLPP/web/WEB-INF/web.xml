@@ -12,6 +12,10 @@
         <servlet-name>UserEventCO</servlet-name>
         <servlet-class>CL.UserEventCO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminCO</servlet-name>
+        <servlet-class>CL.AdminCO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserCO</servlet-name>
         <url-pattern>/UserCO</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>UserEventCO</servlet-name>
         <url-pattern>/UserEventCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCO</servlet-name>
+        <url-pattern>/AdminCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
