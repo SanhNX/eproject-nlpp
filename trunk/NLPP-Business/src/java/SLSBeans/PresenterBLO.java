@@ -28,6 +28,11 @@ public class PresenterBLO implements PresenterBLORemote {
         return presenters;
     }
 
+    public Presenter getByID(int id) {
+        Presenter presenter = em.find(Presenter.class, id);
+        return presenter;
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
  

@@ -42,6 +42,13 @@
         <title>National Level Paper Presentation</title>
     </head>
     <body id="page1">
+        <%
+                    HttpSession s = request.getSession();
+                    User user = (User) s.getAttribute("user");
+                    if (user == null) {
+        %>
+        <jsp:forward page="/User-login.jsp"/>
+        <%}%>
         <div class="wrap">
             <!-- header -->
             <header>
@@ -77,8 +84,6 @@
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
                     <%
-                                HttpSession s = request.getSession();
-                                User user = (User) s.getAttribute("user");
                                 if (user == null) {
                     %>
                     <form action="" id="newsletter-form1">
@@ -99,7 +104,7 @@
                         <fieldset>
                             <div class="rowElem">
                                 <h2>You Are Sign In</h2>
-                                <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">sanh232003</a>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
                                 <br/><br/>
                                 <div><a href="#" class="fleft">My Profile</a><a href="#" class="fright">Logout</a></div>
                             </div>
@@ -144,7 +149,7 @@
                             <table cellpadding="110" cellspacing="15">
                                 <tr class="field">
                                     <td>Email </td>
-                                    <td><input type="text" value="sanh232003@yahoo.com" name="txtEmail" id="inputField" size="30" readonly="true"/></td>
+                                    <td><input type="text" value="${sessionScope.user.email}" name="txtEmail" id="inputField" size="30" readonly="true"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Subject </td>
