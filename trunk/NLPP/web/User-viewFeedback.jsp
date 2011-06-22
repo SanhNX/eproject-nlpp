@@ -6,6 +6,7 @@
 
 <%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -144,27 +145,22 @@
                                 <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.</p>
                             </div>
                         </div>
-                        <h2><img src="images/icon_cube.png" width="64" height="95">Feedback <span>Form</span></h2>
-                        <form id="contacts-form" action="UserFeedbackCO?action=addFeedback" method="POST">
-                            <table cellpadding="110" cellspacing="15">
-                                <tr class="field">
-                                    <td>Email </td>
-                                    <td><input type="text" value="${sessionScope.user.email}" name="txtEmail" id="inputField" size="30" readonly="true"/></td>
+                        <c:forEach var="fb" items="${sessionScope.user.feedBackList}">
+                            <table id="rounded-corner">
+                                <tr>
+                                    <td width="20%" align="right"><span class="txt1">Subject : </span></td>
+                                    <td width="80%">${fb.subject}</td>
                                 </tr>
-                                <tr class="field">
-                                    <td>Subject </td>
-                                    <td><input type="text" name="txtSubject" value="" size="30"/></td>
+                                <tr>
+                                    <td width="20%" align="right"><span class="txt1">Question : </span>at day ${fb.questionDate}</td>
+                                    <td width="80%">${fb.question}</td>
                                 </tr>
-                                <tr class="field">
-                                    <td>Question &nbsp;</td>
-                                    <td><textarea name="txtQuestion" rows="4" cols="40"></textarea></td>
-                                </tr>
-                                <tr class="field">
-                                    <td>&nbsp;</td>
-                                    <td><input align="right" type="submit" value="Send Feedback"> <a class="fright" href="User-viewFeedback.jsp">View Feedback's You</a></td>
+                                <tr>
+                                    <td width="20%" align="right"><span class="txt1">Answer : </span> at day ${fb.answer}</td>
+                                    <td width="80%">${fb.answer}</td>
                                 </tr>
                             </table>
-                        </form>
+                        </c:forEach>
                     </div>
                 </section>
             </div>
