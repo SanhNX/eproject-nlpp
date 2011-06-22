@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -31,6 +33,7 @@ import javax.persistence.TemporalType;
 public class FeedBack implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -64,11 +67,17 @@ public class FeedBack implements Serializable {
         this.id = id;
     }
 
-    public FeedBack(Integer id, String subject, String question, Date questionDate) {
-        this.id = id;
+    public FeedBack(String subject, String question, Date questionDate) {
         this.subject = subject;
         this.question = question;
         this.questionDate = questionDate;
+    }
+
+    public FeedBack(String subject, String question, Date questionDate, String status) {
+        this.subject = subject;
+        this.question = question;
+        this.questionDate = questionDate;
+        this.status = status;
     }
 
     public Integer getId() {
