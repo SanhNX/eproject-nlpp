@@ -18,4 +18,6 @@ public interface PresenterBLORemote {
 
     List<Presenter> getAll();
 
+    Presenter getByID(int id);
+
 }

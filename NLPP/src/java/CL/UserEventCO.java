@@ -53,9 +53,7 @@ public class UserEventCO extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        HttpSession session = null;
+        //HttpSession session = null;
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("viewEvent")) {
             List<Event> events = eventBLO.getAllEvent();
@@ -68,9 +66,12 @@ public class UserEventCO extends HttpServlet {
             DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
             String startDate = dateFormat.format(event.getStartDate());
             String endDate = dateFormat.format(event.getEndDate());
-            request.setAttribute("event", event);
+
+            //System.out.println(startDate+"|"+endDate); //for debug
             request.setAttribute("startDate", startDate);
             request.setAttribute("endDate", endDate);
+            request.setAttribute("event", event);
+            //request.setAttribute("presenterList", presenterList);
             RequestDispatcher rd = request.getRequestDispatcher("User-Event.jsp");
             rd.forward(request, response);
         } else if(action.equalsIgnoreCase("listPresnter")){

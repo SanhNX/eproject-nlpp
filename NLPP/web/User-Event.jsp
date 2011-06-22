@@ -159,16 +159,16 @@
                                 <td width="80%">${requestScope.event.fee} $</td>
                             </tr>
                             <tr>
-                                <td width="20%" align="right"><span class="txt1">Start : </span></td>
+                                <td width="20%" align="right"><span class="txt1">Start Date : </span></td>
                                 <td width="80%">${requestScope.startDate}</td>
                             </tr>
                             <tr>
-                                <td width="20%" align="right"><span class="txt1">End : </span></td>
+                                <td width="20%" align="right"><span class="txt1">End Date : </span></td>
                                 <td width="80%">${requestScope.endDate}</td>
                             </tr>
                         </table>
                         <table id="rounded-corner">
-                            <caption><span class="txt1">List Presenter</span></caption>
+                            <caption><span class="txt1"> Presenters List Of ${requestScope.event.title} </span></caption>
                             <thead>
                                 <tr>
                                     <th scope="col" class="rounded" width="5%">No.</th>
@@ -180,34 +180,105 @@
                             </thead>
                             <tbody>
                                 <c:set var="count" value="0"/>
-                                <c:forEach var="pre" items="">
+                                <c:forEach var="pre" items="${requestScope.event.presenterList}">
                                     <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td >${count}</td>
+                                        <td >${pre.name}</td>
+                                        <td >${pre.address}</td>
+                                        <td >${pre.email}</td>
+                                        <td >${pre.phone}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table id="rounded-corner">
+                            <caption><span class="txt1">Awards Of ${requestScope.event.title} </span></caption>
+                            <thead>
                                 <tr>
-                                    <td >${count}</td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
-                                    <td ></td>
+                                    <th scope="col" class="rounded" width="20%">No.</th>
+                                    <th scope="col" class="rounded" width="80%">Description</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="award" items="${requestScope.event.awardList}">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td >${count}</td>
+                                        <td >${award.description}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table id="rounded-corner">
+                            <caption><span class="txt1">Members Of ${requestScope.event.title}</span></caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded" width="20%">No.</th>
+                                    <th scope="col" class="rounded" width="40%">Email Address</th>
+                                    <th scope="col" class="rounded" width="20%">Full Name</th>
+                                    <th scope="col" class="rounded" width="20%">Phone Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="evtUser" items="${requestScope.event.evtUserList}">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td >${count}</td>
+                                        <td >${evtUser.user.email}</td>
+                                        <td >${evtUser.user.fullName}</td>
+                                        <td >${evtUser.user.phone}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                                <br/>
+                        <br/>
+                        <table id="rounded-corner">
+                            <caption><span class="txt1">Winner Of ${requestScope.event.title}</span></caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded" width="20%">No.</th>
+                                    <th scope="col" class="rounded" width="30%">Email Address</th>
+                                    <th scope="col" class="rounded" width="20%">Full Name</th>
+                                    <th scope="col" class="rounded" width="30%">Award Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="evtUser" items="${requestScope.event.evtWinnerList}">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td >${count}</td>
+                                        <td >${evtUser.user.email}</td>
+                                        <td >${evtUser.user.fullName}</td>
+                                        <td >${evtUser.award.description}</td>
+                                    </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>
-            </div>
-        </section>
-    </div>
-    <!-- footer -->
-<footer>
-    <div class="container">
-        <div class="inside">
-            <div class="wrapper">
-                <div class="fleft">24/7 User Support <span>(+84).938.086.255</span></div>
-                <div class="aligncenter"><a href="#" class="new_window">NLPP University</a> designed by Group 2 - FAT3<br>
-                    <a href="#" class="new_window">CSS</a> provided by Team Leader</div>
+                </section>
             </div>
         </div>
-    </div>
-</footer>
-<script type="text/javascript"> Cufon.now(); </script>
+        <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="inside">
+                <div class="wrapper">
+                    <div class="fleft">24/7 User Support <span>(+84).938.086.255</span></div>
+                    <div class="aligncenter"><a href="#" class="new_window">NLPP University</a> designed by Group 2 - FAT3<br>
+                        <a href="#" class="new_window">CSS</a> provided by Team Leader</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript"> Cufon.now(); </script>
 </body>
 </html>

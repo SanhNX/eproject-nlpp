@@ -118,25 +118,20 @@
                         <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
                         <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
-                        <%
-                        HttpSession s = request.getSession();
-                        String ses = (String) s.getAttribute("user");
-                        if (ses == null) {
-                        %>
                         <li><span><a href="User-login.jsp">Login</a></span></li>
-                        <%}%>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
-                    <form action="" id="newsletter-form1">
+                    <form action="UserCO?action=login" method="POST" id="newsletter-form1">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>Login Site</h2>
-                                <a style="color:#FFF">Username</a>
-                                <input type="text" value="">
+                                <a style="color:#FFF">Email</a>
+                                <input type="text" name="txtEmail" size="25">
                                 <a style="color:#FFF">Password</a>
-                                <input type="password" value="">
-                                <div class="clear"><a href="register.jsp" class="fleft">Register User</a><a href="#" class="fright">Submit</a></div>
-                            </div>                            
+                                <input type="password" name="txtPassword" size="25">
+                                <br/><br/>
+                                <div><a href="register.jsp" class="fleft">Register User</a><input style="float: right; " type="submit" value="Submit" /></div>
+                            </div>
                         </fieldset>
                     </form>
                     <h2>Fresh <span>News</span></h2>

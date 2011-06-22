@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -34,6 +38,7 @@ import javax.persistence.TemporalType;
 public class Event implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -64,12 +69,16 @@ public class Event implements Serializable {
         @JoinColumn(name = "EvtID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "PreID", referencedColumnName = "ID")})
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Presenter> presenterList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL,  mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
     @OneToMany(mappedBy = "event")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Award> awardList;
 
     public Event() {
