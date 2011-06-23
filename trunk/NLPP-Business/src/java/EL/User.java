@@ -61,8 +61,10 @@ public class User implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FeedBack> feedBackList;
     @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
     @JoinColumn(name = "RoleID", referencedColumnName = "ID")
     @ManyToOne

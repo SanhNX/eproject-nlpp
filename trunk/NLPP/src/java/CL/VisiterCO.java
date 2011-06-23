@@ -4,9 +4,13 @@
  */
 package CL;
 
+import EL.Event;
+import EL.FAQ;
 import EL.MailingList;
 import EL.Role;
 import EL.User;
+import SLSBeans.EventBLORemote;
+import SLSBeans.FAQBLORemote;
 import SLSBeans.MailingListBLORemote;
 import SLSBeans.UserBLORemote;
 import java.io.IOException;
@@ -14,7 +18,9 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.naming.InitialContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +35,8 @@ public class VisiterCO extends HttpServlet {
 
     UserBLORemote userBLO;
     MailingListBLORemote mailingListBLO;
+    FAQBLORemote faqBLO;
+    EventBLORemote eventBLO;
 
     @Override
     public void init() throws ServletException {
@@ -39,7 +47,9 @@ public class VisiterCO extends HttpServlet {
             props.load(new java.io.FileInputStream(jndiFileName));
             InitialContext ctx = new InitialContext(props);
             userBLO = (UserBLORemote) ctx.lookup("UserBLO/remote");
+            faqBLO = (FAQBLORemote) ctx.lookup("FAQBLO/remote");
             mailingListBLO = (MailingListBLORemote) ctx.lookup("MailingListBLO/remote");
+            eventBLO = (EventBLORemote) ctx.lookup("EventBLO/remote");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -91,6 +101,17 @@ public class VisiterCO extends HttpServlet {
             if (result) {
                 response.sendRedirect("index.jsp");
             }
+        } else if (action.equalsIgnoreCase("viewFAQ")) {
+            List<FAQ> faqs = faqBLO.getAll();
+            request.setAttribute("faqs", faqs);
+            RequestDispatcher rd = request.getRequestDispatcher("faq.jsp");
+            rd.forward(request, response);
+        } else if (action.equalsIgnoreCase("searchEvent")) {
+            String title = request.getParameter("txtKeyword");
+            List<Event> events = eventBLO.getByTitle(title);
+            request.setAttribute("events", events);
+            RequestDispatcher rd = request.getRequestDispatcher("User-searchResult.jsp");
+            rd.forward(request, response);
         }
     }
 

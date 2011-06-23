@@ -4,7 +4,10 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -13,12 +16,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="css/style-table.css" />
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
         <script type="text/javascript" src="js/html5.js"></script>
-        <script type="text/javascript" src="js/date.js"></script>
+        <script type="text/javascript" src="js/ie_png.js"></script>
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/additional-methods.js"></script>
@@ -34,7 +38,7 @@
                 });  //end validate
             }); //end function
             $(document).ready(function(){
-                $("#contacts-form").validate({
+                $("#newsletter-form1").validate({
                     rules:{
                         txtEmail:{
                             required: true
@@ -60,7 +64,7 @@
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
                             <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
                             <li><a href="VisiterCO?action=viewFAQ" class="m4">FAQ</a></li>
-                            <li class="last"><a href="admin.jsp" class="m5">Administrator</a></li>
+                            <li class="last"><a href="Admin-login.jsp" class="m5">Administrator</a></li>
                         </ul>
                     </nav>
                     <form action="VisiterCO?action=searchEvent" method="POST" id="search-form">
@@ -81,10 +85,44 @@
                         <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
                         <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
+                        <%
+                                    HttpSession s = request.getSession();
+                                    User user = (User) s.getAttribute("user");
+                                    if (user == null) {
+                        %>
+                        <li><span><a href="User-login.jsp">Login</a></span></li>
                         <li><span><a href="User-register.jsp">Register</a></span></li>
+                        <%}%>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
-
+                    <%
+                                if (user == null) {
+                    %>
+                    <form action="UserCO?action=login" method="POST" id="newsletter-form1">
+                        <fieldset>
+                            <div class="rowElem">
+                                <h2>Login Site</h2>
+                                <a style="color:#FFF">Email</a>
+                                <input type="text" name="txtEmail" size="25">
+                                <a style="color:#FFF">Password</a>
+                                <input type="password" name="txtPassword" size="25">
+                                <br/><br/>
+                                <div><a href="register.jsp" class="fleft">Register User</a><input style="float: right; " type="submit" value="Submit" /></div>
+                            </div>                            
+                        </fieldset>
+                    </form>
+                    <%} else {%>
+                    <form action="" method="POST" id="newsletter-form2">
+                        <fieldset>
+                            <div class="rowElem">
+                                <h2>You Are Sign In</h2>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
+                                <br/><br/>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <%}%>
                     <h2>Fresh <span>News</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
@@ -95,7 +133,7 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
-                        <form action="" method="POST" id="newsletter-form">
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
                             <fieldset>
                                 <div class="rowElem">
                                     <h2>Newsletter</h2>
@@ -113,25 +151,41 @@
                     <div id="banner">
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div>
-                    <div class="inside1">
-
-                        <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
-                        <form id="contacts-form" action="UserCO?action=login" method="POST">
-                            <table cellpadding="110" cellspacing="15">
-                                <tr class="field">
-                                    <td><b>Email Address &nbsp;</b></td>
-                                    <td><input type="text" name="txtEmail" value="" size="30"/></td>
+                    <div class="inside">
+                        <h2><img src="images/icon_cube.png" width="64" height="95">Our <span>Frequently Asked Questions</span></h2>
+                        <br/>
+                        <table id="rounded-corner">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded" width="5%">No.</th>
+                                    <th scope="col" class="rounded" width="15%">Subject</th>
+                                    <th scope="col" class="rounded" width="40%">Question</th>
+                                    <th scope="col" class="rounded" width="40%">Answer</th>
                                 </tr>
-                                <tr class="field">
-                                    <td><b>Password &nbsp;</b></td>
-                                    <td><input type="password" name="txtPassword" value="" size="30"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td></td>
-                                    <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Submit Now"></td>
-                                </tr>
-                            </table>
-                        </form>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach var="faq" items="${requestScope.faqs}">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <c:if test="${count%2==1}">
+                                        <tr style="background-color: #d2e7f0;">
+                                            <td >${count}</td>
+                                            <td >${faq.subject}</td>
+                                            <td >${faq.question}</td>
+                                            <td >${faq.answer}</td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="${count%2==0}">
+                                        <tr>
+                                            <td >${count}</td>
+                                            <td >${faq.subject}</td>
+                                            <td >${faq.question}</td>
+                                            <td >${faq.answer}</td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
             </div>

@@ -4,7 +4,9 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -18,7 +20,7 @@
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
         <script type="text/javascript" src="js/html5.js"></script>
-        <script type="text/javascript" src="js/date.js"></script>
+        <script type="text/javascript" src="js/ie_png.js"></script>
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/additional-methods.js"></script>
@@ -33,18 +35,6 @@
                     }   //end rules
                 });  //end validate
             }); //end function
-            $(document).ready(function(){
-                $("#contacts-form").validate({
-                    rules:{
-                        txtEmail:{
-                            required: true
-                        },
-                        txtPassword:{
-                            required:true
-                        }
-                    }   //end rules
-                });  //end validate
-            }); //end function
         </script>
         <title>National Level Paper Presentation</title>
     </head>
@@ -54,6 +44,7 @@
             <header>
                 <div class="container">
                     <img src="images/logo_96.png" width="270" height="270"/>
+                    <!--                    <h1><a href="index.jsp">Student's site</a></h1>-->
                     <nav>
                         <ul>
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
@@ -81,11 +72,46 @@
                         <li><span><a href="UserEventCO?action=viewEvent">Event Information</a></span></li>
                         <li><span><a href="#">Enroll Event</a></span></li>
                         <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
+                        <%
+                                    HttpSession s = request.getSession();
+                                    User user = (User) s.getAttribute("user");
+                                    if (user == null) {
+                        %>
+                        <li><span><a href="User-login.jsp">Login</a></span></li>
                         <li><span><a href="User-register.jsp">Register</a></span></li>
+                        <%}%>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
-
-                    <h2>Fresh <span>News</span></h2>
+                    <%
+                                if (user == null) {
+                    %>
+                    <form action="UserCO?action=login" method="POST" id="newsletter-form1">
+                        <fieldset>
+                            <div class="rowElem">
+                                <h2>Login Site</h2>
+                                <a style="color:#FFF">Email</a>
+                                <input type="text" name="txtEmail" size="25">
+                                <a style="color:#FFF">Password</a>
+                                <input type="password" name="txtPassword" size="25">
+                                <br/><br/>
+                                <div><a href="register.jsp" class="fleft">Register User</a><input style="float: right; " type="submit" value="Submit" /></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <%} else {%>
+                    <form action="" method="POST" id="newsletter-form2">
+                        <fieldset>
+                            <div class="rowElem">
+                                <h2>You Are Sign In</h2>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
+                                <br/><br/>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <%                                }
+                    %>
+                    <h2>Featured <span>Events</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
                             <h4><a href="#">Sed ut perspiciatis unde</a></h4>
@@ -95,7 +121,7 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
-                        <form action="" method="POST" id="newsletter-form">
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
                             <fieldset>
                                 <div class="rowElem">
                                     <h2>Newsletter</h2>
@@ -106,6 +132,7 @@
                                 </div>
                             </fieldset>
                         </form>
+
                     </ul>
                 </aside>
                 <!-- content -->
@@ -113,25 +140,20 @@
                     <div id="banner">
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div>
-                    <div class="inside1">
-
-                        <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
-                        <form id="contacts-form" action="UserCO?action=login" method="POST">
-                            <table cellpadding="110" cellspacing="15">
-                                <tr class="field">
-                                    <td><b>Email Address &nbsp;</b></td>
-                                    <td><input type="text" name="txtEmail" value="" size="30"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td><b>Password &nbsp;</b></td>
-                                    <td><input type="password" name="txtPassword" value="" size="30"/></td>
-                                </tr>
-                                <tr class="field">
-                                    <td></td>
-                                    <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Submit Now"></td>
-                                </tr>
-                            </table>
-                        </form>
+                    <div class="inside">
+                        <h2><img src="images/icon_cube.png" width="64" height="95">View <span> Result</span></h2>
+                        <ul class="articles">
+                            <c:forEach var="event" items="${requestScope.events}">
+                                <li><img src="images/logo_event.png" width="130" height="130">
+                                    <h4><a href="UserEventCO?action=event&id=${event.id}">${event.title}</a></h4>
+                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                    <a style="color: #0087c1;" href="UserEventCO?action=event&id=${event.id}" class="fright">Read More</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </div>
                 </section>
             </div>

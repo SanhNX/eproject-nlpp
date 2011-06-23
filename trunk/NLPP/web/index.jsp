@@ -60,14 +60,14 @@
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
                             <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
-                            <li><a href="contact-us.jsp" class="m4">FAQ</a></li>
+                            <li><a href="VisiterCO?action=viewFAQ" class="m4">FAQ</a></li>
                             <li class="last"><a href="Admin-login.jsp" class="m5">Administrator</a></li>
                         </ul>
                     </nav>
-                    <form action="" id="search-form">
+                    <form action="VisiterCO?action=searchEvent" method="POST" id="search-form">
                         <fieldset>
                             <div class="rowElem">
-                                <input type="text" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
+                                <input type="text" name="txtKeyword" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
                                 <a href="#" onClick="document.getElementById('search-form').submit()">Search</a></div>
                         </fieldset>
                     </form>
