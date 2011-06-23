@@ -7,8 +7,12 @@ package CL;
 
 import EL.User;
 import SLSBeans.UserBLORemote;
+import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,6 +67,72 @@ public class AdminCO extends HttpServlet {
             session = request.getSession();
             session.removeAttribute("admin");
             response.sendRedirect("Admin-login.jsp");
+        }else if (action.equalsIgnoreCase("myProfile")) {
+            session = request.getSession();
+            User admin = (User) session.getAttribute("admin");
+            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            String birthday = dateFormat.format(admin.getBirthday());
+            request.setAttribute("gender", admin.getGender());
+            request.setAttribute("admin", admin);
+            request.setAttribute("birthday", birthday);
+            RequestDispatcher rd = request.getRequestDispatcher("Admin-MyProfile.jsp");
+            rd.forward(request, response);
+        } else if (action.equalsIgnoreCase("updateProfile")) {
+            String fullName = request.getParameter("txtFullname");
+            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            Date birthday = null;
+            try {
+                birthday = (Date) dateFormat.parse(request.getParameter("txtBirthday").toString());
+
+                boolean gender = false;
+                String txtGender = request.getParameter("type");
+                if (txtGender.equalsIgnoreCase("Male")) {
+                    gender = true;
+                } else {
+                    gender = false;
+                }
+                String address = request.getParameter("txtAddress");
+                String phone = request.getParameter("txtPhone");
+                session = request.getSession();
+                User admin = (User) session.getAttribute("admin");
+                String email = admin.getEmail();
+                System.out.println(email + "|" + fullName + "|" + birthday + "|" + gender + "|" + address + "|" + phone);
+                boolean result = userBLO.updateProfile(email, fullName, birthday, gender, address, phone);
+
+                if (result) {
+                    admin = userBLO.checkAdmin(admin.getEmail(), admin.getPassword());
+                    String birthday1 = dateFormat.format(admin.getBirthday());
+                    request.setAttribute("gender", admin.getGender());
+                    request.setAttribute("admin", admin);
+                    request.setAttribute("birthday", birthday1);
+                    RequestDispatcher rd = request.getRequestDispatcher("Admin-MyProfile.jsp");
+                    rd.forward(request, response);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        } else if (action.equalsIgnoreCase("updatePass")) {
+            try {
+                String Pass = request.getParameter("txtPass");
+                String rePass = request.getParameter("txtRePass");
+                String oldPass = request.getParameter("txtOldPass");
+                session = request.getSession();
+                User admin = (User) session.getAttribute("admin");
+                User u = userBLO.checkAdmin(admin.getEmail(), oldPass);
+                if (u != null) {
+                    boolean result = userBLO.updatePass(admin.getEmail(), Pass);
+                    if (result) {
+                        System.out.println("------------------UPDATE PASS SUCCESSFUL----------------");// For Debug
+                        session = request.getSession();
+                        session.removeAttribute("admin");
+                        response.sendRedirect("Admin-Login-comfirm.jsp");
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                response.sendRedirect("Admin-ChangePassError.jsp");
+            }
         }
     } 
 
