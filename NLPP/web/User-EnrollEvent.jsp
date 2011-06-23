@@ -154,7 +154,7 @@
                         <h2><span>Traning Programmer<span>Since 1992</span></span></h2>
                     </div>
                     <div class="inside">
-                        <h2><img src="images/icon_cube.png" width="64" height="95">${requestScope.event.title} <span>Events</span></h2>
+                        <h2><img src="images/icon_cube.png" width="64" height="95">Enroll Events <span> ${requestScope.event.title}</span></h2>
                         <div class="img-box"><img src="images/logo_event.png" width="130" height="130" class="png"><span class="txt1">${requestScope.event.description}</span>
                             ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description}</div>
                         <table id="rounded-corner">
@@ -181,105 +181,30 @@
                                 <td width="80%"><h:formatDate pattern="MM-dd-yyyy" value="${requestScope.event.endDate}"/></td>
                             </tr>
                         </table>
-                        <table id="rounded-corner">
-                            <caption><span class="txt1"> Presenters List Of ${requestScope.event.title} </span></caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded" width="5%">No.</th>
-                                    <th scope="col" class="rounded" width="20%">Name</th>
-                                    <th scope="col" class="rounded" width="40%">Address</th>
-                                    <th scope="col" class="rounded" width="20%">Email</th>
-                                    <th scope="col" class="rounded" width="15%">Phone</th>
+                        <!--code-->
+                        <div align="center">
+                        <h2>Payment <span> Information</span></h2>
+                        <form id="contacts-form" action="UserEventCO?action=enrollEvent&id=${requestScope.event.id}" method="POST">
+                            <table cellpadding="110" cellspacing="15">
+                                <tr class="field">
+                                    <td>Enroll Email &nbsp;</td>
+                                    <td><input type="text" name="txtFullname" value="${sessionScope.user.email}" size="30" readonly="true"/></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach var="pre" items="${requestScope.event.presenterList}">
-                                    <c:set var="count" value="${count + 1}"/>
-
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${pre.name}</td>
-                                        <td >${pre.address}</td>
-                                        <td >${pre.email}</td>
-                                        <td >${pre.phone}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <br/>
-                        <br/>
-                        <table id="rounded-corner">
-                            <caption><span class="txt1">Awards Of ${requestScope.event.title} </span></caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded" width="20%">No.</th>
-                                    <th scope="col" class="rounded" width="80%">Description</th>
+                                <tr class="field">
+                                    <td>Through &nbsp;</td>
+                                    <td>
+                                        <input type="radio" name="rbtType" value="Direct" checked="true"> Direct Payment
+                                        <input type="radio" name="rbtType" value="Cheque"> By Cheque
+                                        <input type="radio" name="rbtType" value="Cash"> By Cash
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach var="award" items="${requestScope.event.awardList}">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${award.description}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <br/>
-                        <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
-                        <table id="rounded-corner">
-                            <caption><span class="txt1">Members Of ${requestScope.event.title}</span></caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded" width="20%">No.</th>
-                                    <th scope="col" class="rounded" width="40%">Email Address</th>
-                                    <th scope="col" class="rounded" width="20%">Full Name</th>
-                                    <th scope="col" class="rounded" width="20%">Phone Number</th>
+                                <tr class="field">
+                                    <td></td>
+                                    <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Submit Now"></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach var="evtUser" items="${requestScope.event.evtUserList}">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${evtUser.user.email}</td>
-                                        <td >${evtUser.user.fullName}</td>
-                                        <td >${evtUser.user.phone}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <br/>
-                        <br/>
-                        <table id="rounded-corner">
-                            <caption><span class="txt1">Winner Of ${requestScope.event.title}</span></caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded" width="20%">No.</th>
-                                    <th scope="col" class="rounded" width="30%">Email Address</th>
-                                    <th scope="col" class="rounded" width="20%">Full Name</th>
-                                    <th scope="col" class="rounded" width="30%">Award Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach var="evtUser" items="${requestScope.event.evtWinnerList}">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${evtUser.user.email}</td>
-                                        <td >${evtUser.user.fullName}</td>
-                                        <td >${evtUser.award.description}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <br/>
-                        <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                            </table>
+                        </form>
+                        </div>
                     </div>
                 </section>
             </div>

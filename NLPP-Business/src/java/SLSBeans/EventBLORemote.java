@@ -6,6 +6,8 @@
 package SLSBeans;
 
 import EL.Event;
+import EL.Payment;
+import EL.User;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -21,5 +23,9 @@ public interface EventBLORemote {
     Event getByID(int evtID);
 
     List<Event> getByTitle(String title);
+
+    boolean addUserForEvent(User u, Event evt, Payment pay);
+
+    Payment getPaymentById(int id);
     
 }

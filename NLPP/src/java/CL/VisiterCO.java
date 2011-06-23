@@ -110,6 +110,7 @@ public class VisiterCO extends HttpServlet {
             String title = request.getParameter("txtKeyword");
             List<Event> events = eventBLO.getByTitle(title);
             request.setAttribute("events", events);
+            request.setAttribute("title", title);
             RequestDispatcher rd = request.getRequestDispatcher("User-searchResult.jsp");
             rd.forward(request, response);
         }
