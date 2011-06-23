@@ -15,6 +15,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -37,6 +39,7 @@ public class Payment implements Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "payment")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
 
     public Payment() {

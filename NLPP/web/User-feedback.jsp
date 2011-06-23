@@ -59,14 +59,14 @@
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
                             <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
-                            <li><a href="contact-us.jsp" class="m4">FAQ</a></li>
+                            <li><a href="VisiterCO?action=viewFAQ" class="m4">FAQ</a></li>
                             <li class="last"><a href="admin.jsp" class="m5">Administrator</a></li>
                         </ul>
                     </nav>
-                    <form action="" id="search-form">
+                    <form action="VisiterCO?action=searchEvent" method="POST" id="search-form">
                         <fieldset>
                             <div class="rowElem">
-                                <input type="text" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
+                                <input type="text" name="txtKeyword" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
                                 <a href="#" onClick="document.getElementById('search-form').submit()">Search</a></div>
                         </fieldset>
                     </form>
@@ -83,35 +83,16 @@
                         <li><span><a href="UserEventCO?action=listPresnter">Presenter Information</a></span></li>
                         <li><span><a href="#">About US</a></span></li>
                     </ul>
-                    <%
-                                if (user == null) {
-                    %>
-                    <form action="" id="newsletter-form1">
-                        <fieldset>
-                            <div class="rowElem">
-                                <h2>Login Site</h2>
-                                <a style="color:#FFF">Username</a>
-                                <input type="text" value="">
-                                <a style="color:#FFF">Password</a>
-                                <input type="password" value="">
-                                <div class="clear"><a href="register.jsp" class="fleft">Register User</a><a href="#" class="fright">Submit</a></div>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <%                                            } else {
-                    %>
                     <form action="" method="POST" id="newsletter-form2">
                         <fieldset>
                             <div class="rowElem">
                                 <h2>You Are Sign In</h2>
-                                <a style="color: white; font-size: 20px; ">Welcome </a><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
+                                <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
                                 <br/><br/>
-                                <div><a href="#" class="fleft">My Profile</a><a href="#" class="fright">Logout</a></div>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
                             </div>
                         </fieldset>
                     </form>
-                    <%                                }
-                    %>
                     <h2>Fresh <span>News</span></h2>
                     <ul class="news">
                         <li><strong>June 30, 2010</strong>
@@ -122,7 +103,18 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
+                        <br/>
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
+                            <fieldset>
+                                <div class="rowElem">
+                                    <h2>Newsletter</h2>
+                                    <input type="text" name="txtMailing" style="width: 100%;"><br/>
+                                    <br/>
+                                    <div><a href="#" class="fleft">UnSubscribe</a><input style="float: right; " type="submit" value="Submit" /></div>
 
+                                </div>
+                            </fieldset>
+                        </form>
                     </ul>
                 </aside>
                 <!-- content -->

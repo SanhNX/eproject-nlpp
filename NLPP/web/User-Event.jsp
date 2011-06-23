@@ -7,6 +7,7 @@
 <%@page import="EL.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -15,6 +16,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                g_globalObject = new JsDatePick({
+                    useMode:1,
+                    isStripped:true,
+                    target:"div3_example"
+                });
+            };
+        </script>
         <link rel="stylesheet" type="text/css" href="css/style-table.css" />
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
@@ -50,14 +62,14 @@
                             <li class="current"><a href="index.jsp" class="m1">Home Page</a></li>
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
                             <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
-                            <li><a href="contact-us.jsp" class="m4">FAQ</a></li>
+                            <li><a href="VisiterCO?action=viewFAQ" class="m4">FAQ</a></li>
                             <li class="last"><a href="admin.jsp" class="m5">Administrator</a></li>
                         </ul>
                     </nav>
-                    <form action="" id="search-form">
+                    <form action="VisiterCO?action=searchEvent" method="POST" id="search-form">
                         <fieldset>
                             <div class="rowElem">
-                                <input type="text" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
+                                <input type="text" name="txtKeyword" value="Search Title Event" onFocus="if(this.value=='Search Title Event'){this.value=''}" onBlur="if(this.value==''){this.value='Search Title Event'}" >
                                 <a href="#" onClick="document.getElementById('search-form').submit()">Search</a></div>
                         </fieldset>
                     </form>
@@ -132,6 +144,8 @@
                                 </div>
                             </fieldset>
                         </form>
+                        <div align="center"><span class="txt1">o0o Calendar o0o</span></div>
+                        <div id="div3_example" style="margin:10px 0 30px 0; border:dashed 1px blue; width:219px; height:230px;" align="center"></div>
                     </ul>
                 </aside>
                 <!-- content -->
@@ -160,11 +174,11 @@
                             </tr>
                             <tr>
                                 <td width="20%" align="right"><span class="txt1">Start Date : </span></td>
-                                <td width="80%">${requestScope.startDate}</td>
+                                <td width="80%"><h:formatDate pattern="MM-dd-yyyy" value="${requestScope.event.startDate}"/></td>
                             </tr>
                             <tr>
                                 <td width="20%" align="right"><span class="txt1">End Date : </span></td>
-                                <td width="80%">${requestScope.endDate}</td>
+                                <td width="80%"><h:formatDate pattern="MM-dd-yyyy" value="${requestScope.event.endDate}"/></td>
                             </tr>
                         </table>
                         <table id="rounded-corner">
@@ -182,6 +196,7 @@
                                 <c:set var="count" value="0"/>
                                 <c:forEach var="pre" items="${requestScope.event.presenterList}">
                                     <c:set var="count" value="${count + 1}"/>
+
                                     <tr>
                                         <td >${count}</td>
                                         <td >${pre.name}</td>
@@ -238,7 +253,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                                <br/>
+                        <br/>
                         <br/>
                         <table id="rounded-corner">
                             <caption><span class="txt1">Winner Of ${requestScope.event.title}</span></caption>

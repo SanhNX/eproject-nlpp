@@ -63,13 +63,13 @@ public class UserEventCO extends HttpServlet {
         } else if(action.equalsIgnoreCase("event")){
             String id = request.getParameter("id");
             Event event = eventBLO.getByID(Integer.parseInt(id));
-            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-            String startDate = dateFormat.format(event.getStartDate());
-            String endDate = dateFormat.format(event.getEndDate());
+//            DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+//            String startDate = dateFormat.format(event.getStartDate());
+//            String endDate = dateFormat.format(event.getEndDate());
 
             //System.out.println(startDate+"|"+endDate); //for debug
-            request.setAttribute("startDate", startDate);
-            request.setAttribute("endDate", endDate);
+//            request.setAttribute("startDate", startDate);
+//            request.setAttribute("endDate", endDate);
             request.setAttribute("event", event);
             //request.setAttribute("presenterList", presenterList);
             RequestDispatcher rd = request.getRequestDispatcher("User-Event.jsp");

@@ -33,6 +33,13 @@ public class EventBLO implements EventBLORemote {
         return evt;
     }
 
+    public List<Event> getByTitle(String title) {
+        String hql = "FROM Event AS e where e.title LIKE '%"+ title +"%'  ";
+        Query query = this.em.createQuery(hql);
+        List<Event> events = query.getResultList();
+        return events;
+    }
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 

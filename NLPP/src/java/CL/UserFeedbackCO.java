@@ -7,9 +7,11 @@ package CL;
 import EL.FeedBack;
 import EL.User;
 import SLSBeans.FeedBackBLORemote;
+import SLSBeans.UserBLORemote;
 import java.io.IOException;
 import java.util.Date;
 import javax.naming.InitialContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpSession;
 public class UserFeedbackCO extends HttpServlet {
 
     FeedBackBLORemote feedbackBLO;
+    UserBLORemote userBLO;
 
     @Override
     public void init() throws ServletException {
@@ -33,6 +36,7 @@ public class UserFeedbackCO extends HttpServlet {
             props.load(new java.io.FileInputStream(jndiFileName));
             InitialContext ctx = new InitialContext(props);
             feedbackBLO = (FeedBackBLORemote) ctx.lookup("FeedBackBLO/remote");
+            userBLO = (UserBLORemote) ctx.lookup("UserBLO/remote");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -59,7 +63,11 @@ public class UserFeedbackCO extends HttpServlet {
                 FeedBack feedback = new FeedBack(subject, question, date,"Not Process");
                 boolean result = feedbackBLO.add(feedback, user);
                 if (result) {
-                    response.sendRedirect("User-viewFeedback.jsp");
+                    user = userBLO.checkUser(user.getEmail(), user.getPassword());
+                    session = request.getSession(true);
+                    session.setAttribute("user", user);
+                    RequestDispatcher rd = request.getRequestDispatcher("User-viewFeedback.jsp");
+                    rd.forward(request, response);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
