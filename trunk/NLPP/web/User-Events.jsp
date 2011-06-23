@@ -15,6 +15,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                g_globalObject = new JsDatePick({
+                    useMode:1,
+                    isStripped:true,
+                    target:"div3_example"
+                });
+            };
+        </script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -132,7 +143,8 @@
                                 </div>
                             </fieldset>
                         </form>
-
+                        <div align="center"><span class="txt1">o0o Calendar o0o</span></div>
+                        <div id="div3_example" style="margin:10px 0 30px 0; border:dashed 1px blue; width:219px; height:230px;" align="center"></div>
                     </ul>
                 </aside>
                 <!-- content -->

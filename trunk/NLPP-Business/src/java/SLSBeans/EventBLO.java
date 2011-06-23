@@ -6,6 +6,10 @@
 package SLSBeans;
 
 import EL.Event;
+import EL.EvtUser;
+import EL.Payment;
+import EL.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,6 +42,27 @@ public class EventBLO implements EventBLORemote {
         Query query = this.em.createQuery(hql);
         List<Event> events = query.getResultList();
         return events;
+    }
+
+    public boolean addUserForEvent(User u, Event evt, Payment pay) {
+        try {
+            List<EvtUser> evtUserList = new ArrayList<EvtUser>();//Tao ra 1 List co 1 Order vi tham so truyen zo setCustOrderList la 1 cai List
+            EvtUser evtUser = new EvtUser(u, pay, evt);
+            evtUserList.add(evtUser);
+            evt.setEvtUserList(evtUserList);
+            pay.setEvtUserList(evtUserList);
+            u.setEvtUserList(evtUserList);
+            this.em.persist(evtUser);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public Payment getPaymentById(int id) {
+        Payment payment =  em.find(Payment.class, id);
+        return payment;
     }
 
     // Add business logic below. (Right-click in editor and choose
