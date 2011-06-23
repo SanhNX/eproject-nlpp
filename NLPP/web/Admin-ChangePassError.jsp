@@ -1,0 +1,204 @@
+<%-- 
+    Document   : index
+    Created on : Jun 6, 2011, 11:02:14 PM
+    Author     : XuanSanh_IT
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
+        <script type="text/javascript" src="js/cufon-yui.js"></script>
+        <script type="text/javascript" src="js/cufon-replace.js"></script>
+        <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
+        <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+        <script type="text/javascript" src="js/html5.js"></script>
+        <script type="text/javascript" src="js/date.js"></script>
+        <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/additional-methods.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#form").validate({
+                    rules:{
+                        txtPass:{
+                            required:true,
+                            rangelength:[6,25]
+                        },
+                        txtRePass:{
+                            equalTo:"#txtPass"
+                        },
+                        txtOldPass:{
+                            required:true
+                        }
+                    }   //end rules
+                });  //end validate
+            }); //end function
+        </script>
+        <script type="text/javascript">
+        function bt(){
+        var r = confirm("Are You Sure ?");
+        if(r == true){
+            var frm = document.getElementById("frmLogout");
+        
+        }
+        
+        }
+    </script>
+        <title>National Level Paper Presentation</title>
+    </head>
+    <body>
+        <div id="main_container">
+
+            <div class="header">
+                <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
+                
+                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
+                <div class="jclock"></div>
+            </div>
+
+            <div class="main_content">
+
+                <div class="menu">
+                    <ul>
+                        <!--<li><a class="current" href="index.html">Admin Home</a></li>
+                        <li><a href="list.html">Manage Categories</a></li>
+                        <li><a href="login.html">Manage Users</a></li>
+                        <li><a href="login.html">Manage Orders</a></li>
+                        <li><a href="login.html">Settings</a></li>
+                        <li><a href="">Custom details</a></li>
+                        <li><a href="">Contact</a></li>-->
+                    </ul>
+                </div>
+
+                <div class="center_content">
+
+
+
+                    <div class="left_content">
+
+                        <div class="sidebar_search">
+                            <form>
+                                <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
+                                <input type="image" class="search_submit" src="images/search.png" />
+                            </form>
+                        </div>
+
+                        <div class="sidebarmenu">
+
+                            <a class="menuitem submenuheader" href="#">Categories</a>
+                            <div class="submenu">
+                                <ul>
+                                    <li><a href="">Manage User</a></li>
+                                    <li><a href="">Manage Event</a></li>
+                                    <li><a href="">Manage Presenter</a></li>
+                                    <li><a href="">Manage Adward</a></li>
+                                    <li><a href="">Manage Payment</a></li>
+                                    <li><a href="">Manage Mailing List</a></li>
+                                    <li><a href="">Manage Feedback</a></li>
+                                    <li><a href="">Manage FAQ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar_box">
+                            <div class="sidebar_box_top"></div>
+                            <div class="sidebar_box_content">
+                                <h3>User help desk</h3>
+                                <img src="images/info.png" alt="" title="" class="sidebar_icon_right" />
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                            <div class="sidebar_box_bottom"></div>
+                        </div>
+
+                        <div class="sidebar_box">
+                            <div class="sidebar_box_top"></div>
+                            <div class="sidebar_box_content">
+                                <h4>Important notice</h4>
+                                <img src="images/notice.png" alt="" title="" class="sidebar_icon_right" />
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                            <div class="sidebar_box_bottom"></div>
+                        </div>
+
+                        <div class="sidebar_box">
+                            <div class="sidebar_box_top"></div>
+                            <div class="sidebar_box_content">
+                                <h5>Download photos</h5>
+                                <img src="images/photo.png" alt="" title="" class="sidebar_icon_right" />
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                            </div>
+                            <div class="sidebar_box_bottom"></div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="right_content">
+
+                       
+
+                        <div class="form">
+                            <h2><img src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
+                        <h4><span>The Problems did happened in the process of the change password</span></h4>
+                        <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back </a></u></h4>
+                        <br/>
+                        <form id="form" action="AdminCO?action=updatePass" method="post" class="niceform" >
+
+                                <fieldset>
+                                    <dl>
+                                        <dt><label for="newpass">New PassWord:</label></dt>
+                                        <dd><input type="password" name="txtPass" id="txtPass" size="54" /></dd>
+                                    </dl>
+                                <dl>
+                                        <dt><label for="repass">Re-PassWord:</label></dt>
+                                        <dd><input type="password" name="txtRePass"  size="54" /></dd>
+                                    </dl>
+                                <dl>
+                                        <dt><label for="oldpass">Old-PassWord:</label></dt>
+                                        <dd><input type="password" name="txtOldPass"  size="54" /></dd>
+                                    </dl>
+                                    <dl class="submit">
+                                        <input align="light" type="submit" name="submit" id="submit" value="Change Pass" />&nbsp;|&nbsp;<input align="right" type="reset" name="submit" id="submit" value="Reset Form" />
+                                    </dl>
+                                </fieldset>
+
+                            </form>
+                        </div>
+
+
+                    </div><!-- end of right content-->
+
+
+                </div>   <!--end of center content -->
+
+
+
+
+                <div class="clear"></div>
+            </div> <!--end of main content-->
+
+
+            <div class="footer">
+
+                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+            </div>
+
+        </div>
+    </body>
+
+</html>

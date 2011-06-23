@@ -33,6 +33,7 @@
                 });  //end validate
             }); //end function
         </script>
+        
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -63,7 +64,7 @@
                             </dd>
                         </dl>
                         <dl class="submit">
-                            <input type="submit" name="submit" id="submit" value="Submit" />
+                            <input type="submit" name="submit" id="submit" value="Submit"  />
                         </dl>
                     </fieldset>
                 </form>
