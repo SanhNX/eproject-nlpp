@@ -7,6 +7,7 @@ package SLSBeans;
 
 import EL.Event;
 import EL.EvtUser;
+import EL.EvtUserPK;
 import EL.Payment;
 import EL.User;
 import java.util.ArrayList;
@@ -47,7 +48,9 @@ public class EventBLO implements EventBLORemote {
     public boolean addUserForEvent(User u, Event evt, Payment pay) {
         try {
             List<EvtUser> evtUserList = new ArrayList<EvtUser>();//Tao ra 1 List co 1 Order vi tham so truyen zo setCustOrderList la 1 cai List
+            EvtUserPK evtUserPK = new EvtUserPK(evt.getId(), u.getEmail());
             EvtUser evtUser = new EvtUser(u, pay, evt);
+            evtUser.setEvtUserPK(evtUserPK);
             evtUserList.add(evtUser);
             evt.setEvtUserList(evtUserList);
             pay.setEvtUserList(evtUserList);

@@ -89,18 +89,18 @@ public class UserEventCO extends HttpServlet {
             User user = (User) session.getAttribute("user");
             String id = request.getParameter("id");
             Event event = eventBLO.getByID(Integer.parseInt(id));
-            String txtNamePayment = request.getParameter("rbtType");
+            String PaymentName = request.getParameter("rbtType");
             Payment payment = null;
-            if (txtNamePayment.equalsIgnoreCase("Direct")) {
+            if (PaymentName.equalsIgnoreCase("Direct")) {
                 payment = eventBLO.getPaymentById(1);
-            } else if (txtNamePayment.equalsIgnoreCase("Cheque")) {
+            } else if (PaymentName.equalsIgnoreCase("Cheque")) {
                 payment = eventBLO.getPaymentById(2);
-            } else if (txtNamePayment.equalsIgnoreCase("Cash")) {
+            } else if (PaymentName.equalsIgnoreCase("Cash")) {
                 payment = eventBLO.getPaymentById(3);
             }
             boolean result = eventBLO.addUserForEvent(user, event, payment);
             if(result){
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("UserEventCO?action=event&id="+id);
             }
         }
     }

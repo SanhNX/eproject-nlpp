@@ -162,15 +162,15 @@
                                 <fieldset>
                                     <dl>
                                         <dt><label for="newpass">New PassWord:</label></dt>
-                                        <dd><input type="password" name="txtPass" id="txtPass" size="54" /></dd>
+                                        <dd><input type="password" name="txtPass" id="txtPass" size="50" /></dd>
                                     </dl>
                                 <dl>
                                         <dt><label for="repass">Re-PassWord:</label></dt>
-                                        <dd><input type="password" name="txtRePass"  size="54" /></dd>
+                                        <dd><input type="password" name="txtRePass"  size="50" /></dd>
                                     </dl>
                                 <dl>
                                         <dt><label for="oldpass">Old-PassWord:</label></dt>
-                                        <dd><input type="password" name="txtOldPass"  size="54" /></dd>
+                                        <dd><input type="password" name="txtOldPass"  size="50" /></dd>
                                     </dl>
                                     <dl class="submit">
                                         <input align="light" type="submit" name="submit" id="submit" value="Change Pass" />&nbsp;|&nbsp;<input align="right" type="reset" name="submit" id="submit" value="Reset Form" />

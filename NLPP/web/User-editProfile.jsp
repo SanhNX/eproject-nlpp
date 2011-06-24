@@ -202,7 +202,7 @@
                                 </tr>
                                 <tr class="field">
                                     <td></td>
-                                    <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Update Now"></td>
+                                    <td><input align="right" type="submit" value="Update Now"></td>
                                 </tr>
                             </table>
                         </form>

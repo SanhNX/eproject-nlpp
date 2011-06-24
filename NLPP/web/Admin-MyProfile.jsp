@@ -20,6 +20,7 @@
         <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
         <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
         <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
         <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
         <script type="text/javascript">
             window.onload = function(){
@@ -48,7 +49,7 @@
         <script type="text/javascript" src="js/additional-methods.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#contacts-form1").validate({
+                $("#form1").validate({
                     rules:{
                         txtPass:{
                             required:true,
@@ -63,22 +64,12 @@
                     }   //end rules
                 });  //end validate
 
-                $("#contacts-form").validate({
+                $("#form").validate({
                     rules:{
-                        txtPass:{
-                            required:true,
-                            rangelength:[6,25]
-                        },
-                        txtRePass:{
-                            equalTo:"#txtPass"
-                        },
-                        txtOldPass:{
-                            required:true
-                        },
                         txtBirthday:{
                             required:true
                         },
-                       txtFullname:{
+                        txtFullname:{
                             required:true
                         },
                         txtAddress:{
@@ -100,7 +91,7 @@
 
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                
+
                 <div class="right_header">Welcome ${sessionScope.admin.email} <a href="#">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
                 <div class="jclock"></div>
             </div>
@@ -183,118 +174,84 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
-
-
-
                     </div>
-
                     <div class="right_content">
-
-                        <h2><img src="images/icon_cube.png" width="64" height="95">View Profile <span>Form</span></h2>
-
+                        <h2><img src="images/icon_cube.png" width="64" height="95">Update Profile <span>Form</span></h2>
                         <div class="form">
-                            <form id="contacts-form" action="AdminCO?action=updateProfile" method="post" class="niceform">
-                                
-                                    <fieldset>
+                            <form id="form" action="AdminCO?action=updateProfile" method="post" class="niceform">
+
+                                <fieldset>
                                     <dl>
-                                        <dt><label for="birth">Birth Day:</label></dt>
+                                        <dt><b>Birth Day:</b></dt>
                                         <dd><input type="text" name="txtBirthday" value="${requestScope.birthday}" id="inputField" size="54" readonly="true"/></dd>
                                     </dl>
                                     <dl>
-                                        <dt><label for="fullname">Full Name:</label></dt>
+                                        <dt><b>Full Name:</b></dt>
                                         <dd><input type="text" name="txtFullname" value="${requestScope.admin.fullName}" id="" size="54" /></dd>
                                     </dl>
-                                        <c:if test="${requestScope.gender==true}">
-                                     <dl>
-                                        <dt><label for="color">Gender</label></dt>
-                                        <dd>
-                                            <input type="radio" name="type" id="" value="Male" checked="true"  /><label class="check_label">Male</label>
-                                            <input type="radio" name="type" id="" value="FeMale" /><label class="check_label">FeMale</label>
+                                    <c:if test="${requestScope.gender==true}">
+                                        <dl>
+                                            <dt><b>Gender</b></dt>
+                                            <dd>
+                                                <input type="radio" name="type" id="" value="Male" checked="true"  /><label class="check_label">Male</label>
+                                                <input type="radio" name="type" id="" value="FeMale" /><label class="check_label">FeMale</label>
 
-                                        </dd>
-                                    </dl>
-                                        </c:if>
+                                            </dd>
+                                        </dl>
+                                    </c:if>
                                     <c:if test="${requestScope.gender==false}">
-                                     <dl>
-                                        <dt><label for="color">Gender</label></dt>
-                                        <dd>
-                                            <input type="radio" name="type" id="" value="Male" /><label class="check_label">Male</label>
-                                            <input type="radio" name="type" id="" value="FeMale" checked="true" /><label class="check_label">FeMale</label>
+                                        <dl>
+                                            <dt><b>Gender</b></dt>
+                                            <dd>
+                                                <input type="radio" name="type" id="" value="Male" /><label class="check_label" style="color: #666;">Male</label>
+                                                <input type="radio" name="type" id="" value="FeMale" checked="true" /><label class="check_label" style="color: #666;">FeMale</label>
 
-                                        </dd>
-                                    </dl>
-                                        </c:if>
-
-
+                                            </dd>
+                                        </dl>
+                                    </c:if>
                                     <dl>
-                                        <dt><label for="address">Address:</label></dt>
+                                        <dt><b>Address:</b></dt>
                                         <dd><input type="text" name="txtAddress" value="${requestScope.admin.address}" id="" size="54" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><label for="phone">Phone:</label></dt>
+                                        <dt><b>Phone:</b></dt>
                                         <dd><input type="text" name="txtPhone" value="${requestScope.admin.phone}" id="" size="54" /></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="light" type="submit" name="submit" id="submit" value="Update Now" />&nbsp;|&nbsp;<input align="right" type="reset"  id="submit" value="Reset Form" />
+                                        <input align="right" type="submit" value="Update Now" />
                                     </dl>
-
-
-
                                 </fieldset>
-                                
-                                
-
                             </form>
+                            <br/> <br/>
+                            <h2><img src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
 
-                             <h2><img src="images/icon_cube.png" width="64" height="95">Update Profile <span>Form</span></h2>
-                             
-                             <form id="contacts-form1" action="AdminCO?action=updatePass" method="Post" class="niceform" >
+                            <form id="form1" action="AdminCO?action=updatePass" method="Post" class="niceform" >
                                 <fieldset>
                                     <dl>
-                                        <dt><label for="newpass">New PassWord:</label></dt>
+                                        <dt><b>New PassWord:</b></dt>
                                         <dd><input type="password" name="txtPass" id="txtPass" size="54" /></dd>
                                     </dl>
-                                <dl>
-                                        <dt><label for="repass">Re-PassWord:</label></dt>
+                                    <dl>
+                                        <dt><b>Re-PassWord:</b></dt>
                                         <dd><input type="password" name="txtRePass"  size="54" /></dd>
                                     </dl>
-                                <dl>
-                                        <dt><label for="oldpass">Old-PassWord:</label></dt>
+                                    <dl>
+                                        <dt><b>Old-PassWord:</b></dt>
                                         <dd><input type="password" name="txtOldPass"  size="54" /></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="light" type="submit" name="submit" id="submit" value="Change Pass" />&nbsp;|&nbsp;<input align="right" type="reset" name="submit" id="submit" value="Reset Form" />
+                                        <input align="left" type="reset" value="Reset Form" />&nbsp;&nbsp;|&nbsp;&nbsp;<input align="right" type="submit" value="Change Pass" />
                                     </dl>
                                 </fieldset>
-                                    
-                                
-                                       
-                                    
-                                    </form>
-                             
+                            </form>
                         </div>
-
-
                     </div><!-- end of right content-->
-
-
                 </div>   <!--end of center content -->
-                
-
-
-
                 <div class="clear"></div>
             </div> <!--end of main content-->
-
-
-
             <div class="footer">
-
                 <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
-
 </html>
