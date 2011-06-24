@@ -87,7 +87,7 @@
                                 <h2>You Are Sign In</h2>
                                 <a style="color: white; font-size: 20px; ">Welcome </a><br/><br/><a href="#" style="font-weight:lighter;font-style: italic;color: brown;font-size: 15px; ">${sessionScope.user.email}</a>
                                 <br/><br/>
-                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a href="UserCO?action=logout" class="fright">Logout</a></div>
+                                <div><a href="UserCO?action=myProfile" class="fleft">My Profile</a><a onClick="return confirm('Are You Still Want To Logout ?')" href="UserCO?action=logout" class="fright">Logout</a></div>
                             </div>
                         </fieldset>
                     </form>
