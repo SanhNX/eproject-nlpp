@@ -20,6 +20,10 @@
         <servlet-name>UserFeedbackCO</servlet-name>
         <servlet-class>CL.UserFeedbackCO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminMNEventCO</servlet-name>
+        <servlet-class>CL.AdminMNEventCO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserCO</servlet-name>
         <url-pattern>/UserCO</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>UserFeedbackCO</servlet-name>
         <url-pattern>/UserFeedbackCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminMNEventCO</servlet-name>
+        <url-pattern>/AdminMNEventCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

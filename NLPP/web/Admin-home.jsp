@@ -78,10 +78,8 @@
                             <div class="submenu">
                                 <ul>
                                     <li><a href="">Manage User</a></li>
-                                    <li><a href="">Manage Event</a></li>
+                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Award</a></li>
-                                    <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
                                     <li><a href="">Manage FAQ</a></li>

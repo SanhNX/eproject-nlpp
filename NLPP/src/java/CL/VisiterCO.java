@@ -4,15 +4,8 @@
  */
 package CL;
 
-import EL.Event;
-import EL.FAQ;
-import EL.MailingList;
-import EL.Role;
-import EL.User;
-import SLSBeans.EventBLORemote;
-import SLSBeans.FAQBLORemote;
-import SLSBeans.MailingListBLORemote;
-import SLSBeans.UserBLORemote;
+import EL.*;
+import SLSBeans.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -70,11 +63,14 @@ public class VisiterCO extends HttpServlet {
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("register")) {
             String messege="";
+            User u = null;
+            Date birthday = null;
+            DateFormat dateFormat = null;
             try {
                 String email = request.getParameter("txtEmail");
                 String pass = request.getParameter("txtPass");
-                DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-                Date birthday = (Date) dateFormat.parse(request.getParameter("txtBirthday").toString());
+                dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                birthday = (Date) dateFormat.parse(request.getParameter("txtBirthday").toString());
                 String fullName = request.getParameter("txtFullname");
                 String txtgender = request.getParameter("rbtType");
                 boolean gender = true;
@@ -86,7 +82,7 @@ public class VisiterCO extends HttpServlet {
                 String address = request.getParameter("txtAddress");
                 String phone = request.getParameter("txtPhone");
                 Role role = userBLO.getRole(9);
-                User u = new User(email, pass, fullName, birthday, gender, address, phone,true);
+                u = new User(email, pass, fullName, birthday, gender, address, phone,true);
                 boolean result = userBLO.add(role, u);
                 if (result) {
                     messege="";
@@ -96,6 +92,9 @@ public class VisiterCO extends HttpServlet {
                 ex.printStackTrace();
                 messege = "This email address is already registered !<br/>Please switch to the Login Page.";
                 request.setAttribute("messege", messege);
+                request.setAttribute("user", u);
+                String birthday1 = dateFormat.format(u.getBirthday());
+                request.setAttribute("birthday", birthday1);
                 RequestDispatcher rd = request.getRequestDispatcher("User-register.jsp");
                 rd.forward(request, response);
             }
