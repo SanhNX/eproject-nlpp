@@ -43,15 +43,15 @@
             }); //end function
         </script>
         <script type="text/javascript">
-        function bt(){
-        var r = confirm("Are You Sure ?");
-        if(r == true){
-            var frm = document.getElementById("frmLogout");
+            function bt(){
+                var r = confirm("Are You Sure ?");
+                if(r == true){
+                    var frm = document.getElementById("frmLogout");
         
-        }
+                }
         
-        }
-    </script>
+            }
+        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -59,7 +59,7 @@
 
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                
+
                 <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
                 <div class="jclock"></div>
             </div>
@@ -77,18 +77,11 @@
                         <li><a href="">Contact</a></li>-->
                     </ul>
                 </div>
-
                 <div class="center_content">
-
-
-
                     <div class="left_content">
-
                         <div class="sidebar_search">
-                            <form>
                                 <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
                                 <input type="image" class="search_submit" src="images/search.png" />
-                            </form>
                         </div>
 
                         <div class="sidebarmenu">
@@ -99,7 +92,7 @@
                                     <li><a href="">Manage User</a></li>
                                     <li><a href="">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Adward</a></li>
+                                    <li><a href="">Manage Award</a></li>
                                     <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
@@ -118,7 +111,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -130,7 +122,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -142,63 +133,41 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
-
-
-
                     </div>
-
                     <div class="right_content">
-
-                       
-
                         <div class="form">
-                            <h2><img src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
-                        <h4><span>The Problems did happened in the process of the change password</span></h4>
-                        <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back </a></u></h4>
-                        <br/>
-                        <form id="form" action="AdminCO?action=updatePass" method="post" class="niceform" >
-
+                            <br/><br/><br/><br/>
+                            <h2><img alt="NLPP's Site" src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
+                            <h4><span>The Problems did happened in the process of the change password</span></h4>
+                            <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back To Administrator Home</a></u></h4>
+                            <br/><br/><br/>
+                            <form id="form" action="AdminCO?action=updatePass" method="post" class="niceform" >
                                 <fieldset>
                                     <dl>
-                                        <dt><label for="newpass">New PassWord:</label></dt>
+                                        <dt><b>New PassWord:</b></dt>
                                         <dd><input type="password" name="txtPass" id="txtPass" size="50" /></dd>
                                     </dl>
-                                <dl>
-                                        <dt><label for="repass">Re-PassWord:</label></dt>
+                                    <dl>
+                                        <dt><b>Re-PassWord:</b></dt>
                                         <dd><input type="password" name="txtRePass"  size="50" /></dd>
                                     </dl>
-                                <dl>
-                                        <dt><label for="oldpass">Old-PassWord:</label></dt>
+                                    <dl>
+                                        <dt><b>Old-PassWord:</b></dt>
                                         <dd><input type="password" name="txtOldPass"  size="50" /></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="light" type="submit" name="submit" id="submit" value="Change Pass" />&nbsp;|&nbsp;<input align="right" type="reset" name="submit" id="submit" value="Reset Form" />
+                                        <input align="right" type="reset" name="submit" id="submit" value="Reset Form" />|<input align="light" type="submit" name="submit" id="submit" value="Change Pass" />
                                     </dl>
                                 </fieldset>
-
                             </form>
                         </div>
-
-
                     </div><!-- end of right content-->
-
-
                 </div>   <!--end of center content -->
-
-
-
-
                 <div class="clear"></div>
             </div> <!--end of main content-->
-
-
             <div class="footer">
-
                 <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
-
 </html>

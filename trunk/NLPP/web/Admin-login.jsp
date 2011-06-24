@@ -33,7 +33,7 @@
                 });  //end validate
             }); //end function
         </script>
-        
+
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -50,18 +50,18 @@
                         <br/>
                         <br/>
                         <dl>
-                            <dt><label for="email" style="color: #666;">Username &nbsp;</label></dt>
-                            <dd><input type="text" name="txtUsername" id="" size="40" /></dd>
+                            <dt1><b>Username &nbsp;</b></dt1>
+                            <dd1><input type="text" name="txtUsername" id="" size="40" /></dd1>
                         </dl>
                         <dl>
-                            <dt><label for="password" style="color: #666;">Password &nbsp;</label></dt>
-                            <dd><input type="password" name="txtPassword" id="" size="40" /></dd>
+                            <dt1><b>Password &nbsp;</b></dt1>
+                            <dd1><input type="password" name="txtPassword" id="" size="40" /></dd1>
                         </dl>
                         <dl>
-                            <dt><label></label></dt>
-                            <dd>
+                            <dt1><label></label></dt1>
+                            <dd1>
                                 <input type="checkbox" name="interests[]" id="" value="" /><label class="check_label" style="color: #666;">Remember me</label>
-                            </dd>
+                            </dd1>
                         </dl>
                         <dl class="submit">
                             <input type="submit" name="submit" id="submit" value="Submit"  />
