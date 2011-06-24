@@ -51,6 +51,12 @@ public class FAQ implements Serializable {
         this.id = id;
     }
 
+    public FAQ(String subject, String question, String answer) {
+        this.subject = subject;
+        this.question = question;
+        this.answer = answer;
+    }
+
     public FAQ(Integer id, String subject, String question, String answer) {
         this.id = id;
         this.subject = subject;

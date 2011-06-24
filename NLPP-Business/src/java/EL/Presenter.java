@@ -55,6 +55,13 @@ public class Presenter implements Serializable {
         this.id = id;
     }
 
+    public Presenter(String name, String address, String email, String phone) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+    }
+
     public Presenter(Integer id, String name, String address, String email, String phone) {
         this.id = id;
         this.name = name;

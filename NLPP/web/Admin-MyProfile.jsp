@@ -92,7 +92,8 @@
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
 
-                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="#">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
+                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="#">View Profile</a>  | <a href="AdminCO?action=logout"
+                                                                                                                 class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
 

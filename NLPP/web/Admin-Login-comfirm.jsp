@@ -132,8 +132,8 @@
                             <br/><br/><br/><br/>
                             <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
                             <div align="left">
-                                <h4><span>You Have Change Password Success </span></h4>
-                                <h4><span>Please Login To Change Password Confirmation </span></h4>
+                                <h4><span>Your request completed successfully.</span></h4>
+                                <h4><span>Please Login To Confirmation </span></h4>
                             </div>
                             <form action="AdminCO?action=login" method="post" id="login-admin">
                                 <fieldset>

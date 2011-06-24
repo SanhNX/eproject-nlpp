@@ -97,7 +97,7 @@
                     User user = (User) s.getAttribute("user");
                     if (user == null) {
         %>
-        <jsp:forward page="/User-login.jsp"/>
+        <jsp:forward page="/User-login-confirm.jsp"/>
         <%}%>
 
         <div class="wrap">
