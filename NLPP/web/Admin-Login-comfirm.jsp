@@ -70,27 +70,21 @@
                 </div>
 
                 <div class="center_content">
-
-
-
                     <div class="left_content">
-
                         <div class="sidebar_search">
                             <form>
                                 <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
                                 <input type="image" class="search_submit" src="images/search.png" />
                             </form>
                         </div>
-
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
                                     <li><a href="">Manage User</a></li>
                                     <li><a href="">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Adward</a></li>
+                                    <li><a href="">Manage Award</a></li>
                                     <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
@@ -121,7 +115,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -133,15 +126,8 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
-
-
-
                     </div>
-
                     <div class="right_content">
-
-
                         <div class="form">
                             <br/><br/><br/><br/>
                             <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
@@ -149,45 +135,32 @@
                                 <h4><span>You Have Change Password Success </span></h4>
                                 <h4><span>Please Login To Change Password Confirmation </span></h4>
                             </div>
-                                <form action="AdminCO?action=login" method="post" id="login-admin">
-                                    <fieldset>
-                                        <br/>
-                                        <br/>
-                                        <dl>
-                                            <dt><b>Username &nbsp;</b></dt>
-                                            <dd><input type="text" name="txtUsername" id="" size="50" /></dd>
-                                        </dl>
-                                        <dl>
-                                            <dt><b>Password &nbsp;</b></dt>
-                                            <dd><input type="password" name="txtPassword" id="" size="50" /></dd>
-                                        </dl>
+                            <form action="AdminCO?action=login" method="post" id="login-admin">
+                                <fieldset>
+                                    <br/>
+                                    <br/>
+                                    <dl>
+                                        <dt><b>Username &nbsp;</b></dt>
+                                        <dd><input type="text" name="txtUsername" id="" size="50" /></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Password &nbsp;</b></dt>
+                                        <dd><input type="password" name="txtPassword" id="" size="50" /></dd>
+                                    </dl>
 
-                                        <dl class="submit">
-                                            <input align="light" type="submit" name="submit" id="submit" value="Login Admin" />
-                                        </dl>
-                                    </fieldset>
-                                </form>
+                                    <dl class="submit">
+                                        <input align="light" type="submit" name="submit" id="submit" value="Login Admin" />
+                                    </dl>
+                                </fieldset>
+                            </form>
                         </div>
-
-
                     </div><!-- end of right content-->
-
-
                 </div>   <!--end of center content -->
-
-
-
-
                 <div class="clear"></div>
             </div> <!--end of main content-->
-
-
             <div class="footer">
-
                 <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
-
 </html>

@@ -90,7 +90,7 @@
                                     <li><a href="">Manage User</a></li>
                                     <li><a href="">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Adward</a></li>
+                                    <li><a href="">Manage Award</a></li>
                                     <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
