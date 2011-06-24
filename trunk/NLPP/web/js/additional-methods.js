@@ -286,8 +286,8 @@ jQuery.validator.addMethod("ipv6", function(value, element, param) {
 jQuery.validator.addMethod("phoneVN", function(phone_number, element) {
     phone_number = phone_number.replace(/\s+/g, "");
     return this.optional(element) || phone_number.match(/^\(\+84\)-[0-9]{3}-[0-9]{6,7}$/);
-}, "Please specify a valid phone number");
+}, "* Please specify a valid phone number");
 
 jQuery.validator.addMethod("dateVN", function(value, element) {
     return Date.parseExact(value, "dd/MM/yyyy"); //reference to date.js
-}, "Please enter a date format in the format 'dd/MM/yyyy' ");
+}, "* Please enter a date format in the format 'dd/MM/yyyy' ");

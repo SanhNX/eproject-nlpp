@@ -34,15 +34,15 @@
             }); //end function
         </script>
         <script type="text/javascript">
-        function bt(){
-        var r = confirm("Are You Sure ?");
-        if(r == true){
-            var frm = document.getElementById("frmLogout");
+            function bt(){
+                var r = confirm("Are You Sure ?");
+                if(r == true){
+                    var frm = document.getElementById("frmLogout");
         
-        }
+                }
         
-        }
-    </script>
+            }
+        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -50,7 +50,7 @@
 
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                
+
                 <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
                 <div class="jclock"></div>
             </div>
@@ -141,35 +141,32 @@
 
                     <div class="right_content">
 
-                        
+
                         <div class="form">
+                            <br/><br/><br/><br/>
                             <h2><img src="images/icon_home.png" width="64" height="95"/>Login <span>Form</span></h2>
-                        <h4><span>You Have Change Password Success </span></h4>
-                        <h4><span>Please Login To Change Password Confirmation </span></h4>
-                            <form action="AdminCO?action=login" method="post" id="login-admin">
-                    <fieldset>
-                        <br/>
-                        <br/>
-                        <dl>
-                            <dt><label for="email">Username &nbsp;</label></dt>
-                            <dd><input type="text" name="txtUsername" id="" size="40" /></dd>
-                        </dl>
-                        <dl>
-                            <dt><label for="password">Password &nbsp;</label></dt>
-                            <dd><input type="password" name="txtPassword" id="" size="40" /></dd>
-                        </dl>
-                        <dl>
-                            <dt><label></label></dt>
-                            <dd>
-                                <input type="checkbox" name="interests[]" id="" value="" /><label class="check_label">Remember me</label>
-                            </dd>
-                        </dl>
-                        <dl class="submit">
-                                <input align="light" type="submit" name="submit" id="submit" value="Login Admin" />
-                                &nbsp;|&nbsp;<input align="right" type="reset" name="submit" id="submit" value="ResetForm" />
-                        </dl>
-                    </fieldset>
-                </form>
+                            <div align="left">
+                                <h4><span>You Have Change Password Success </span></h4>
+                                <h4><span>Please Login To Change Password Confirmation </span></h4>
+                            </div>
+                                <form action="AdminCO?action=login" method="post" id="login-admin">
+                                    <fieldset>
+                                        <br/>
+                                        <br/>
+                                        <dl>
+                                            <dt><b>Username &nbsp;</b></dt>
+                                            <dd><input type="text" name="txtUsername" id="" size="50" /></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt><b>Password &nbsp;</b></dt>
+                                            <dd><input type="password" name="txtPassword" id="" size="50" /></dd>
+                                        </dl>
+
+                                        <dl class="submit">
+                                            <input align="light" type="submit" name="submit" id="submit" value="Login Admin" />
+                                        </dl>
+                                    </fieldset>
+                                </form>
                         </div>
 
 

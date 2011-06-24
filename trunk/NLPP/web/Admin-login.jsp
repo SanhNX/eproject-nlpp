@@ -50,17 +50,17 @@
                         <br/>
                         <br/>
                         <dl>
-                            <dt><label for="email">Username &nbsp;</label></dt>
+                            <dt><label for="email" style="color: #666;">Username &nbsp;</label></dt>
                             <dd><input type="text" name="txtUsername" id="" size="40" /></dd>
                         </dl>
                         <dl>
-                            <dt><label for="password">Password &nbsp;</label></dt>
+                            <dt><label for="password" style="color: #666;">Password &nbsp;</label></dt>
                             <dd><input type="password" name="txtPassword" id="" size="40" /></dd>
                         </dl>
                         <dl>
                             <dt><label></label></dt>
                             <dd>
-                                <input type="checkbox" name="interests[]" id="" value="" /><label class="check_label">Remember me</label>
+                                <input type="checkbox" name="interests[]" id="" value="" /><label class="check_label" style="color: #666;">Remember me</label>
                             </dd>
                         </dl>
                         <dl class="submit">

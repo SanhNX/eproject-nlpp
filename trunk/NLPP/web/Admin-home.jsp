@@ -237,8 +237,8 @@
                         <a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete items</strong><span class="bt_red_r"></span></a>
                         <h2>Nice Form example</h2>
 
-                        <div class="form">
-                            <form action="" method="post" class="niceform">
+                        <div>
+                            <form action="" method="post">
 
                                 <fieldset>
                                     <dl>
@@ -249,8 +249,6 @@
                                         <dt><label for="password">Password:</label></dt>
                                         <dd><input type="text" name="" id="" size="54" /></dd>
                                     </dl>
-
-
                                     <dl>
                                         <dt><label for="gender">Select categories:</label></dt>
                                         <dd>
