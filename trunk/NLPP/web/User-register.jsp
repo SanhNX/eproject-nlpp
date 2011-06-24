@@ -56,8 +56,7 @@
                     rules:{
                         txtEmail:{
                             required: true,
-                            email:true,
-                            remote:"checkEmail.jsp"
+                            email:true
                         },
                         txtPass:{
                             required:true,
@@ -167,6 +166,10 @@
                         <h2><img src="images/icon_cube.png" width="64" height="95"/>Register <span>Form</span></h2>
                         <form id="contacts-form" action="VisiterCO?action=register" method="POST">
                             <table cellpadding="110" cellspacing="15">
+                                <tr class="field">
+                                    <td></td>
+                                    <td><label>${requestScope.messege}</label></td>
+                                </tr>
                                 <tr class="field">
                                     <td>Your E-mail &nbsp;</td>
                                     <td><input type="text" name="txtEmail" value="" size="30"/></td>

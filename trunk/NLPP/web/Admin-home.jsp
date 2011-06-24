@@ -33,16 +33,6 @@
                 });  //end validate
             }); //end function
         </script>
-        <script type="text/javascript">
-        function bt(){
-        var r = confirm("Are You Sure ?");
-        if(r == true){
-            var frm = document.getElementById("frmLogout");
-        
-        }
-        
-        }
-    </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -51,7 +41,7 @@
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
                 
-                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a id="frmLogout" href="AdminCO?action=logout" class="logout" onclick="bt()">Logout</a></div>
+                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
 

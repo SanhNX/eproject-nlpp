@@ -57,17 +57,20 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "Phone")
     private String phone;
+    @Basic(optional = false)
+    @Column(name = "Status")
+    private boolean status;
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FeedBack> feedBackList;
-    @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
-    @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
     @JoinColumn(name = "RoleID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Role role;
 
     public User() {
@@ -77,7 +80,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone) {
+    public User(String email, String password, String fullName, Date birthday, boolean gender, String address, String phone, boolean status) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -85,6 +88,7 @@ public class User implements Serializable {
         this.gender = gender;
         this.address = address;
         this.phone = phone;
+        this.status = status;
     }
 
     public String getEmail() {
@@ -141,6 +145,14 @@ public class User implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public List<FeedBack> getFeedBackList() {

@@ -85,22 +85,30 @@ public class UserEventCO extends HttpServlet {
                 rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("enrollEvent")) {
-            session = request.getSession();
-            User user = (User) session.getAttribute("user");
             String id = request.getParameter("id");
-            Event event = eventBLO.getByID(Integer.parseInt(id));
             String PaymentName = request.getParameter("rbtType");
-            Payment payment = null;
-            if (PaymentName.equalsIgnoreCase("Direct")) {
-                payment = eventBLO.getPaymentById(1);
-            } else if (PaymentName.equalsIgnoreCase("Cheque")) {
-                payment = eventBLO.getPaymentById(2);
-            } else if (PaymentName.equalsIgnoreCase("Cash")) {
-                payment = eventBLO.getPaymentById(3);
-            }
-            boolean result = eventBLO.addUserForEvent(user, event, payment);
-            if(result){
-                response.sendRedirect("UserEventCO?action=event&id="+id);
+            try {
+                session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                Event event = eventBLO.getByID(Integer.parseInt(id));
+                Payment payment = null;
+                if (PaymentName.equalsIgnoreCase("Direct")) {
+                    payment = eventBLO.getPaymentById(1);
+                } else if (PaymentName.equalsIgnoreCase("Cheque")) {
+                    payment = eventBLO.getPaymentById(2);
+                } else if (PaymentName.equalsIgnoreCase("Cash")) {
+                    payment = eventBLO.getPaymentById(3);
+                }
+                boolean result = eventBLO.addUserForEvent(user, event, payment);
+                if (result) {
+                    response.sendRedirect("UserEventCO?action=event&id=" + id);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Event event = eventBLO.getByID(Integer.parseInt(id));
+                request.setAttribute("event", event);
+                RequestDispatcher rd = request.getRequestDispatcher("User-EnrollError.jsp");
+                rd.forward(request, response);
             }
         }
     }

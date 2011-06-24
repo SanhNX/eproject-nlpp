@@ -71,7 +71,7 @@ public class Event implements Serializable {
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Presenter> presenterList;
-    @OneToMany(cascade = CascadeType.ALL,  mappedBy = "event")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
@@ -86,6 +86,16 @@ public class Event implements Serializable {
 
     public Event(Integer id) {
         this.id = id;
+    }
+
+    public Event(String title, int fee, String criteria, String procedures, Date startDate, Date endDate, String description) {
+        this.title = title;
+        this.fee = fee;
+        this.criteria = criteria;
+        this.procedures = procedures;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
     }
 
     public Event(Integer id, String title, int fee, String criteria, String procedures, Date startDate, Date endDate, String description) {

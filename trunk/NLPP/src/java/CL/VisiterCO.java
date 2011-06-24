@@ -69,6 +69,7 @@ public class VisiterCO extends HttpServlet {
         HttpSession session = null;
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("register")) {
+            String messege="";
             try {
                 String email = request.getParameter("txtEmail");
                 String pass = request.getParameter("txtPass");
@@ -85,14 +86,18 @@ public class VisiterCO extends HttpServlet {
                 String address = request.getParameter("txtAddress");
                 String phone = request.getParameter("txtPhone");
                 Role role = userBLO.getRole(9);
-                User u = new User(email, pass, fullName, birthday, gender, address, phone);
+                User u = new User(email, pass, fullName, birthday, gender, address, phone,true);
                 boolean result = userBLO.add(role, u);
                 if (result) {
-                    response.sendRedirect("User-login.jsp");
+                    messege="";
+                    response.sendRedirect("User-login-confirm.jsp");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                // Message box or redirect to existing user page
+                messege = "This email address is already registered !<br/>Please switch to the Login Page.";
+                request.setAttribute("messege", messege);
+                RequestDispatcher rd = request.getRequestDispatcher("User-register.jsp");
+                rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("addMail")) {
             String email = request.getParameter("txtMailing");
