@@ -229,7 +229,12 @@
                             </tbody>
                         </table>
                         <br/>
-                        <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                        <c:if test="${requestScope.compare < 0}">
+                            <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                        </c:if>
+                        <c:if test="${requestScope.compare >= 0}">
+                            <span class="txt1"><a class="fright">This event had enroll expired</a></span>
+                        </c:if>
                         <table id="rounded-corner">
                             <caption><span class="txt1">Members Of ${requestScope.event.title}</span></caption>
                             <thead>
@@ -279,7 +284,12 @@
                             </tbody>
                         </table>
                         <br/>
-                        <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                        <c:if test="${requestScope.compare < 0}">
+                            <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                        </c:if>
+                        <c:if test="${requestScope.compare >= 0}">
+                            <span class="txt1"><a class="fright">This event had enroll expired</a></span>
+                        </c:if>
                     </div>
                 </section>
             </div>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -172,7 +173,7 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Your E-mail &nbsp;</td>
-                                    <td><input type="text" name="txtEmail" value="" size="30"/></td>
+                                    <td><input type="text" name="txtEmail" value="${requestScope.user.email}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Password &nbsp;</td>
@@ -184,11 +185,11 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Birthday &nbsp;</td>
-                                    <td><input type="text" value="" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
+                                    <td><input type="text" value="${requestScope.birthday}" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Full Name &nbsp;</td>
-                                    <td><input type="text" name="txtFullname" value="" size="30"/></td>
+                                    <td><input type="text" name="txtFullname" value="${requestScope.user.fullName}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Gender &nbsp;</td>
@@ -199,11 +200,11 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Address &nbsp;</td>
-                                    <td><input type="text" name="txtAddress" value="" size="30"/></td>
+                                    <td><input type="text" name="txtAddress" value="${requestScope.user.address}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Phone Number &nbsp;</td>
-                                    <td><input type="text" name="txtPhone" value="" size="30"/></td>
+                                    <td><input type="text" name="txtPhone" value="${requestScope.user.phone}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td></td>
