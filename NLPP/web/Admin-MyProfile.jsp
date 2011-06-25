@@ -88,17 +88,12 @@
     </head>
     <body>
         <div id="main_container">
-
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-
-                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="#">View Profile</a>  | <a href="AdminCO?action=logout"
-                                                                                                                 class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b><a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -110,30 +105,15 @@
                         <li><a href="">Contact</a></li>-->
                     </ul>
                 </div>
-
                 <div class="center_content">
-
-
-
                     <div class="left_content">
-
-                        <div class="sidebar_search">
-                            <form>
-                                <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-                                <input type="image" class="search_submit" src="images/search.png" />
-                            </form>
-                        </div>
-
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
                                     <li><a href="">Manage User</a></li>
-                                    <li><a href="">Manage Event</a></li>
+                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Award</a></li>
-                                    <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
                                     <li><a href="">Manage FAQ</a></li>
@@ -151,7 +131,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -177,22 +156,22 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img src="images/icon_cube.png" width="64" height="95">Update Profile <span>Form</span></h2>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Update Profile <span>Form</span></h2>
                         <div class="form">
                             <form id="form" action="AdminCO?action=updateProfile" method="post" class="niceform">
 
                                 <fieldset>
                                     <dl>
-                                        <dt><b>Birth Day:</b></dt>
+                                        <dt><b>Birth Day :</b></dt>
                                         <dd><input type="text" name="txtBirthday" value="${requestScope.birthday}" id="inputField" size="54" readonly="true"/></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Full Name:</b></dt>
+                                        <dt><b>Full Name :</b></dt>
                                         <dd><input type="text" name="txtFullname" value="${requestScope.admin.fullName}" id="" size="54" /></dd>
                                     </dl>
                                     <c:if test="${requestScope.gender==true}">
                                         <dl>
-                                            <dt><b>Gender</b></dt>
+                                            <dt><b>Gender :</b></dt>
                                             <dd>
                                                 <input type="radio" name="type" id="" value="Male" checked="true"  /><label class="check_label">Male</label>
                                                 <input type="radio" name="type" id="" value="FeMale" /><label class="check_label">FeMale</label>
@@ -202,20 +181,20 @@
                                     </c:if>
                                     <c:if test="${requestScope.gender==false}">
                                         <dl>
-                                            <dt><b>Gender</b></dt>
+                                            <dt><b>Gender :</b></dt>
                                             <dd>
-                                                <input type="radio" name="type" id="" value="Male" /><label class="check_label" style="color: #666;">Male</label>
-                                                <input type="radio" name="type" id="" value="FeMale" checked="true" /><label class="check_label" style="color: #666;">FeMale</label>
+                                                <input type="radio" name="type" id="" value="Male" /><label class="check_label">Male</label>
+                                                <input type="radio" name="type" id="" value="FeMale" checked="true" /><label class="check_label">FeMale</label>
 
                                             </dd>
                                         </dl>
                                     </c:if>
                                     <dl>
-                                        <dt><b>Address:</b></dt>
+                                        <dt><b>Address :</b></dt>
                                         <dd><input type="text" name="txtAddress" value="${requestScope.admin.address}" id="" size="54" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Phone:</b></dt>
+                                        <dt><b>Phone :</b></dt>
                                         <dd><input type="text" name="txtPhone" value="${requestScope.admin.phone}" id="" size="54" /></dd>
                                     </dl>
                                     <dl class="submit">
@@ -224,20 +203,20 @@
                                 </fieldset>
                             </form>
                             <br/> <br/>
-                            <h2><img src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
+                            <h2><img alt="NLPP' Site"  src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
 
                             <form id="form1" action="AdminCO?action=updatePass" method="Post" class="niceform" >
                                 <fieldset>
                                     <dl>
-                                        <dt><b>New PassWord:</b></dt>
+                                        <dt><b>New PassWord :</b></dt>
                                         <dd><input type="password" name="txtPass" id="txtPass" size="54" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Re-PassWord:</b></dt>
+                                        <dt><b>Re-PassWord :</b></dt>
                                         <dd><input type="password" name="txtRePass"  size="54" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Old-PassWord:</b></dt>
+                                        <dt><b>Old-PassWord :</b></dt>
                                         <dd><input type="password" name="txtOldPass"  size="54" /></dd>
                                     </dl>
                                     <dl class="submit">
@@ -251,7 +230,7 @@
                 <div class="clear"></div>
             </div> <!--end of main content-->
             <div class="footer">
-                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
         </div>
     </body>

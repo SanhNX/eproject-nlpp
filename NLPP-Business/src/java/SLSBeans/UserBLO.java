@@ -25,7 +25,7 @@ public class UserBLO implements UserBLORemote {
     private EntityManager em;
 
     public User checkUser(String email, String password) {
-        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 9  ";
+        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 2  ";
         Query query = this.em.createQuery(hql);
         User user = (User) query.getSingleResult();
         return user;
@@ -33,7 +33,7 @@ public class UserBLO implements UserBLORemote {
 
 
      public User checkAdmin(String email, String password) {
-        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 8 ";
+        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 1 ";
         Query query = this.em.createQuery(hql);
         User user = (User) query.getSingleResult();
         return user;

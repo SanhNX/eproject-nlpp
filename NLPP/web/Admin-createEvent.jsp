@@ -4,7 +4,11 @@
     Author     : XuanSanh_IT
 --%>
 
+<%@page import="EL.User"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -15,6 +19,37 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
         <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
+        <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                new JsDatePick({
+                    useMode:2,
+                    target:"inputField",
+                    isStripped:false,
+                    selectedDate:{
+                        year:2009,
+                        month:4,
+                        day:16
+                    },
+                    yearsRange: new Array(1971,2100),
+                    limitToToday:true
+                });
+                new JsDatePick({
+                    useMode:2,
+                    target:"inputField1",
+                    isStripped:false,
+                    selectedDate:{
+                        year:2009,
+                        month:4,
+                        day:16
+                    },
+                    yearsRange: new Array(1971,2100),
+                    limitToToday:true
+                });
+            };
+        </script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -28,14 +63,22 @@
             $(document).ready(function(){
                 $("#form").validate({
                     rules:{
-                        txtPass:{
-                            required:true,
-                            rangelength:[6,25]
+                        txtTitle:{
+                            required:true
                         },
-                        txtRePass:{
-                            equalTo:"#txtPass"
+                        txtFee:{
+                            required:true
                         },
-                        txtOldPass:{
+                        txtCriteria:{
+                            required:true
+                        },
+                        txtProcedures:{
+                            required:true                            
+                        },
+                        txtStartDate:{
+                            required:true
+                        },
+                        txtEndDate:{
                             required:true
                         }
                     }   //end rules
@@ -46,16 +89,12 @@
     </head>
     <body>
         <div id="main_container">
-
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b>
-                    <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b><a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -70,7 +109,6 @@
                 <div class="center_content">
                     <div class="left_content">
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -105,6 +143,7 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
+
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -118,28 +157,37 @@
                         </div>
                     </div>
                     <div class="right_content">
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Event <span>Form</span></h2>
                         <div class="form">
-                            <br/><br/><br/><br/>
-                            <h2><img alt="NLPP's Site" src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
-                            <h4><span>The Problems did happened in the process of the change password</span></h4>
-                            <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back To Administrator Home</a></u></h4>
-                            <br/><br/><br/>
-                            <form id="form" action="AdminCO?action=updatePass" method="post" class="niceform" >
+                            <form id="form" action="AdminCO?action=updateProfile" method="post" class="niceform">
                                 <fieldset>
                                     <dl>
-                                        <dt><b>New PassWord:</b></dt>
-                                        <dd><input type="password" name="txtPass" id="txtPass" size="50" /></dd>
+                                        <dt><b>Event Title :</b></dt>
+                                        <dd><input type="text" name="txtTitle"  id="" size="54"/></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Re-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtRePass"  size="50" /></dd>
+                                        <dt><b>Fee :</b></dt>
+                                        <dd><input type="text" name="txtFee"  id="" size="54" /></dd>
+                                    </dl>
+                                    
+                                    <dl>
+                                        <dt><b>Criteria :</b></dt>
+                                        <dd><input type="text" name="txtCriteria" id="" size="54" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Old-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtOldPass"  size="50" /></dd>
+                                        <dt><b>Procedures :</b></dt>
+                                        <dd><input type="text" name="txtProcedures" id="" size="54" /></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Start Date :</b></dt>
+                                        <dd><input type="text" name="txtStartDate" id="inputField" size="54" readonly="true"/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>End Date :</b></dt>
+                                        <dd><input type="text" name="txtEndDate" id="inputField1" size="54" readonly="true"/></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="right" type="reset" name="submit" id="submit" value="Reset Form" />|<input align="light" type="submit" name="submit" id="submit" value="Change Pass" />
+                                        <input align="right" type="submit" value="Create Event" />
                                     </dl>
                                 </fieldset>
                             </form>

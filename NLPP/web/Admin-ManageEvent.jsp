@@ -6,9 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,16 +24,13 @@
     </head>
     <body>
         <div id="main_container">
-
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
 
-                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b><a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -45,22 +42,9 @@
                         <li><a href="">Contact</a></li>-->
                     </ul>
                 </div>
-
                 <div class="center_content">
-
-
-
                     <div class="left_content">
-
-                        <div class="sidebar_search">
-                            <form>
-                                <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-                                <input type="image" class="search_submit" src="images/search.png" />
-                            </form>
-                        </div>
-
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -84,7 +68,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -109,13 +92,25 @@
                             <div class="sidebar_box_bottom"></div>
                         </div>
                     </div>
-
                     <div class="right_content">
-
-                        <h2>MANAGE EVENTS</h2>
-
-
-                        <table id="rounded-corner" summary="2007 Major IT Companies' Profit">
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>MANAGE EVENTS <span>Form</span></h2>
+                        <div>
+                            <!--                            <a href="Admin-createEvent.jsp" class="bt_blue"><span class="bt_blue_lft"></span><strong>Create New Event</strong><span class="bt_blue_r"></span></a>-->
+                            <a href="Admin-createEvent.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Create New Event</strong><span class="bt_green_r"></span></a>
+                            <br/>
+                            <div class="sidebar_search">
+                                <form method="POST" action="AdminMNEventCO?action=searchEvent" id="search-event">
+                                    <input type="text" class="search_input"
+                                           name="txtKeyword" value="Search Event By Title"
+                                           onfocus="if(this.value=='Search Event By Title'){this.value=''}"
+                                           onblur="if(this.value==''){this.value='Search Event By Title'}"/>
+                                    <input type="image" onclick="document.getElementById('search-event').submit()"
+                                           class="search_submit" src="images/search.png" />
+                                </form>
+                            </div>
+                        </div>
+                        <br/>
+                        <table id="rounded-corner" >
                             <thead>
                                 <tr>
                                     <th scope="col" class="rounded">Title</th>
@@ -130,9 +125,9 @@
                                 <c:forEach items="${requestScope.events}" var="event">
                                     <tr>
                                         <td>${event.title}</td>
-                                        <td>${event.fee}</td>
-                                        <td>${event.startDate}</td>
-                                        <td>${event.endDate}</td>
+                                        <td>${event.fee} $</td>
+                                        <td><h:formatDate value="${event.startDate}" pattern="MM-dd-yyyy" /></td>
+                                        <td><h:formatDate value="${event.endDate}" pattern="MM-dd-yyyy" /></td>
 
                                         <td><a href="#"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
                                         <td><a href="#" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
@@ -145,10 +140,8 @@
                 <div class="clear"></div>
             </div> <!--end of main content-->
             <div class="footer">
-                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
-
 </html>

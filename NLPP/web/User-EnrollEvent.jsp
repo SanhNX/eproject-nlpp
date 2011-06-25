@@ -156,17 +156,15 @@
                     <div class="inside">
                         <h2><img src="images/icon_cube.png" width="64" height="95">Enroll Events <span> ${requestScope.event.title}</span></h2>
                         <div class="img-box"><img src="images/logo_event.png" width="130" height="130" class="png"><span class="txt1">${requestScope.event.description}</span>
-                            ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description} ${requestScope.event.description}</div>
+                        </div>
                         <table id="rounded-corner">
                             <tr>
                                 <td width="20%" align="right"><span class="txt1">Procedures : </span></td>
-                                <td width="80%">${requestScope.event.procedures} ${requestScope.event.procedures} ${requestScope.event.procedures}
-                                    ${requestScope.event.procedures} ${requestScope.event.procedures} ${requestScope.event.procedures}</td>
+                                <td width="80%">${requestScope.event.procedures}</td>
                             </tr>
                             <tr>
                                 <td width="20%" align="right"><span class="txt1">Criteria : </span></td>
-                                <td width="80%">${requestScope.event.criteria} ${requestScope.event.criteria} ${requestScope.event.criteria}
-                                    ${requestScope.event.criteria} ${requestScope.event.criteria} ${requestScope.event.criteria}</td>
+                                <td width="80%">${requestScope.event.criteria}</td>
                             </tr>
                             <tr>
                                 <td width="20%" align="right"><span class="txt1">Fee : </span></td>
