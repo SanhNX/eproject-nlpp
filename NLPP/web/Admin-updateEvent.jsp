@@ -167,45 +167,76 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Event <span>Form</span></h2>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Update Information <span>Form</span></h2>
                         <div class="form">
-                            <form id="form" action="AdminMNEventCO?action=addEvent" method="post" class="niceform">
+                            <form id="form" action="AdminMNEventCO?action=updateInfo&id=${requestScope.event.id}" method="post" class="niceform">
                                 <fieldset>
                                     <dl>
                                         <dt><b>Event Title :</b></dt>
-                                        <dd><input type="text" name="txtTitle"  id="" size="54"/></dd>
+                                        <dd><input type="text" name="txtTitle" value="${requestScope.event.title}" size="54"/></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Fee :</b></dt>
-                                        <dd><input type="text" name="txtFee"  id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtFee"  value="${requestScope.event.fee}" size="54" /></dd>
                                     </dl>
-                                    
+
                                     <dl>
                                         <dt><b>Criteria :</b></dt>
-                                        <dd><input type="text" name="txtCriteria" id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtCriteria" value="${requestScope.event.criteria}" size="54" /></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Procedures :</b></dt>
-                                        <dd><input type="text" name="txtProcedures" id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtProcedures" value="${requestScope.event.procedures}" size="54" /></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Start Date :</b></dt>
-                                        <dd><input type="text" name="txtStartDate" id="inputField" size="54" readonly="true"/></dd>
+                                        <dd><input type="text" name="txtStartDate" value="${requestScope.startDate}"
+                                                   id="inputField" size="54" readonly="true"/></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>End Date :</b></dt>
-                                        <dd><input type="text" name="txtEndDate" id="inputField1" size="54" readonly="true"/></dd>
+                                        <dd><input type="text" name="txtEndDate" value="${requestScope.endDate}"
+                                                   id="inputField1" size="54" readonly="true"/></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Description :</b></dt>
-                                        <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
+                                        <dd><textarea name="txtDescription" rows="8" cols="70">${requestScope.event.description}</textarea></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="right" type="submit" value="Create Event" />
+                                        <input align="right" type="submit" value="Update Event" />
                                     </dl>
                                 </fieldset>
                             </form>
-                        </div>
+                        </div><br/>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
+                        
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded">Name</th>
+                                    <th scope="col" class="rounded">Address</th>
+                                    <th scope="col" class="rounded">Email</th>
+                                    <th scope="col" class="rounded">Phone</th>
+                                    <th scope="col" class="rounded-q4">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach items="${requestScope.event.presenterList}" var="pre">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td>${count}</td>
+                                        <td>${pre.name}</td>
+                                        <td>${pre.address}</td>
+                                        <td>${pre.email}</td>
+                                        <td>${pre.phone}</td>
+                                        <td><a href="AdminMNEventCO?action=delPre&preID=${pre.id}&evtID=${requestScope.event.id}" onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                                <a href="AdminMNEventCO?action=listPresnter&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Presenter For This Event</strong><span class="bt_green_r"></span></a>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

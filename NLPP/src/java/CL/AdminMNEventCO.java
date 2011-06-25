@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package CL;
 
 import EL.Event;
+import EL.Presenter;
 import SLSBeans.EventBLORemote;
 import SLSBeans.PresenterBLORemote;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.naming.InitialContext;
@@ -25,7 +27,8 @@ import javax.servlet.http.HttpSession;
  * @author XuanSanh_IT
  */
 public class AdminMNEventCO extends HttpServlet {
-   EventBLORemote eventBLO;
+
+    EventBLORemote eventBLO;
     PresenterBLORemote preBLO;
 
     @Override
@@ -42,7 +45,8 @@ public class AdminMNEventCO extends HttpServlet {
             ex.printStackTrace();
         }
     }
-    /** 
+
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -50,7 +54,7 @@ public class AdminMNEventCO extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = null;
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("viewEvent")) {
@@ -58,17 +62,24 @@ public class AdminMNEventCO extends HttpServlet {
             request.setAttribute("events", events);
             RequestDispatcher rd = request.getRequestDispatcher("Admin-ManageEvent.jsp");
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("event")) {
+        } else if (action.equalsIgnoreCase("addEvent")) {
+            DateFormat dateFormat = null;
             try {
-                String id = request.getParameter("id");
-                Event event = eventBLO.getByID(Integer.parseInt(id));
-                Date date = new Date();
-                int compare = date.compareTo(event.getEndDate());
-                //System.out.println(date+"----------------------"+compare);//for Debug
-                request.setAttribute("compare", compare);
-                request.setAttribute("event", event);
-                RequestDispatcher rd = request.getRequestDispatcher("User-Event.jsp");
-                rd.forward(request, response);
+                String title = request.getParameter("txtTitle");
+                int fee = Integer.parseInt(request.getParameter("txtFee"));
+                String criteria = request.getParameter("txtCriteria");
+                String procedures = request.getParameter("txtProcedures");
+                dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                Date startDate = (Date) dateFormat.parse(request.getParameter("txtStartDate").toString());
+                Date endDate = (Date) dateFormat.parse(request.getParameter("txtEndDate").toString());
+                String description = request.getParameter("txtDescription");
+                Event event = new Event(title, fee, criteria, procedures, startDate, endDate, description);
+                boolean result = eventBLO.addEvent(event);
+                if (result) {
+                    request.setAttribute("event", event);
+                    RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=viewEvent");
+                    rd.forward(request, response);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -79,8 +90,74 @@ public class AdminMNEventCO extends HttpServlet {
             request.setAttribute("title", title);
             RequestDispatcher rd = request.getRequestDispatcher("Admin-searchResult.jsp");
             rd.forward(request, response);
+        } else if (action.equalsIgnoreCase("formUpdateEvent")) {
+            try {
+                String id = request.getParameter("id");
+                Event event = eventBLO.getByID(Integer.parseInt(id));
+                DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                String startDate = dateFormat.format(event.getStartDate());
+                String endDate = dateFormat.format(event.getEndDate());
+                request.setAttribute("event", event);
+                request.setAttribute("startDate", startDate);
+                request.setAttribute("endDate", endDate);
+                RequestDispatcher rd = request.getRequestDispatcher("Admin-updateEvent.jsp");
+                rd.forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (action.equalsIgnoreCase("updateInfo")) {
+            DateFormat dateFormat = null;
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String title = request.getParameter("txtTitle");
+                int fee = Integer.parseInt(request.getParameter("txtFee"));
+                String criteria = request.getParameter("txtCriteria");
+                String procedures = request.getParameter("txtProcedures");
+                dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+                Date startDate = (Date) dateFormat.parse(request.getParameter("txtStartDate").toString());
+                Date endDate = (Date) dateFormat.parse(request.getParameter("txtEndDate").toString());
+                String description = request.getParameter("txtDescription");
+                Event event = new Event(id, title, fee, criteria, procedures, startDate, endDate, description);
+                boolean result = eventBLO.updateEvent(event);
+                if (result) {
+                    request.setAttribute("event", event);
+                    RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=formUpdateEvent&id=" + event.getId());
+                    rd.forward(request, response);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (action.equalsIgnoreCase("listPresnter")) {
+            List<Presenter> presenters = preBLO.getAll();
+            String id = request.getParameter("id");
+            request.setAttribute("id", id);
+            request.setAttribute("presenters", presenters);
+            RequestDispatcher rd = request.getRequestDispatcher("Admin-listPresenter.jsp");
+            rd.forward(request, response);
+        } else if (action.equalsIgnoreCase("addPresenter")) {
+            try {
+                int evtID = Integer.parseInt(request.getParameter("evtID"));
+                int preID = Integer.parseInt(request.getParameter("preID"));
+                boolean result = eventBLO.addPreForEvent(evtID, preID);
+                if(result){
+                    response.sendRedirect("AdminMNEventCO?action=formUpdateEvent&id="+evtID);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (action.equalsIgnoreCase("delPre")) {
+            try {
+                int evtID = Integer.parseInt(request.getParameter("evtID"));
+                int preID = Integer.parseInt(request.getParameter("preID"));
+                boolean result = eventBLO.removePreForEvent(evtID, preID);
+                if(result){
+                    response.sendRedirect("AdminMNEventCO?action=formUpdateEvent&id="+evtID);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -92,9 +169,9 @@ public class AdminMNEventCO extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -105,7 +182,7 @@ public class AdminMNEventCO extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -117,5 +194,4 @@ public class AdminMNEventCO extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

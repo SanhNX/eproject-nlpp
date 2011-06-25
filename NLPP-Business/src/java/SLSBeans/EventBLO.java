@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package SLSBeans;
 
 import EL.Event;
 import EL.EvtUser;
 import EL.EvtUserPK;
 import EL.Payment;
+import EL.Presenter;
 import EL.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EventBLO implements EventBLORemote {
+
     @PersistenceContext(unitName = "Eproject_EJBPU")
     private EntityManager em;
 
@@ -39,7 +40,7 @@ public class EventBLO implements EventBLORemote {
     }
 
     public List<Event> getByTitle(String title) {
-        String hql = "FROM Event AS e where e.title LIKE '%"+ title +"%'  ";
+        String hql = "FROM Event AS e where e.title LIKE '%" + title + "%'  ";
         Query query = this.em.createQuery(hql);
         List<Event> events = query.getResultList();
         return events;
@@ -64,11 +65,54 @@ public class EventBLO implements EventBLORemote {
     }
 
     public Payment getPaymentById(int id) {
-        Payment payment =  em.find(Payment.class, id);
+        Payment payment = em.find(Payment.class, id);
         return payment;
     }
 
+    public boolean addEvent(Event evt) {
+        try {
+            this.em.persist(evt);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean addPreForEvent(int evtID, int preID) {
+        Event event = em.find(Event.class, evtID);
+        Presenter presenter = em.find(Presenter.class, preID);
+        event.getPresenterList().add(presenter);
+        presenter.getEventList().add(event);
+        return true;
+    }
+
+    public boolean updateEvent(Event evt) {
+        try {
+            Event event = this.em.find(Event.class, evt.getId());
+            event.setId(evt.getId());
+            event.setTitle(evt.getTitle());
+            event.setFee(evt.getFee());
+            event.setCriteria(evt.getCriteria());
+            event.setProcedures(evt.getProcedures());
+            event.setStartDate(evt.getStartDate());
+            event.setEndDate(evt.getEndDate());
+            event.setDescription(evt.getDescription());
+            this.em.persist(event);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean removePreForEvent(int evtID, int preID) {
+        Event event = em.find(Event.class, evtID);
+        Presenter presenter = em.find(Presenter.class, preID);
+        event.getPresenterList().remove(presenter);
+        presenter.getEventList().remove(event);
+        return true;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
 }

@@ -7,6 +7,7 @@ package SLSBeans;
 
 import EL.Event;
 import EL.Payment;
+import EL.Presenter;
 import EL.User;
 import java.util.List;
 import javax.ejb.Remote;
@@ -27,5 +28,13 @@ public interface EventBLORemote {
     boolean addUserForEvent(User u, Event evt, Payment pay);
 
     Payment getPaymentById(int id);
+
+    boolean addEvent(Event evt);
+
+    boolean addPreForEvent(int evtID, int preID);
+
+    boolean updateEvent(Event evt);
+
+    boolean removePreForEvent(int evtID, int preID);
     
 }

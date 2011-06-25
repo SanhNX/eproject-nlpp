@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -46,6 +48,7 @@ public class Presenter implements Serializable {
     @Column(name = "Phone")
     private String phone;
     @ManyToMany(mappedBy = "presenterList")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Event> eventList;
 
     public Presenter() {
