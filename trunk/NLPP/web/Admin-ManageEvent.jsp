@@ -129,7 +129,7 @@
                                         <td><h:formatDate value="${event.startDate}" pattern="MM-dd-yyyy" /></td>
                                         <td><h:formatDate value="${event.endDate}" pattern="MM-dd-yyyy" /></td>
 
-                                        <td><a href="#"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+                                        <td><a href="AdminMNEventCO?action=formUpdateEvent&id=${event.id}"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
                                         <td><a href="#" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                     </tr>
                                 </c:forEach>
