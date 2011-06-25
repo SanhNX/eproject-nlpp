@@ -158,10 +158,7 @@
                             <c:forEach var="event" items="${requestScope.events}">
                                 <li><img src="images/logo_event.png" width="130" height="130">
                                     <h4><a href="UserEventCO?action=event&id=${event.id}">${event.title}</a></h4>
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
-                                    ${event.description} ${event.description} ${event.description} ${event.description} ${event.description} ${event.description}
+                                    ${event.description} 
                                     <a style="color: #0087c1;" href="UserEventCO?action=event&id=${event.id}" class="fright">Read More</a>
                                 </li>
                             </c:forEach>

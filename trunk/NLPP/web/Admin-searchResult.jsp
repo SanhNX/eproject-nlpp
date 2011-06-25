@@ -5,9 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,47 +16,21 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
         <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
-        <script type="text/javascript" src="js/cufon-yui.js"></script>
-        <script type="text/javascript" src="js/cufon-replace.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
-        <script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
-        <script type="text/javascript" src="js/html5.js"></script>
-        <script type="text/javascript" src="js/date.js"></script>
+        <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/additional-methods.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $("#form").validate({
-                    rules:{
-                        txtPass:{
-                            required:true,
-                            rangelength:[6,25]
-                        },
-                        txtRePass:{
-                            equalTo:"#txtPass"
-                        },
-                        txtOldPass:{
-                            required:true
-                        }
-                    }   //end rules
-                });  //end validate
-            }); //end function
-        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
         <div id="main_container">
-
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b>
-                    <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b><a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -69,8 +44,8 @@
                 </div>
                 <div class="center_content">
                     <div class="left_content">
-                        <div class="sidebarmenu">
 
+                        <div class="sidebarmenu">
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -105,6 +80,7 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
+
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -118,32 +94,57 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <div class="form">
-                            <br/><br/><br/><br/>
-                            <h2><img alt="NLPP's Site" src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
-                            <h4><span>The Problems did happened in the process of the change password</span></h4>
-                            <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back To Administrator Home</a></u></h4>
-                            <br/><br/><br/>
-                            <form id="form" action="AdminCO?action=updatePass" method="post" class="niceform" >
-                                <fieldset>
-                                    <dl>
-                                        <dt><b>New PassWord:</b></dt>
-                                        <dd><input type="password" name="txtPass" id="txtPass" size="50" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Re-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtRePass"  size="50" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Old-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtOldPass"  size="50" /></dd>
-                                    </dl>
-                                    <dl class="submit">
-                                        <input align="right" type="reset" name="submit" id="submit" value="Reset Form" />|<input align="light" type="submit" name="submit" id="submit" value="Change Pass" />
-                                    </dl>
-                                </fieldset>
-                            </form>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>View Result <span>Form</span></h2>
+                        <div>
+                            <!--                            <a href="Admin-createEvent.jsp" class="bt_blue"><span class="bt_blue_lft"></span><strong>Create New Event</strong><span class="bt_blue_r"></span></a>-->
+                            <a href="Admin-createEvent.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Create New Event</strong><span class="bt_green_r"></span></a>
+                            <br/>
+                            <div class="sidebar_search">
+                                <form method="POST" action="AdminMNEventCO?action=searchEvent" id="search-event">
+                                    <input type="text" class="search_input"
+                                           name="txtKeyword" value="Search Event By Title"
+                                           onfocus="if(this.value=='Search Event By Title'){this.value=''}"
+                                           onblur="if(this.value==''){this.value='Search Event By Title'}"/>
+                                    <input type="image" onclick="document.getElementById('search-event').submit()"
+                                           class="search_submit" src="images/search.png" />
+                                </form>
+                            </div>
                         </div>
+                        <br/>
+                        <c:set value="${requestScope.events}" var="events"/>
+                        <c:if test="${empty events}">
+                            <h3><span class="txt1" style="color: red;" >Event Not Found in Search Result With Keyword :</span>
+                                <span class="txt1">${requestScope.title}</span></h3>
+                            <br/>
+                            <h3><span class="txt1" style="color: red;" >Please try Again ! </span></h3>
+                        </c:if>
+                        <c:if test="${not empty events}">
+                            <table id="rounded-corner" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="rounded">Title</th>
+                                        <th scope="col" class="rounded">Fee</th>
+                                        <th scope="col" class="rounded">Start</th>
+                                        <th scope="col" class="rounded">End</th>
+                                        <th scope="col" class="rounded">Edit</th>
+                                        <th scope="col" class="rounded-q4">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${requestScope.events}" var="event">
+                                        <tr>
+                                            <td>${event.title}</td>
+                                            <td>${event.fee} $</td>
+                                            <td><h:formatDate value="${event.startDate}" pattern="MM-dd-yyyy" /></td>
+                                            <td><h:formatDate value="${event.endDate}" pattern="MM-dd-yyyy" /></td>
+
+                                            <td><a href="#"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+                                            <td><a href="#" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

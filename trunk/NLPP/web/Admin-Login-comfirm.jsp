@@ -82,10 +82,8 @@
                             <div class="submenu">
                                 <ul>
                                     <li><a href="">Manage User</a></li>
-                                    <li><a href="">Manage Event</a></li>
+                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="">Manage Presenter</a></li>
-                                    <li><a href="">Manage Award</a></li>
-                                    <li><a href="">Manage Payment</a></li>
                                     <li><a href="">Manage Mailing List</a></li>
                                     <li><a href="">Manage Feedback</a></li>
                                     <li><a href="">Manage FAQ</a></li>
@@ -159,7 +157,7 @@
                 <div class="clear"></div>
             </div> <!--end of main content-->
             <div class="footer">
-                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
         </div>
     </body>

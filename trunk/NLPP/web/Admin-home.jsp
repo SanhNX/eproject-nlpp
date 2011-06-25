@@ -40,13 +40,11 @@
 
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                
-                <div class="right_header">Welcome ${sessionScope.admin.email} <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b>
+                    <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -58,22 +56,9 @@
                         <li><a href="">Contact</a></li>-->
                     </ul>
                 </div>
-
                 <div class="center_content">
-
-
-
                     <div class="left_content">
-
-                        <div class="sidebar_search">
-                            <form>
-                                <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-                                <input type="image" class="search_submit" src="images/search.png" />
-                            </form>
-                        </div>
-
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -121,17 +106,9 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
-
-
-
                     </div>
-
                     <div class="right_content">
-
                         <h2>Products Categories Settings</h2>
-
-
                         <table id="rounded-corner" summary="2007 Major IT Companies' Profit">
                             <thead>
                                 <tr>
@@ -303,19 +280,11 @@
 
 
                 </div>   <!--end of center content -->
-
-
-
-
                 <div class="clear"></div>
             </div> <!--end of main content-->
-
-
             <div class="footer">
-
-                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
 

@@ -70,7 +70,7 @@
                 </form>
             </div>
             <div class="footer_login">
-                <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
+                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
         </div>
     </body>

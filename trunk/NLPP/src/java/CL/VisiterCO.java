@@ -81,7 +81,7 @@ public class VisiterCO extends HttpServlet {
                 }
                 String address = request.getParameter("txtAddress");
                 String phone = request.getParameter("txtPhone");
-                Role role = userBLO.getRole(9);
+                Role role = userBLO.getRole(2);
                 u = new User(email, pass, fullName, birthday, gender, address, phone,true);
                 boolean result = userBLO.add(role, u);
                 if (result) {

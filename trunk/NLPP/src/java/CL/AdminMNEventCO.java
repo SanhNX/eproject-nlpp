@@ -72,6 +72,13 @@ public class AdminMNEventCO extends HttpServlet {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        } else if (action.equalsIgnoreCase("searchEvent")) {
+            String title = request.getParameter("txtKeyword");
+            List<Event> events = eventBLO.getByTitle(title);
+            request.setAttribute("events", events);
+            request.setAttribute("title", title);
+            RequestDispatcher rd = request.getRequestDispatcher("Admin-searchResult.jsp");
+            rd.forward(request, response);
         }
     } 
 
