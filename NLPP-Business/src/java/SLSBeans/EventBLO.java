@@ -98,7 +98,7 @@ public class EventBLO implements EventBLORemote {
             event.setStartDate(evt.getStartDate());
             event.setEndDate(evt.getEndDate());
             event.setDescription(evt.getDescription());
-            this.em.persist(event);
+            this.em.merge(event);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;

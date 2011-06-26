@@ -228,7 +228,8 @@
                         </table>
                         <br/>
                         <c:if test="${requestScope.compare < 0}">
-                            <span class="txt1"><a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}" class="fright">Enroll Current Event</a></span>
+                            <span class="txt1">
+                                <a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}&fromPage=${pageContext.request.requestURI}" class="fright">Enroll Current Event</a></span>
                         </c:if>
                         <c:if test="${requestScope.compare >= 0}">
                             <span class="txt1"><a class="fright">This event had enroll expired</a></span>

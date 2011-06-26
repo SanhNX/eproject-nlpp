@@ -60,7 +60,7 @@ public class AdminMNEventCO extends HttpServlet {
         if (action.equalsIgnoreCase("viewEvent")) {
             List<Event> events = eventBLO.getAllEvent();
             request.setAttribute("events", events);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin-ManageEvent.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageEvent.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("addEvent")) {
             DateFormat dateFormat = null;
@@ -88,7 +88,7 @@ public class AdminMNEventCO extends HttpServlet {
             List<Event> events = eventBLO.getByTitle(title);
             request.setAttribute("events", events);
             request.setAttribute("title", title);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin-searchResult.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageEvent.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("formUpdateEvent")) {
             try {
@@ -100,7 +100,7 @@ public class AdminMNEventCO extends HttpServlet {
                 request.setAttribute("event", event);
                 request.setAttribute("startDate", startDate);
                 request.setAttribute("endDate", endDate);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin-updateEvent.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-updateEvent.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -132,7 +132,7 @@ public class AdminMNEventCO extends HttpServlet {
             String id = request.getParameter("id");
             request.setAttribute("id", id);
             request.setAttribute("presenters", presenters);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin-listPresenter.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-listPresenter.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("addPresenter")) {
             try {

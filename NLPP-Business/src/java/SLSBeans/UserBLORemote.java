@@ -32,4 +32,6 @@ public interface UserBLORemote {
 
     User getByEmail(String email);
 
+    boolean updateStatus(User user);
+
 }

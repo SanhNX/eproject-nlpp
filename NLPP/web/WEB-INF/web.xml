@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
+        <servlet-name>AdminPresenterCO</servlet-name>
+        <servlet-class>CL.AdminPresenterCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminUserCO</servlet-name>
+        <servlet-class>CL.AdminUserCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mailingCO</servlet-name>
+        <servlet-class>CL.mailingCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminFeedBackCO</servlet-name>
+        <servlet-class>CL.AdminFeedBackCO</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UserCO</servlet-name>
         <servlet-class>CL.UserCO</servlet-class>
     </servlet>
@@ -23,6 +39,10 @@
     <servlet>
         <servlet-name>AdminMNEventCO</servlet-name>
         <servlet-class>CL.AdminMNEventCO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminFAQCO</servlet-name>
+        <servlet-class>CL.AdminFAQCO</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserCO</servlet-name>
@@ -47,6 +67,26 @@
     <servlet-mapping>
         <servlet-name>AdminMNEventCO</servlet-name>
         <url-pattern>/AdminMNEventCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPresenterCO</servlet-name>
+        <url-pattern>/AdminPresenterCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminUserCO</servlet-name>
+        <url-pattern>/AdminUserCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mailingCO</servlet-name>
+        <url-pattern>/mailingCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminFeedBackCO</servlet-name>
+        <url-pattern>/AdminFeedBackCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminFAQCO</servlet-name>
+        <url-pattern>/AdminFAQCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
