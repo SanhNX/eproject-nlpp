@@ -56,17 +56,17 @@ public class AdminCO extends HttpServlet {
                 if (admin != null) {
                     session = request.getSession(true);
                     session.setAttribute("admin", admin);
-                    RequestDispatcher rd = request.getRequestDispatcher("Admin-home.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-home.jsp");
                     rd.forward(request, response);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                response.sendRedirect("Admin-login.jsp");
+                response.sendRedirect("Admin/Admin-login.jsp");
             }
         } else if (action.equalsIgnoreCase("logout")) {
             session = request.getSession();
             session.removeAttribute("admin");
-            response.sendRedirect("Admin-login.jsp");
+            response.sendRedirect("Admin/Admin-login.jsp");
         }else if (action.equalsIgnoreCase("myProfile")) {
             session = request.getSession();
             User admin = (User) session.getAttribute("admin");
@@ -75,7 +75,7 @@ public class AdminCO extends HttpServlet {
             request.setAttribute("gender", admin.getGender());
             request.setAttribute("admin", admin);
             request.setAttribute("birthday", birthday);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin-MyProfile.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-MyProfile.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("updateProfile")) {
             String fullName = request.getParameter("txtFullname");
@@ -105,7 +105,7 @@ public class AdminCO extends HttpServlet {
                     request.setAttribute("gender", admin.getGender());
                     request.setAttribute("admin", admin);
                     request.setAttribute("birthday", birthday1);
-                    RequestDispatcher rd = request.getRequestDispatcher("Admin-MyProfile.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-MyProfile.jsp");
                     rd.forward(request, response);
                 }
             } catch (Exception ex) {
@@ -126,12 +126,12 @@ public class AdminCO extends HttpServlet {
                         System.out.println("------------------UPDATE PASS SUCCESSFUL----------------");// For Debug
                         session = request.getSession();
                         session.removeAttribute("admin");
-                        response.sendRedirect("Admin-Login-comfirm.jsp");
+                        response.sendRedirect("Admin/Admin-Login-comfirm.jsp");
                     }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                response.sendRedirect("Admin-ChangePassError.jsp");
+                response.sendRedirect("Admin/Admin-ChangePassError.jsp");
             }
         }
     } 

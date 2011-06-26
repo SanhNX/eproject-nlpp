@@ -71,10 +71,21 @@ public class UserCO extends HttpServlet {
                     session.setAttribute("user", user);
                     RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                     rd.forward(request, response);
+//                    String fromPage = request.getParameter("fromPage");
+//                    String arr[]=fromPage.split("/");
+//                    System.out.println(arr[1]+"  |  "+arr[2]);
+//                    if (fromPage.equalsIgnoreCase("")) { // from index page to login page
+//                        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+//                        rd.forward(request, response);
+//                    } else { // from another page to login page
+//                        RequestDispatcher rd = request.getRequestDispatcher(arr[2]);
+//                        rd.forward(request, response);
+//                    }
+
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                response.sendRedirect("User-login.jsp");
+                response.sendRedirect("User-login-Permission.jsp");
             }
         } else if (action.equalsIgnoreCase("logout")) {
             session = request.getSession();

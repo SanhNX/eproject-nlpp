@@ -130,7 +130,7 @@
                                     <td><input type="password" name="txtPassword" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
-                                    <td></td>
+                                    <td><input type="hidden" name="fromPage" value="${param.fromPage}"/></td>
                                     <td><input align="left" type="reset" value="Reset Form"> &nbsp;|&nbsp; <input align="right" type="submit" value="Submit Now"></td>
                                 </tr>
                             </table>

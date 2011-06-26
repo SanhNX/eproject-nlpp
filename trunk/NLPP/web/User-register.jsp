@@ -83,6 +83,30 @@
                 });  //end validate
             }); //end function
         </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#txtEmail").live('blur', function() { // textbox's onblur event
+                    var username = $("#txtEmail").val();
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "VisiterCO",
+                        data: "action=checkUsername&username=" + username,
+                        success: function(result) { // result = {"isValid":true|false}
+                            //alert(result.isValid); // for debug
+                            if (result.isValid) {
+                                $("#imgCheck").attr("src", "images/pass.jpg");
+                            } else {
+                                $("#imgCheck").attr("src", "images/fail.jpg");
+                                $("#txtEmail").focus();
+                                $("#txtEmail").select();
+                            }
+                        }
+                    }); // end AJAX
+                }); // end event-handler
+
+            }); // end function
+        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body id="page1">
@@ -173,7 +197,10 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Your E-mail &nbsp;</td>
-                                    <td><input type="text" name="txtEmail" value="${requestScope.user.email}" size="30"/></td>
+                                    <td>
+                                        <input type="text" id="txtEmail" name="txtEmail" value="${requestScope.user.email}" size="30"/>
+                                        <img src="images/fail.jpg" alt=":D" width="25px" height="25px" id="imgCheck"/>
+                                    </td>
                                 </tr>
                                 <tr class="field">
                                     <td>Password &nbsp;</td>

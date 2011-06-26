@@ -87,7 +87,8 @@ public class UserEventCO extends HttpServlet {
             session = request.getSession();
             User user = (User) session.getAttribute("user");
             if (user == null) {
-                response.sendRedirect("User-login-Permission.jsp");
+                String fromPage = request.getParameter("fromPage");
+                response.sendRedirect("User-login-Permission.jsp?fromPage="+fromPage);
             } else {
                 String id = request.getParameter("id");
                 Event event = eventBLO.getByID(Integer.parseInt(id));

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package SLSBeans;
 
 import EL.Presenter;
@@ -20,4 +19,11 @@ public interface PresenterBLORemote {
 
     Presenter getByID(int id);
 
+    boolean addPresenter(Presenter pre);
+
+    boolean deletePresenter(int id);
+
+    boolean updatePresenter(Presenter pre);
+
+    List<Presenter> searchPresenter(String keyword);
 }

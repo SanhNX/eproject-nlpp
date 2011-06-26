@@ -6,6 +6,7 @@ package CL;
 
 import EL.*;
 import SLSBeans.*;
+import org.json.*;  
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -58,10 +59,30 @@ public class VisiterCO extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession session = null;
         String action = request.getParameter("action");
-        if (action.equalsIgnoreCase("register")) {
+        if (action.equalsIgnoreCase("checkUsername")) {
+            String username = request.getParameter("username");
+            boolean isValid = false;
+            User user = userBLO.getByEmail(username);
+            if (user == null) { // hard-code
+                isValid = true;
+            }
+
+            // send the response back to browser
+            response.setContentType("text/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            try {
+                JSONObject result = new JSONObject();
+                result.put("isValid", isValid);
+                out.write(result.toString()); // result = {"isValid":true|false}
+                out.flush();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                out.close();
+            }
+        } else if (action.equalsIgnoreCase("register")) {
             String messege="";
             User u = null;
             Date birthday = null;

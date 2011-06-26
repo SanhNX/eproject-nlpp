@@ -17,5 +17,15 @@ import javax.ejb.Remote;
 public interface FAQBLORemote {
 
     List<FAQ> getAll();
+
+    boolean add(FAQ faq);
+
+    boolean update(FAQ faq);
+
+    boolean delete(FAQ faq);
+
+    List<FAQ> searchBySubject(String keyword);
+
+    FAQ getFAQByID(int id);
     
 }

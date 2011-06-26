@@ -25,27 +25,27 @@ public class UserBLO implements UserBLORemote {
     private EntityManager em;
 
     public User checkUser(String email, String password) {
-        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 2  ";
+        String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 2 AND u.status = True  ";
         Query query = this.em.createQuery(hql);
         User user = (User) query.getSingleResult();
         return user;
     }
 
-
-     public User checkAdmin(String email, String password) {
+    public User checkAdmin(String email, String password) {
         String hql = "FROM User AS u where u.email = '" + email + "' AND u.password = '" + password + "' AND RoleID = 1 ";
         Query query = this.em.createQuery(hql);
         User user = (User) query.getSingleResult();
         return user;
     }
-    public boolean updateProfile(String email,String fullName, Date birthday, boolean gender, String address, String phone) {
+
+    public boolean updateProfile(String email, String fullName, Date birthday, boolean gender, String address, String phone) {
         User u = em.find(User.class, email);
         u.setFullName(fullName);
         u.setBirthday(birthday);
         u.setGender(gender);
         u.setAddress(address);
         u.setPhone(phone);
-        em.persist(u);
+        em.merge(u);
         return true;
     }
 
@@ -83,8 +83,25 @@ public class UserBLO implements UserBLORemote {
         return user;
     }
 
-    
-
+    public boolean updateStatus(User user) {
+        try {
+            User u = getByEmail(user.getEmail());
+            u.setEmail(user.getEmail());
+            u.setPassword(user.getPassword());
+            u.setFullName(user.getFullName());
+            u.setBirthday(user.getBirthday());
+            u.setGender(user.getGender());
+            u.setAddress(user.getAddress());
+            u.setPhone(user.getPhone());
+            u.setRole(user.getRole());
+            u.setStatus(user.getStatus());
+            this.em.merge(u);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
