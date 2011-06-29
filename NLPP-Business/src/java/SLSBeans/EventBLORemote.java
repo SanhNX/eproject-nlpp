@@ -5,6 +5,7 @@
 
 package SLSBeans;
 
+import EL.Award;
 import EL.Event;
 import EL.Payment;
 import EL.Presenter;
@@ -36,5 +37,11 @@ public interface EventBLORemote {
     boolean updateEvent(Event evt);
 
     boolean removePreForEvent(int evtID, int preID);
+
+    boolean addAwardForEvent(Award award, Event event);
+
+    boolean deleteAwardOfEvent(int id);
+
+    boolean delUserOfEvent(User u, Event evt);
     
 }

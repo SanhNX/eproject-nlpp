@@ -4,6 +4,7 @@
  */
 package SLSBeans;
 
+import EL.Award;
 import EL.Event;
 import EL.EvtUser;
 import EL.EvtUserPK;
@@ -111,6 +112,48 @@ public class EventBLO implements EventBLORemote {
         Presenter presenter = em.find(Presenter.class, preID);
         event.getPresenterList().remove(presenter);
         presenter.getEventList().remove(event);
+        return true;
+    }
+
+    public boolean addAwardForEvent(Award award, Event event) {
+        try {
+            List<Award> awardList = new ArrayList<Award>();
+            awardList.add(award);
+            event.setAwardList(awardList);
+            award.setEvent(event);
+            this.em.persist(award);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteAwardOfEvent(int id) {
+        Award a = this.em.find(Award.class, id);
+        if (a != null) {
+            try {
+                em.remove(a);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean delUserOfEvent(User u, Event evt) {
+        try {
+            EvtUserPK evtUserPK = new EvtUserPK(evt.getId(),u.getEmail());
+            EvtUser evtUser = this.em.find(EvtUser.class, evtUserPK);
+            if(evtUser != null){
+                this.em.remove(evtUser);
+            }
+        } catch (Exception ex) {  
+            ex.printStackTrace();
+            return false;
+        }
         return true;
     }
     // Add business logic below. (Right-click in editor and choose

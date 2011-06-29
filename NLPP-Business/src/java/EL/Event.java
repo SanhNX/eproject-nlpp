@@ -74,7 +74,7 @@ public class Event implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
+    @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "event")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
     @OneToMany(mappedBy = "event")
