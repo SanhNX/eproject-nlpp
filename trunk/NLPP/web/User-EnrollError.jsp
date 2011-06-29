@@ -51,7 +51,6 @@
                             <li><a href="User-register.jsp" class="m3">Register</a></li>
                             <li><a href="User-feedback.jsp" class="m2">Feedback Us</a></li>
                             <li><a href="VisiterCO?action=viewFAQ" class="m4">FAQ</a></li>
-                            <li class="last"><a href="admin.jsp" class="m5">Administrator</a></li>
                         </ul>
                     </nav>
                     <form action="VisiterCO?action=searchEvent" method="POST" id="search-form">

@@ -215,8 +215,8 @@
                                 </fieldset>
                             </form>
                         </div><br/>
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
-                        
+                        <h2>Presenter <span>List</span></h2>
+
                         <table id="rounded-corner" >
                             <thead>
                                 <tr>
@@ -243,7 +243,98 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                                <a href="AdminMNEventCO?action=listPresnter&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Presenter For This Event</strong><span class="bt_green_r"></span></a>
+                        <a href="AdminMNEventCO?action=listPresnter&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Presenter For This Event</strong><span class="bt_green_r"></span></a>
+                        <br/>
+                        <h2>Award <span>List</span></h2>
+
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded">Description</th>
+                                    <th scope="col" class="rounded-q4">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach items="${requestScope.event.awardList}" var="award">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td>${count}</td>
+                                        <td>${award.description}</td>
+
+                                        <c:set value="${award.evtWinnerList}" var="evtWinner"/>
+                                        <c:if test="${empty evtWinner}">
+                                            <td><a href="AdminMNEventCO?action=deleteAward&awardID=${award.id}&id=${requestScope.event.id}"
+                                                   onclick="return confirm('Are You Still Want To Delete ?')"
+                                                   class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                </c:if>
+                                                <c:if test="${not empty evtWinner}">
+                                            <td><a class="ask"><img src="" alt="" title="" border="0" /></a></td>
+                                                </c:if>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <a href="AdminMNEventCO?action=formAddAward&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Award For This Event</strong><span class="bt_green_r"></span></a>
+                        <br/>
+                        <h2>Member's <span> This Event</span></h2>
+
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded">Email</th>
+                                    <th scope="col" class="rounded">Full Name</th>
+                                    <th scope="col" class="rounded">Phone</th>
+                                    <th scope="col" class="rounded-q4">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach items="${requestScope.event.evtUserList}" var="evtUser">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td>${count}</td>
+                                        <td>${evtUser.user.email}</td>
+                                        <td>${evtUser.user.fullName}</td>
+                                        <td>${evtUser.user.phone}</td>
+                                        <td><a href="AdminMNEventCO?action=deleteUForE&email=${evtUser.user.email}&evtID=${requestScope.event.id}" 
+                                               onclick="return confirm('Are You Still Want To Delete ?')" class="ask">
+                                                <img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+                        <br/>
+                        <h2>Winner's <span> This Event</span></h2>
+
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded">Email</th>
+                                    <th scope="col" class="rounded">Full Name</th>
+                                    <th scope="col" class="rounded">Phone</th>
+                                    <th scope="col" class="rounded-q4">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach items="${requestScope.event.evtWinnerList}" var="evtUser">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td>${count}</td>
+                                        <td >${evtUser.user.email}</td>
+                                        <td >${evtUser.user.fullName}</td>
+                                        <td >${evtUser.award.description}</td>
+                                        <td><a href="AdminMNEventCO?action=delPre&preID=${pre.id}&evtID=${requestScope.event.id}" onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <a href="AdminMNEventCO?action=listPresnter&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Winner For This Event</strong><span class="bt_green_r"></span></a>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

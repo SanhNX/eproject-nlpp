@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -29,6 +33,7 @@ import javax.persistence.Table;
 public class Award implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -36,12 +41,17 @@ public class Award implements Serializable {
     @Column(name = "Description")
     private String description;
     @OneToMany(mappedBy = "award")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtWinner> evtWinnerList;
     @JoinColumn(name = "EvtID", referencedColumnName = "ID")
     @ManyToOne
     private Event event;
 
     public Award() {
+    }
+
+    public Award(String description) {
+        this.description = description;
     }
 
     public Award(Integer id) {

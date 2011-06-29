@@ -174,7 +174,7 @@
                                                     </c:if>
                                                     <c:if test="${not empty fList or not empty evtList}">
                                                 <td><a href="">
-                                                        <img src="" alt="" title="" border="0" /></a></td>
+                                                        <img alt="" title="" border="0" /></a></td>
                                                     </c:if>
                                         </tr>
                                     </c:forEach>

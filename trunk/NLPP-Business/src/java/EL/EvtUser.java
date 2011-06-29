@@ -45,6 +45,11 @@ public class EvtUser implements Serializable {
         this.event = event;
     }
 
+    public EvtUser(User user, Event event) {
+        this.user = user;
+        this.event = event;
+    }
+
     public EvtUser(EvtUserPK evtUserPK) {
         this.evtUserPK = evtUserPK;
     }

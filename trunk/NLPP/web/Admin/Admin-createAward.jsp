@@ -5,7 +5,10 @@
 --%>
 
 <%@page import="EL.User"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -16,6 +19,37 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
         <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
         <link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
+        <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
+        <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
+        <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                new JsDatePick({
+                    useMode:2,
+                    target:"inputField",
+                    isStripped:false,
+                    selectedDate:{
+                        year:2009,
+                        month:4,
+                        day:16
+                    },
+                    yearsRange: new Array(1971,2100),
+                    limitToToday:true
+                });
+                new JsDatePick({
+                    useMode:2,
+                    target:"inputField1",
+                    isStripped:false,
+                    selectedDate:{
+                        year:2009,
+                        month:4,
+                        day:16
+                    },
+                    yearsRange: new Array(1971,2100),
+                    limitToToday:true
+                });
+            };
+        </script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -29,15 +63,33 @@
             $(document).ready(function(){
                 $("#form").validate({
                     rules:{
-                        txtPass:{
+                        txtTitle:{
                             required:true,
-                            rangelength:[6,25]
+                            rangelength:[6,30]
                         },
-                        txtRePass:{
-                            equalTo:"#txtPass"
+                        txtFee:{
+                            required:true,
+                            digits:true,
+                            min:500,
+                            max:50000
                         },
-                        txtOldPass:{
+                        txtCriteria:{
+                            required:true,
+                            minlength:10
+                        },
+                        txtProcedures:{
+                            required:true,
+                            minlength:10
+                        },
+                        txtStartDate:{
                             required:true
+                        },
+                        txtEndDate:{
+                            required:true
+                        },
+                        txtDescription:{
+                            required:true,
+                            minlength:10
                         }
                     }   //end rules
                 });  //end validate
@@ -54,16 +106,16 @@
         <jsp:forward page="Admin-login.jsp"/>
         <%}%>
         <div id="main_container">
-
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
                 <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b>
-                    <a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
+                    <a href="AdminCO?action=myProfile">View Profile</a>
+                    |
+                    <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a>
+                </div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
-
                 <div class="menu">
                     <ul>
                         <!--<li><a class="current" href="index.html">Admin Home</a></li>
@@ -78,7 +130,6 @@
                 <div class="center_content">
                     <div class="left_content">
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -113,6 +164,7 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
+
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -126,32 +178,44 @@
                         </div>
                     </div>
                     <div class="right_content">
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Award <span>Form</span></h2>
                         <div class="form">
-                            <br/><br/><br/><br/>
-                            <h2><img alt="NLPP's Site" src="images/icon_cube.png" width="64" height="95">Change Password <span>Form</span></h2>
-                            <h4><span>The Problems did happened in the process of the change password</span></h4>
-                            <h4><span>Please Try Again Or </span><u><a href="Admin-home.jsp">Back To Administrator Home</a></u></h4>
-                            <br/><br/><br/>
-                            <form id="form" action="../AdminCO?action=updatePass" method="post" class="niceform" >
+                            
+                            <form id="form" action="AdminMNEventCO?action=addAward&id=${requestScope.event.id}" method="post" class="niceform">
                                 <fieldset>
                                     <dl>
-                                        <dt><b>New PassWord:</b></dt>
-                                        <dd><input type="password" name="txtPass" id="txtPass" size="50" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Re-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtRePass"  size="50" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Old-PassWord:</b></dt>
-                                        <dd><input type="password" name="txtOldPass"  size="50" /></dd>
+                                        <dt><b>Description :</b></dt>
+                                        <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="right" type="reset" name="submit" id="submit" value="Reset Form" />|<input align="light" type="submit" name="submit" id="submit" value="Change Pass" />
+                                        <input align="right" type="submit" value="Create Award For This Event" />
                                     </dl>
                                 </fieldset>
                             </form>
                         </div>
+                        <br/>
+                        <h2>Award <span>List</span></h2>
+                        <a href="AdminMNEventCO?action=formUpdateEvent&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Back To View This Event Page</strong><span class="bt_green_r"></span></a>
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded-q4">Description</th>
+<!--                                    <th scope="col" class="rounded-q4">Delete</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="0"/>
+                                <c:forEach items="${requestScope.event.awardList}" var="award">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <tr>
+                                        <td>${count}</td>
+                                        <td>${award.description}</td>
+<!--                                        <td><a href="AdminMNEventCO?action=delPre&preID=${pre.id}&evtID=${requestScope.event.id}" onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>-->
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>
