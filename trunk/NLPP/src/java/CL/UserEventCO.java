@@ -4,6 +4,7 @@
  */
 package CL;
 
+import EL.Award;
 import EL.Event;
 import EL.EvtUser;
 import EL.Payment;
@@ -111,7 +112,8 @@ public class UserEventCO extends HttpServlet {
                 } else if (PaymentName.equalsIgnoreCase("Cash")) {
                     payment = eventBLO.getPaymentById(3);
                 }
-                boolean result = eventBLO.addUserForEvent(user, event, payment);
+                Award award = new Award(1);
+                boolean result = eventBLO.addUserForEvent(user, event, payment,award);
                 if (result) {
                     response.sendRedirect("UserEventCO?action=event&id=" + id);
                 }

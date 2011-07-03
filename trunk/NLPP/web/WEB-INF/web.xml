@@ -44,6 +44,10 @@
         <servlet-name>AdminFAQCO</servlet-name>
         <servlet-class>CL.AdminFAQCO</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAwardCO</servlet-name>
+        <servlet-class>CL.AdminAwardCO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserCO</servlet-name>
         <url-pattern>/UserCO</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>AdminFAQCO</servlet-name>
         <url-pattern>/AdminFAQCO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAwardCO</servlet-name>
+        <url-pattern>/AdminAwardCO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

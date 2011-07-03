@@ -4,8 +4,8 @@
  */
 package CL;
 
-import EL.FAQ;
-import SLSBeans.FAQBLORemote;
+import EL.Award;
+import SLSBeans.AwardBLORemote;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author XuanSanh_IT
  */
-public class AdminFAQCO extends HttpServlet {
+public class AdminAwardCO extends HttpServlet {
 
-    FAQBLORemote faqBLO;
+    AwardBLORemote awardBLO;
 
     @Override
     public void init() throws ServletException {
@@ -32,7 +32,7 @@ public class AdminFAQCO extends HttpServlet {
             java.util.Properties props = new java.util.Properties();
             props.load(new java.io.FileInputStream(jndiFileName));
             InitialContext ctx = new InitialContext(props);
-            faqBLO = (FAQBLORemote) ctx.lookup("FAQBLO/remote");
+            awardBLO = (AwardBLORemote) ctx.lookup("AwardBLO/remote");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -48,50 +48,46 @@ public class AdminFAQCO extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action.equalsIgnoreCase("viewFAQ")) {
-            List<FAQ> faqList = faqBLO.getAll();
-            request.setAttribute("faqList", faqList);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/viewFAQ.jsp");
+        if (action.equalsIgnoreCase("viewAward")) {
+            List<Award> awards = awardBLO.getAllAward();
+            request.setAttribute("awards", awards);
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/manageAward.jsp");
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("formEdit")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            FAQ faq = faqBLO.getFAQByID(id);
-            request.setAttribute("faq", faq);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/updateFAQ.jsp");
+        } else if (action.equalsIgnoreCase("addAward")) {
+            String description = request.getParameter("txtDescription");
+            Award award = new Award(description);
+            boolean result = awardBLO.addAward(award);
+            if (result) {
+                response.sendRedirect("AdminAwardCO?action=viewAward");
+            }
+        } else if (action.equalsIgnoreCase("deleteAward")) {
+            int awardID = Integer.parseInt(request.getParameter("awardID"));
+            boolean result = awardBLO.deleteAward(awardID);
+            if (result) {
+                response.sendRedirect("AdminAwardCO?action=viewAward");
+            }
+        } else if (action.equalsIgnoreCase("formEditAward")) {
+            int awardID = Integer.parseInt(request.getParameter("awardID"));
+            Award award = awardBLO.getByID(awardID);
+            List<Award> awards = awardBLO.getAllAward();
+            request.setAttribute("awards", awards);
+            request.setAttribute("award", award);
+            request.setAttribute("flag", "True");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/manageAward.jsp");
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("edit")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String subject = request.getParameter("txtSubject");
-            String question = request.getParameter("txtQuestion");
-            String answer = request.getParameter("txtAnswer");
-            FAQ faq = new FAQ(id, subject, question, answer);
-            boolean result = faqBLO.update(faq);
-            if(result){
-                response.sendRedirect("AdminFAQCO?action=viewFAQ");
+        } else if (action.equalsIgnoreCase("editAward")) {
+            int awardID = Integer.parseInt(request.getParameter("awardID"));
+            String desciption = request.getParameter("txtDescription1");
+            System.out.println(desciption);
+            Award award = new Award(awardID, desciption);
+            boolean result = awardBLO.editAward(award);
+            if (result) {
+                List<Award> awards = awardBLO.getAllAward();
+                request.setAttribute("awards", awards);
+                request.setAttribute("flag", "");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/manageAward.jsp");
+                rd.forward(request, response);
             }
-        } else if (action.equalsIgnoreCase("delete")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            FAQ faq  = faqBLO.getFAQByID(id);
-            boolean result = faqBLO.delete(faq);
-            if(result){
-                response.sendRedirect("AdminFAQCO?action=viewFAQ");
-            }
-        } else if (action.equalsIgnoreCase("add")) {
-            String subject = request.getParameter("txtSubject");
-            String question = request.getParameter("txtQuestion");
-            String answer = request.getParameter("txtAnswer");
-            FAQ faq = new FAQ(subject, question, answer);
-            boolean result = faqBLO.add(faq);
-            if(result){
-                response.sendRedirect("AdminFAQCO?action=viewFAQ");
-            }
-        } else if (action.equalsIgnoreCase("search")) {
-            String keyword = request.getParameter("txtsearch");
-            List<FAQ> faqList = faqBLO.searchBySubject(keyword);
-            request.setAttribute("faqList", faqList);
-            request.setAttribute("keyword", keyword);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/viewFAQ.jsp");
-            rd.forward(request, response);
         }
     }
 

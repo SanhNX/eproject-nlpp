@@ -133,12 +133,12 @@
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
-                                    <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
-                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
-                                    <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
-                                    <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
-                                    <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
-                                    <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
+                                    <li><a href="../AdminUserCO?action=manageUser">Manage User</a></li>
+                                    <li><a href="../AdminMNEventCO?action=viewEvent">Manage Event</a></li>
+                                    <li><a href="../AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="../mailingCO?action=mailling">Manage Mailing List</a></li>
+                                    <li><a href="../AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
+                                    <li><a href="../AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -178,44 +178,45 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Award <span>Form</span></h2>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Event <span>Form</span></h2>
                         <div class="form">
-                            
-                            <form id="form" action="AdminMNEventCO?action=addAward&id=${requestScope.event.id}" method="post" class="niceform">
+                            <form id="form" action="../AdminMNEventCO?action=addEvent" method="post" class="niceform">
                                 <fieldset>
+                                    <dl>
+                                        <dt><b>Event Title :</b></dt>
+                                        <dd><input type="text" name="txtTitle"  id="" size="54"/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Fee :</b></dt>
+                                        <dd><input type="text" name="txtFee"  id="" size="54" /></dd>
+                                    </dl>
+                                    
+                                    <dl>
+                                        <dt><b>Criteria :</b></dt>
+                                        <dd><input type="text" name="txtCriteria" id="" size="54" /></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Procedures :</b></dt>
+                                        <dd><input type="text" name="txtProcedures" id="" size="54" /></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Start Date :</b></dt>
+                                        <dd><input type="text" name="txtStartDate" id="inputField" size="54" readonly="true"/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>End Date :</b></dt>
+                                        <dd><input type="text" name="txtEndDate" id="inputField1" size="54" readonly="true"/></dd>
+                                    </dl>
                                     <dl>
                                         <dt><b>Description :</b></dt>
                                         <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input align="right" type="submit" value="Create Award For This Event" />
+                                        <input align="right" type="submit" value="Create Event" />
                                     </dl>
                                 </fieldset>
                             </form>
                         </div>
-                        <br/>
-                        <h2>Award <span>List</span></h2>
-                        <a href="AdminMNEventCO?action=formUpdateEvent&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Back To View This Event Page</strong><span class="bt_green_r"></span></a>
-                        <table id="rounded-corner" >
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded">No.</th>
-                                    <th scope="col" class="rounded-q4">Description</th>
-<!--                                    <th scope="col" class="rounded-q4">Delete</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach items="${requestScope.event.awardList}" var="award">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td>${count}</td>
-                                        <td>${award.description}</td>
-<!--                                        <td><a href="AdminMNEventCO?action=delPre&preID=${pre.id}&evtID=${requestScope.event.id}" onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>-->
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

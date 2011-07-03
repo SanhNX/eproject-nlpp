@@ -66,7 +66,7 @@ public class AdminMNEventCO extends HttpServlet {
         if (action.equalsIgnoreCase("viewEvent")) {
             List<Event> events = eventBLO.getAllEvent();
             request.setAttribute("events", events);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageEvent.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/ManageEvent.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("addEvent")) {
             DateFormat dateFormat = null;
@@ -94,7 +94,7 @@ public class AdminMNEventCO extends HttpServlet {
             List<Event> events = eventBLO.getByTitle(title);
             request.setAttribute("events", events);
             request.setAttribute("title", title);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageEvent.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/ManageEvent.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("formUpdateEvent")) {
             try {
@@ -106,7 +106,7 @@ public class AdminMNEventCO extends HttpServlet {
                 request.setAttribute("event", event);
                 request.setAttribute("startDate", startDate);
                 request.setAttribute("endDate", endDate);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-updateEvent.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/updateEvent.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -133,23 +133,33 @@ public class AdminMNEventCO extends HttpServlet {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        } else if (action.equalsIgnoreCase("deleteEvent")) {
+            int evtID = Integer.parseInt(request.getParameter("evtID"));
+            boolean result = eventBLO.deleteEvent(evtID);
+            if(result){
+                response.sendRedirect("AdminMNEventCO?action=viewEvent");
+            }
         } else if (action.equalsIgnoreCase("listPresnter")) {
             List<Presenter> presenters = preBLO.getAll();
             String id = request.getParameter("id");
             request.setAttribute("id", id);
             request.setAttribute("presenters", presenters);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-listPresenter.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/listPresenter.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("addPresenter")) {
+            int evtID = Integer.parseInt(request.getParameter("evtID"));
+            int preID = Integer.parseInt(request.getParameter("preID"));
             try {
-                int evtID = Integer.parseInt(request.getParameter("evtID"));
-                int preID = Integer.parseInt(request.getParameter("preID"));
                 boolean result = eventBLO.addPreForEvent(evtID, preID);
                 if (result) {
                     response.sendRedirect("AdminMNEventCO?action=formUpdateEvent&id=" + evtID);
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
+                Presenter presenter = preBLO.getByID(preID);
+                request.setAttribute("presenter", presenter);
+                RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=listPresnter&id=" + evtID);
+                rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("delPre")) {
             try {
@@ -166,41 +176,30 @@ public class AdminMNEventCO extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Event event = eventBLO.getByID(id);
             request.setAttribute("event", event);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-createAward.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/createAward.jsp");
             rd.forward(request, response);
-        } else if (action.equalsIgnoreCase("addAward")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Event event = eventBLO.getByID(id);
-            String description = request.getParameter("txtDescription");
-            Award award = new Award(description);
-            boolean result = eventBLO.addAwardForEvent(award, event);
-            if (result) {
-                Event eventNew = eventBLO.getByID(id);
-                request.setAttribute("event", eventNew);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-createAward.jsp");
-                rd.forward(request, response);
-            }
-        } else if (action.equalsIgnoreCase("deleteAward")) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            int awardID = Integer.parseInt(request.getParameter("awardID"));
-            boolean result = eventBLO.deleteAwardOfEvent(awardID);
-            if (result) {
-                Event eventNew = eventBLO.getByID(id);
-                request.setAttribute("event", eventNew);
-                RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=formUpdateEvent&id=" + id);
-                rd.forward(request, response);
-            }
         } else if (action.equalsIgnoreCase("deleteUForE")) {
             String email = request.getParameter("email");
             int evtID = Integer.parseInt(request.getParameter("evtID"));
             User user = userBLO.getByEmail(email);
             Event event = eventBLO.getByID(evtID);
             boolean result = eventBLO.delUserOfEvent(user, event);
-            if(result){
+            if (result) {
                 Event eventNew = eventBLO.getByID(evtID);
                 request.setAttribute("event", eventNew);
                 RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=formUpdateEvent&id=" + evtID);
                 rd.forward(request, response);
+            }
+        } else if (action.equalsIgnoreCase("formAddWinner")) {
+            int evtID = Integer.parseInt(request.getParameter("id"));
+            Event event = eventBLO.getByID(evtID);
+
+        } else if (action.equalsIgnoreCase("delWinner")) {
+            String email = request.getParameter("email");
+            int evtID = Integer.parseInt(request.getParameter("evtID"));
+            boolean result = eventBLO.delWinnerForEvent(email, evtID);
+            if (result) {
+                response.sendRedirect("AdminMNEventCO?action=formUpdateEvent&id=" + evtID);
             }
         }
     }

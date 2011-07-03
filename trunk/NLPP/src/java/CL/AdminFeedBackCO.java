@@ -51,7 +51,7 @@ public class AdminFeedBackCO extends HttpServlet {
         if (action.equalsIgnoreCase("feedback")) {
             List<FeedBack> feeds = feedbackBLO.getAll();
             request.setAttribute("feeds", feeds);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-FeedBack.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/FeedBack.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("view")) {
             int id = Integer.parseInt(request.getParameter("code"));
@@ -60,7 +60,7 @@ public class AdminFeedBackCO extends HttpServlet {
             String questionDate = dateFormat.format(pre.getQuestionDate());
             request.setAttribute("feed", pre);
             request.setAttribute("questionDate", questionDate);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-FeedBack-View.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/FeedBack-View.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("delete")) {
             int id = Integer.parseInt(request.getParameter("code"));
@@ -68,7 +68,7 @@ public class AdminFeedBackCO extends HttpServlet {
             if (resutl) {
                 List<FeedBack> feeds = feedbackBLO.getAll();
                 request.setAttribute("feeds", feeds);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-FeedBack.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/FeedBack.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("Admin/error.jsp");
@@ -102,7 +102,7 @@ public class AdminFeedBackCO extends HttpServlet {
             List<FeedBack> feedbacks = feedbackBLO.searchBySubject(keyword);
             request.setAttribute("feeds", feedbacks);
             request.setAttribute("keyword", keyword);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-FeedBack.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/FeedBack.jsp");
             rd.forward(request, response);
         }
     }

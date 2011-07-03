@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Admin-Presenter-View
-    Created on : Jun 24, 2011, 9:45:23 AM
+    Document   : Admin-Presenter
+    Created on : Jun 23, 2011, 9:54:00 PM
     Author     : APTECH-FPT
 --%>
 
@@ -24,19 +24,21 @@
         <script type="text/javascript" src="js/additional-methods.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#admin").validate({
+                $("#form").validate({
                     rules:{
                         txtname:{
-                            required: true
+                            required: true,
+                            rangelength:[6,30]
                         },
                         txtaddress:{
-                            required:true
+                            required:true,
+                            minlength:10
                         },
-                         txtemail:{
+                        txtemail:{
                             required:true,
                             email:true
                         },
-                         txtphone:{
+                        txtphone:{
                             required:true,
                             phoneVN:true
                         }
@@ -65,6 +67,7 @@
                 </div>
                 <div class="jclock"></div>
             </div>
+
             <div class="main_content">
                 <div class="menu">
                     <ul>
@@ -80,14 +83,7 @@
 
                 <div class="center_content">
                     <div class="left_content">
-                        <div class="sidebar_search">
-                            <form>
-                                <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
-                                <input type="image" class="search_submit" src="images/search.png" />
-                            </form>
-                        </div>
                         <div class="sidebarmenu">
-
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -123,6 +119,7 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
+
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -136,41 +133,83 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>View/Edit Presenter <span>Form</span></h2>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
                         <div>
-                            <form id="admin" action="AdminPresenterCO?action=update&id=${requestScope.pre.id}" method="post" >
-                                <fieldset>
-                                    <dl>
-                                        <dt><b>FullName:</b></dt>
-                                        <dd><input type="text" name="txtname" id="" size="54" value="${requestScope.pre.name}"  /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Email:</b></dt>
-                                        <dd><input type="text" name="txtemail" id="" size="54" value="${requestScope.pre.email}" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Number Phone:</b></dt>
-                                        <dd><input type="text" name="txtphone" id="" size="54" value="${requestScope.pre.phone}"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Address:</b></dt>
-                                        <dd><textarea name="txtaddress" rows="8" cols="60">${requestScope.pre.address}</textarea></dd>
-                                    </dl>
-                                    <dl class="submit">
-                                        <input type="submit" value="Update" name="action"/>
-                                    </dl>
-                                </fieldset>
-
-                            </form>
+                            <a href="Admin/Admin-addPresenter.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Add New Presenter</strong><span class="bt_green_r"></span></a>
+                            <br/>
+                            <div class="sidebar_search">
+                                <form action="AdminPresenterCO?action=search" method="post">
+                                    <input type="text" name="txtsearch" class="search_input"
+                                           value="Search Presenter By Name"
+                                           onfocus="if(this.value=='Search Presenter By Name'){this.value=''}"
+                                           onblur="if(this.value==''){this.value='Search Presenter By Name'}" />
+                                    <input type="image" class="search_submit" src="images/search.png" />
+                                </form>
+                            </div>
                         </div>
+                        <c:set value="${requestScope.presenters}" var="presenters"/>
+                        <c:if test="${empty presenters}">
+                            <h4><span class="txt1" style="color: red;" >Presenter Not Found in Search Result With Keyword :</span>
+                                <span class="txt1">${requestScope.keyword}</span></h4>
+                            <br/>
+                            <h4><span class="txt1" style="color: red;" >Please try Again ! </span></h4>
+                        </c:if>
+                        <c:if test="${not empty presenters}">
+                            <table id="rounded-corner">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="rounded">No.</th>
+                                        <th scope="col" class="rounded">Name</th>
+                                        <th scope="col" class="rounded">Mail</th>
+                                        <th scope="col" class="rounded">Phone</th>
+                                        <th scope="col" class="rounded">View</th>
+                                        <th scope="col" class="rounded-q4">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:set var="count" value="0"/>
+                                    <c:forEach var="pre" items="${requestScope.presenters}">
+                                        <c:set var="count" value="${count + 1}"/>
+                                        <tr>
+                                            <td>${count}</td>
+                                            <td>${pre.name}</td>
+                                            <td>${pre.email}</td>
+                                            <td>${pre.phone}</td>
+                                            <td><a href="AdminPresenterCO?action=view&id=${pre.id}"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+
+                                            <c:set value="${pre.eventList}" var="evtList"/>
+                                            <c:if test="${empty evtList}">
+                                                    <td><a onclick="return confirm('Are You Still Want To Delete ?')"
+                                                           href="AdminPresenterCO?action=Delete&id=${pre.id}"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                    </c:if>
+                                                    <c:if test="${not empty evtList}">
+                                                <td><a href="">
+                                                        <img alt="" title="" border="0" /></a></td>
+                                                    </c:if>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:if>
+
                     </div><!-- end of right content-->
+
+
                 </div>   <!--end of center content -->
+
+
+
+
                 <div class="clear"></div>
             </div> <!--end of main content-->
+
+
             <div class="footer">
+
                 <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
+
         </div>
     </body>
-</html>
 
+</html>

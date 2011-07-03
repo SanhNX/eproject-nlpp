@@ -63,29 +63,9 @@
             $(document).ready(function(){
                 $("#form").validate({
                     rules:{
-                        txtTitle:{
-                            required:true,
-                            rangelength:[6,30]
-                        },
-                        txtFee:{
-                            required:true,
-                            digits:true,
-                            min:500,
-                            max:50000
-                        },
-                        txtCriteria:{
+                        txtDescription1:{
                             required:true,
                             minlength:10
-                        },
-                        txtProcedures:{
-                            required:true,
-                            minlength:10
-                        },
-                        txtStartDate:{
-                            required:true
-                        },
-                        txtEndDate:{
-                            required:true
                         },
                         txtDescription:{
                             required:true,
@@ -94,6 +74,14 @@
                     }   //end rules
                 });  //end validate
             }); //end function
+        </script>
+        <script type="text/javascript">
+            function confirmation() {
+                var answer = confirm("Are You Still Want To Delete ?")
+                if (answer){
+                    alert("Delete Successful!")
+                }
+            }
         </script>
         <title>National Level Paper Presentation</title>
     </head>
@@ -133,12 +121,12 @@
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
-                                    <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
-                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
-                                    <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
-                                    <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
-                                    <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
-                                    <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
+                                    <li><a href="../AdminUserCO?action=manageUser">Manage User</a></li>
+                                    <li><a href="../AdminMNEventCO?action=viewEvent">Manage Event</a></li>
+                                    <li><a href="../AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="../mailingCO?action=mailling">Manage Mailing List</a></li>
+                                    <li><a href="../AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
+                                    <li><a href="../AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -178,45 +166,82 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Event <span>Form</span></h2>
+                        <c:set value="${requestScope.flag}" var="flag"/>
+                        <c:if test="${empty flag}">
+                            <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Award <span>Form</span></h2>
+                            </c:if>
+                            <c:if test="${not empty flag}">
+                            <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Update Award <span>Form</span></h2>
+                            </c:if>
                         <div class="form">
-                            <form id="form" action="AdminMNEventCO?action=addEvent" method="post" class="niceform">
-                                <fieldset>
-                                    <dl>
-                                        <dt><b>Event Title :</b></dt>
-                                        <dd><input type="text" name="txtTitle"  id="" size="54"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Fee :</b></dt>
-                                        <dd><input type="text" name="txtFee"  id="" size="54" /></dd>
-                                    </dl>
-                                    
-                                    <dl>
-                                        <dt><b>Criteria :</b></dt>
-                                        <dd><input type="text" name="txtCriteria" id="" size="54" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Procedures :</b></dt>
-                                        <dd><input type="text" name="txtProcedures" id="" size="54" /></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Start Date :</b></dt>
-                                        <dd><input type="text" name="txtStartDate" id="inputField" size="54" readonly="true"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>End Date :</b></dt>
-                                        <dd><input type="text" name="txtEndDate" id="inputField1" size="54" readonly="true"/></dd>
-                                    </dl>
-                                    <dl>
-                                        <dt><b>Description :</b></dt>
-                                        <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
-                                    </dl>
-                                    <dl class="submit">
-                                        <input align="right" type="submit" value="Create Event" />
-                                    </dl>
-                                </fieldset>
-                            </form>
+                            <c:set value="${requestScope.flag}" var="flag"/>
+                            <c:if test="${empty flag}">
+                                <form id="form" action="AdminAwardCO?action=addAward" method="post" class="niceform">
+                                    <fieldset>
+                                        <dl>
+                                            <dt><b>Description :</b></dt>
+                                            <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
+                                        </dl>
+                                        <dl class="submit">
+                                            <input align="right" type="submit" value="Create Award" />
+                                        </dl>
+                                    </fieldset>
+                                </form>
+                            </c:if>
+                            <c:if test="${not empty flag}">
+
+                                <form id="form" action="AdminAwardCO?action=editAward&awardID=${requestScope.award.id}" method="post" class="niceform">
+                                    <fieldset>
+                                        <dl>
+                                            <dt><b>Description :</b></dt>
+                                            <dd><textarea name="txtDescription1" rows="8" cols="70">${requestScope.award.description}</textarea></dd>
+                                        </dl>
+                                        <dl class="submit">
+                                            <input align="right" type="submit" value="Update Award" />
+
+
+                                        </dl>
+                                    </fieldset>
+                                </form>
+
+                            </c:if>
                         </div>
+                        <br/>
+                        <h2>Award <span>List</span></h2>
+                        <table id="rounded-corner" >
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="rounded">No.</th>
+                                    <th scope="col" class="rounded">Description</th>
+                                    <th scope="col" class="rounded-q4" colspan="2" align="center">Action</th>
+                                    <!--                                    <th scope="col" class="rounded-q4">Delete</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="-1"/>
+                                <c:forEach items="${requestScope.awards}" var="award">
+                                    <c:set var="count" value="${count + 1}"/>
+                                    <c:if test="${award.id != 1}">
+                                        <tr>
+                                            <td>${count}</td>
+                                            <td>${award.description}</td>
+                                            <td><a href="AdminAwardCO?action=formEditAward&awardID=${award.id}"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
+                                                    <c:set value="${award.evtUserList}" var="evtUser"/>
+                                                    <c:if test="${empty evtUser}">
+                                                <td><a onclick="confirmation();" href="AdminAwardCO?action=deleteAward&awardID=${award.id}" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                    </c:if>
+                                                    <c:if test="${not empty evtUser}">
+                                                <td><a href="#" class="ask"><img src="" alt="" title="" border="0" /></a></td>
+                                                    </c:if>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <c:set value="${requestScope.flag}" var="flag"/>
+                        <c:if test="${not empty flag}">
+                            <a href="AdminAwardCO?action=viewAward" class="bt_green"><span class="bt_green_lft"></span><strong>Redirect To Create Award Page</strong><span class="bt_green_r"></span></a>
+                        </c:if>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

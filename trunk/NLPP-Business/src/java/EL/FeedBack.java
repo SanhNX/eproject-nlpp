@@ -67,14 +67,6 @@ public class FeedBack implements Serializable {
     public FeedBack(Integer id) {
         this.id = id;
     }
-
-    public FeedBack(String subject, String question, Date questionDate, String status) {
-        this.subject = subject;
-        this.question = question;
-        this.questionDate = questionDate;
-        this.status = status;
-    }
-
     public FeedBack(Integer id, String subject, String question, String answer, Date questionDate, Date answerDate, String status, User user) {
         this.id = id;
         this.subject = subject;
@@ -86,14 +78,19 @@ public class FeedBack implements Serializable {
         this.user = user;
     }
 
-    
-
     public FeedBack(String subject, String question, String answer, Date questionDate, Date answerDate, String status) {
         this.subject = subject;
         this.question = question;
         this.answer = answer;
         this.questionDate = questionDate;
         this.answerDate = answerDate;
+        this.status = status;
+    }
+
+    public FeedBack(String subject, String question, Date questionDate, String status) {
+        this.subject = subject;
+        this.question = question;
+        this.questionDate = questionDate;
         this.status = status;
     }
 

@@ -8,13 +8,12 @@ package EL;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,22 +39,19 @@ public class Award implements Serializable {
     @Basic(optional = false)
     @Column(name = "Description")
     private String description;
-    @OneToMany(mappedBy = "award")
+    @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "award")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<EvtWinner> evtWinnerList;
-    @JoinColumn(name = "EvtID", referencedColumnName = "ID")
-    @ManyToOne
-    private Event event;
+    private List<EvtUser> evtUserList;
 
     public Award() {
     }
 
-    public Award(String description) {
-        this.description = description;
-    }
-
     public Award(Integer id) {
         this.id = id;
+    }
+
+    public Award(String description) {
+        this.description = description;
     }
 
     public Award(Integer id, String description) {
@@ -79,20 +75,12 @@ public class Award implements Serializable {
         this.description = description;
     }
 
-    public List<EvtWinner> getEvtWinnerList() {
-        return evtWinnerList;
+    public List<EvtUser> getEvtUserList() {
+        return evtUserList;
     }
 
-    public void setEvtWinnerList(List<EvtWinner> evtWinnerList) {
-        this.evtWinnerList = evtWinnerList;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvtUserList(List<EvtUser> evtUserList) {
+        this.evtUserList = evtUserList;
     }
 
     @Override

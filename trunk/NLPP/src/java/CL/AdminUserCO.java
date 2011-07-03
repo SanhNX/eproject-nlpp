@@ -47,7 +47,7 @@ public class AdminUserCO extends HttpServlet {
         if (action.equalsIgnoreCase("manageUser")) {
             List<User> users = adminUserBLO.getAll();
             request.setAttribute("users", users);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageUser.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/ManageUser.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("editUser")) {
 //            User user = userBLO.getByEmail(username);
@@ -59,7 +59,7 @@ public class AdminUserCO extends HttpServlet {
             List<User> users = adminUserBLO.searchUser(keywork);
             request.setAttribute("users", users);
             request.setAttribute("keywork", keywork);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-ManageUser.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/ManageUser.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("updateStatus")) {
             String email = request.getParameter("email");

@@ -43,7 +43,7 @@ public class mailingCO extends HttpServlet {
         if (action.equalsIgnoreCase("mailling")) {
             List<MailingList> mails = mailBLO.getAll();
             request.setAttribute("mails", mails);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Mailling.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Mailling.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("add")) {
             String email = request.getParameter("txtemail");
@@ -52,7 +52,7 @@ public class mailingCO extends HttpServlet {
             if (resutl) {
                 List<MailingList> mails = mailBLO.getAll();
                 request.setAttribute("mails", mails);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Mailling.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/Mailling.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("error.jsp");
@@ -61,10 +61,7 @@ public class mailingCO extends HttpServlet {
             String mail = request.getParameter("code");
             boolean resutl = mailBLO.deleteMail(mail);
             if (resutl) {
-                List<MailingList> mails = mailBLO.getAll();
-                request.setAttribute("mails", mails);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Mailling.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("mailingCO?action=mailling");
             } else {
                 response.sendRedirect("error.jsp");
             }
@@ -73,7 +70,7 @@ public class mailingCO extends HttpServlet {
             List<MailingList> mails = mailBLO.search(keyword);
             request.setAttribute("mails", mails);
             request.setAttribute("keyword", keyword);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Mailling.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Mailling.jsp");
             rd.forward(request, response);
         }
 

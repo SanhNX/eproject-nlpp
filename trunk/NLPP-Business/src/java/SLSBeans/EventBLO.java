@@ -47,16 +47,17 @@ public class EventBLO implements EventBLORemote {
         return events;
     }
 
-    public boolean addUserForEvent(User u, Event evt, Payment pay) {
+    public boolean addUserForEvent(User u, Event evt, Payment pay, Award a) {
         try {
             List<EvtUser> evtUserList = new ArrayList<EvtUser>();//Tao ra 1 List co 1 Order vi tham so truyen zo setCustOrderList la 1 cai List
             EvtUserPK evtUserPK = new EvtUserPK(evt.getId(), u.getEmail());
-            EvtUser evtUser = new EvtUser(u, pay, evt);
+            EvtUser evtUser = new EvtUser(u, pay, evt, a);
             evtUser.setEvtUserPK(evtUserPK);
             evtUserList.add(evtUser);
             evt.setEvtUserList(evtUserList);
             pay.setEvtUserList(evtUserList);
             u.setEvtUserList(evtUserList);
+            a.setEvtUserList(evtUserList);
             this.em.persist(evtUser);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -115,13 +116,13 @@ public class EventBLO implements EventBLORemote {
         return true;
     }
 
-    public boolean addAwardForEvent(Award award, Event event) {
+    public boolean delUserOfEvent(User u, Event evt) {
         try {
-            List<Award> awardList = new ArrayList<Award>();
-            awardList.add(award);
-            event.setAwardList(awardList);
-            award.setEvent(event);
-            this.em.persist(award);
+            EvtUserPK evtUserPK = new EvtUserPK(evt.getId(), u.getEmail());
+            EvtUser evtUser = this.em.find(EvtUser.class, evtUserPK);
+            if (evtUser != null) {
+                this.em.remove(evtUser);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
@@ -129,11 +130,26 @@ public class EventBLO implements EventBLORemote {
         return true;
     }
 
-    public boolean deleteAwardOfEvent(int id) {
-        Award a = this.em.find(Award.class, id);
-        if (a != null) {
+    public boolean delWinnerForEvent(String email, int evtID) {
+        EvtUserPK euPK = new EvtUserPK(evtID, email);
+        EvtUser evtUser = this.em.find(EvtUser.class, euPK);
+        if (evtUser != null) {
             try {
-                em.remove(a);
+                Award award = new Award(1);
+                evtUser.setAward(award);
+                this.em.merge(evtUser);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public boolean deleteEvent(int evtID) {
+        Event event = getByID(evtID);
+        if (event != null) {
+            try {
+                this.em.remove(event);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 return false;
@@ -141,20 +157,6 @@ public class EventBLO implements EventBLORemote {
             return true;
         }
         return false;
-    }
-
-    public boolean delUserOfEvent(User u, Event evt) {
-        try {
-            EvtUserPK evtUserPK = new EvtUserPK(evt.getId(),u.getEmail());
-            EvtUser evtUser = this.em.find(EvtUser.class, evtUserPK);
-            if(evtUser != null){
-                this.em.remove(evtUser);
-            }
-        } catch (Exception ex) {  
-            ex.printStackTrace();
-            return false;
-        }
-        return true;
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

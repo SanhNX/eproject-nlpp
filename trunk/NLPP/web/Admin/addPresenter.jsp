@@ -87,12 +87,12 @@
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
-                                    <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
-                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
-                                    <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
-                                    <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
-                                    <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
-                                    <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
+                                    <li><a href="../AdminUserCO?action=manageUser">Manage User</a></li>
+                                    <li><a href="../AdminMNEventCO?action=viewEvent">Manage Event</a></li>
+                                    <li><a href="../AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="../mailingCO?action=mailling">Manage Mailing List</a></li>
+                                    <li><a href="../AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
+                                    <li><a href="../AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
                                 </ul>
                             </div>
                         </div>
