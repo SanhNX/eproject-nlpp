@@ -44,7 +44,7 @@ public class AdminPresenterCO extends HttpServlet {
         if (action.equalsIgnoreCase("presenter")) {
             List<Presenter> presenters = PresenterBLO.getAll();
             request.setAttribute("presenters", presenters);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("addpresenter")) {
             String name = request.getParameter("txtname");
@@ -57,7 +57,7 @@ public class AdminPresenterCO extends HttpServlet {
             if (resutl) {
                 List<Presenter> presenters = PresenterBLO.getAll();
                 request.setAttribute("presenters", presenters);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("Admin/error.jsp");
@@ -66,7 +66,7 @@ public class AdminPresenterCO extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Presenter pre = PresenterBLO.getByID(id);
             request.setAttribute("pre", pre);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter-View.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter-View.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("Delete")) {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -74,7 +74,7 @@ public class AdminPresenterCO extends HttpServlet {
             if (resutl) {
                 List<Presenter> presenters = PresenterBLO.getAll();
                 request.setAttribute("presenters", presenters);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("Admin/error.jsp");
@@ -91,7 +91,7 @@ public class AdminPresenterCO extends HttpServlet {
             if (resutl) {
                 List<Presenter> presenters = PresenterBLO.getAll();
                 request.setAttribute("presenters", presenters);
-                RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter.jsp");
                 rd.forward(request, response);
             } else {
                 response.sendRedirect("error.jsp");
@@ -101,7 +101,7 @@ public class AdminPresenterCO extends HttpServlet {
             List<Presenter> presenters = PresenterBLO.searchPresenter(keyword);
             request.setAttribute("presenters", presenters);
             request.setAttribute("keyword", keyword);
-            RequestDispatcher rd = request.getRequestDispatcher("Admin/Admin-Presenter.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/Presenter.jsp");
             rd.forward(request, response);
         }
 

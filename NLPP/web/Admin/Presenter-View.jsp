@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Admin-Presenter
-    Created on : Jun 23, 2011, 9:54:00 PM
+    Document   : Admin-Presenter-View
+    Created on : Jun 24, 2011, 9:45:23 AM
     Author     : APTECH-FPT
 --%>
 
@@ -24,19 +24,21 @@
         <script type="text/javascript" src="js/additional-methods.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#form").validate({
+                $("#admin").validate({
                     rules:{
-                        txtSubject:{
-                            required: true,
-                            rangelength:[6,30]
+                        txtname:{
+                            required: true
                         },
-                        txtQuestion:{
-                            required:true,
-                            minlength:10
+                        txtaddress:{
+                            required:true
                         },
-                        txtAnswer:{
+                         txtemail:{
                             required:true,
-                            minlength:10
+                            email:true
+                        },
+                         txtphone:{
+                            required:true,
+                            phoneVN:true
                         }
                     }   //end rules
                 });  //end validate
@@ -63,7 +65,6 @@
                 </div>
                 <div class="jclock"></div>
             </div>
-
             <div class="main_content">
                 <div class="menu">
                     <ul>
@@ -79,7 +80,9 @@
 
                 <div class="center_content">
                     <div class="left_content">
+                        
                         <div class="sidebarmenu">
+
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
@@ -115,7 +118,6 @@
                             </div>
                             <div class="sidebar_box_bottom"></div>
                         </div>
-
                         <div class="sidebar_box">
                             <div class="sidebar_box_top"></div>
                             <div class="sidebar_box_content">
@@ -129,24 +131,28 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create FAQ <span>Form</span></h2>
-                        <div class="form">
-                            <form id="form" action="../AdminFAQCO?action=add" method="post" >
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>View/Edit Presenter <span>Form</span></h2>
+                        <div>
+                            <form id="admin" action="AdminPresenterCO?action=update&id=${requestScope.pre.id}" method="post" >
                                 <fieldset>
                                     <dl>
-                                        <dt><b>Subject :</b></dt>
-                                        <dd><input type="text" name="txtSubject" id="" size="54"  /></dd>
+                                        <dt><b>FullName:</b></dt>
+                                        <dd><input type="text" name="txtname" id="" size="54" value="${requestScope.pre.name}"  /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Question :</b></dt>
-                                        <dd><textarea name="txtQuestion" rows="8" cols="60"></textarea></dd>
+                                        <dt><b>Email:</b></dt>
+                                        <dd><input type="text" name="txtemail" id="" size="54" value="${requestScope.pre.email}" /></dd>
                                     </dl>
                                     <dl>
-                                        <dt><b>Answer :</b></dt>
-                                        <dd><textarea name="txtAnswer" rows="8" cols="60"></textarea></dd>
+                                        <dt><b>Number Phone:</b></dt>
+                                        <dd><input type="text" name="txtphone" id="" size="54" value="${requestScope.pre.phone}"/></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Address:</b></dt>
+                                        <dd><textarea name="txtaddress" rows="8" cols="60">${requestScope.pre.address}</textarea></dd>
                                     </dl>
                                     <dl class="submit">
-                                        <input type="reset" value="Reset Form"/>||<input type="submit" name="submit" id="submit" value="Create Now !" />
+                                        <input type="submit" value="Update" name="action"/>
                                     </dl>
                                 </fieldset>
 
@@ -162,3 +168,4 @@
         </div>
     </body>
 </html>
+

@@ -63,9 +63,6 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FeedBack> feedBackList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
@@ -161,14 +158,6 @@ public class User implements Serializable {
 
     public void setFeedBackList(List<FeedBack> feedBackList) {
         this.feedBackList = feedBackList;
-    }
-
-    public List<EvtWinner> getEvtWinnerList() {
-        return evtWinnerList;
-    }
-
-    public void setEvtWinnerList(List<EvtWinner> evtWinnerList) {
-        this.evtWinnerList = evtWinnerList;
     }
 
     public List<EvtUser> getEvtUserList() {

@@ -25,10 +25,22 @@
                         month:4,
                         day:16
                     },
-                    yearsRange: new Array(1971,2100),
+                    yearsRange: new Array(1945,1993),
                     limitToToday:true
                 });
             };
+        </script>
+        <script type="text/javascript">
+            function checkYear() {
+                var abc = document.getElementById("inputField").value;
+                var currentDate=new Date();
+                var inputDate = new Date(abc);
+                var result = (((currentDate.getTime()-inputDate.getTime())/(24*3600*1000*365)) );
+                alert(parseInt(result));
+                if(parseInt(result) < 18){
+                    alert("chua du tuoi ku oi");
+                }
+            }
         </script>
         <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -104,7 +116,6 @@
                         }
                     }); // end AJAX
                 }); // end event-handler
-
             }); // end function
         </script>
         <title>National Level Paper Presentation</title>
@@ -191,14 +202,10 @@
                         <form id="contacts-form" action="VisiterCO?action=register" method="POST">
                             <table cellpadding="110" cellspacing="15">
                                 <tr class="field">
-                                    <td></td>
-                                    <td><label>${requestScope.messege}</label></td>
-                                </tr>
-                                <tr class="field">
                                     <td>Your E-mail &nbsp;</td>
                                     <td>
-                                        <input type="text" id="txtEmail" name="txtEmail" value="${requestScope.user.email}" size="30"/>
-                                        <img src="images/fail.jpg" alt=":D" width="25px" height="25px" id="imgCheck"/>
+                                        <input type="text" id="txtEmail" name="txtEmail" value="" size="30"/>
+                                        <img src="" alt="" width="25px" height="25px" id="imgCheck"/>
                                     </td>
                                 </tr>
                                 <tr class="field">
@@ -211,11 +218,12 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Birthday &nbsp;</td>
-                                    <td><input type="text" value="${requestScope.birthday}" name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
+                                    <td><input type="text" onblur="checkYear();" value=""
+                                               name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Full Name &nbsp;</td>
-                                    <td><input type="text" name="txtFullname" value="${requestScope.user.fullName}" size="30"/></td>
+                                    <td><input type="text" name="txtFullname" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Gender &nbsp;</td>
@@ -226,11 +234,11 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Address &nbsp;</td>
-                                    <td><input type="text" name="txtAddress" value="${requestScope.user.address}" size="30"/></td>
+                                    <td><input type="text" name="txtAddress" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Phone Number &nbsp;</td>
-                                    <td><input type="text" name="txtPhone" value="${requestScope.user.phone}" size="30"/></td>
+                                    <td><input type="text" name="txtPhone" value="" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td></td>

@@ -22,7 +22,7 @@
         <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
         <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
         <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
-        
+
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -148,7 +148,13 @@
                     </div>
                     <div class="right_content">
                         <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
-                        
+                            <c:set value="${requestScope.presenter}" var="presenter"/>
+                            <c:if test="${not empty presenter}">
+                            <script type="text/javascript">
+                                window.alert("This Presenter already exists in presenter list");
+                            </script>
+                        </c:if>
+                        <br/>
                         <table id="rounded-corner" >
                             <thead>
                                 <tr>
@@ -175,7 +181,7 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                                <a href="AdminMNEventCO?action=formUpdateEvent&id=${requestScope.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Back To View Current Event Page</strong><span class="bt_green_r"></span></a>
+                        <a href="AdminMNEventCO?action=formUpdateEvent&id=${requestScope.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Back To View Current Event Page</strong><span class="bt_green_r"></span></a>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

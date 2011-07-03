@@ -206,31 +206,11 @@
                         </table>
                         <br/>
                         <br/>
-                        <table id="rounded-corner">
-                            <caption><span class="txt1">Awards Of ${requestScope.event.title} </span></caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded" width="20%">No.</th>
-                                    <th scope="col" class="rounded" width="80%">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="0"/>
-                                <c:forEach var="award" items="${requestScope.event.awardList}">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${award.description}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <br/>
                         <c:if test="${requestScope.compare < 0}">
                             <span class="txt1">
                                 <a href="UserEventCO?action=formEnrollEvent&id=${requestScope.event.id}&fromPage=${pageContext.request.requestURI}" class="fright">Enroll Current Event</a></span>
-                        </c:if>
-                        <c:if test="${requestScope.compare >= 0}">
+                            </c:if>
+                            <c:if test="${requestScope.compare >= 0}">
                             <span class="txt1"><a class="fright">This event had enroll expired</a></span>
                         </c:if>
                         <table id="rounded-corner">
@@ -270,14 +250,17 @@
                             </thead>
                             <tbody>
                                 <c:set var="count" value="0"/>
-                                <c:forEach var="evtUser" items="${requestScope.event.evtWinnerList}">
+                                <c:forEach var="evtUser" items="${requestScope.event.evtUserList}">
                                     <c:set var="count" value="${count + 1}"/>
-                                    <tr>
-                                        <td >${count}</td>
-                                        <td >${evtUser.user.email}</td>
-                                        <td >${evtUser.user.fullName}</td>
-                                        <td >${evtUser.award.description}</td>
-                                    </tr>
+                                    <c:set var="default" value="default"/>
+                                    <c:if test="${evtUser.award.description ne default}">
+                                        <tr>
+                                            <td >${count}</td>
+                                            <td >${evtUser.user.email}</td>
+                                            <td >${evtUser.user.fullName}</td>
+                                            <td >${evtUser.award.description}</td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>

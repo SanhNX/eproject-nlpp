@@ -26,21 +26,17 @@
             $(document).ready(function(){
                 $("#form").validate({
                     rules:{
-                        txtname:{
+                        txtSubject:{
                             required: true,
                             rangelength:[6,30]
                         },
-                        txtaddress:{
+                        txtQuestion:{
                             required:true,
                             minlength:10
                         },
-                        txtemail:{
+                        txtAnswer:{
                             required:true,
-                            email:true
-                        },
-                        txtphone:{
-                            required:true,
-                            phoneVN:true
+                            minlength:10
                         }
                     }   //end rules
                 });  //end validate
@@ -87,12 +83,12 @@
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
-                                    <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
-                                    <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
-                                    <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
-                                    <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
-                                    <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
-                                    <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
+                                    <li><a href="../AdminUserCO?action=manageUser">Manage User</a></li>
+                                    <li><a href="../AdminMNEventCO?action=viewEvent">Manage Event</a></li>
+                                    <li><a href="../AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="../mailingCO?action=mailling">Manage Mailing List</a></li>
+                                    <li><a href="../AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
+                                    <li><a href="../AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -133,83 +129,36 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
-                        <div>
-                            <a href="Admin/Admin-addPresenter.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Add New Presenter</strong><span class="bt_green_r"></span></a>
-                            <br/>
-                            <div class="sidebar_search">
-                                <form action="AdminPresenterCO?action=search" method="post">
-                                    <input type="text" name="txtsearch" class="search_input"
-                                           value="Search Presenter By Name"
-                                           onfocus="if(this.value=='Search Presenter By Name'){this.value=''}"
-                                           onblur="if(this.value==''){this.value='Search Presenter By Name'}" />
-                                    <input type="image" class="search_submit" src="images/search.png" />
-                                </form>
-                            </div>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create FAQ <span>Form</span></h2>
+                        <div class="form">
+                            <form id="form" action="../AdminFAQCO?action=add" method="post" >
+                                <fieldset>
+                                    <dl>
+                                        <dt><b>Subject :</b></dt>
+                                        <dd><input type="text" name="txtSubject" id="" size="54"  /></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Question :</b></dt>
+                                        <dd><textarea name="txtQuestion" rows="8" cols="60"></textarea></dd>
+                                    </dl>
+                                    <dl>
+                                        <dt><b>Answer :</b></dt>
+                                        <dd><textarea name="txtAnswer" rows="8" cols="60"></textarea></dd>
+                                    </dl>
+                                    <dl class="submit">
+                                        <input type="reset" value="Reset Form"/>||<input type="submit" name="submit" id="submit" value="Create Now !" />
+                                    </dl>
+                                </fieldset>
+
+                            </form>
                         </div>
-                        <c:set value="${requestScope.presenters}" var="presenters"/>
-                        <c:if test="${empty presenters}">
-                            <h4><span class="txt1" style="color: red;" >Presenter Not Found in Search Result With Keyword :</span>
-                                <span class="txt1">${requestScope.keyword}</span></h4>
-                            <br/>
-                            <h4><span class="txt1" style="color: red;" >Please try Again ! </span></h4>
-                        </c:if>
-                        <c:if test="${not empty presenters}">
-                            <table id="rounded-corner">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="rounded">No.</th>
-                                        <th scope="col" class="rounded">Name</th>
-                                        <th scope="col" class="rounded">Mail</th>
-                                        <th scope="col" class="rounded">Phone</th>
-                                        <th scope="col" class="rounded">View</th>
-                                        <th scope="col" class="rounded-q4">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:set var="count" value="0"/>
-                                    <c:forEach var="pre" items="${requestScope.presenters}">
-                                        <c:set var="count" value="${count + 1}"/>
-                                        <tr>
-                                            <td>${count}</td>
-                                            <td>${pre.name}</td>
-                                            <td>${pre.email}</td>
-                                            <td>${pre.phone}</td>
-                                            <td><a href="AdminPresenterCO?action=view&id=${pre.id}"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-
-                                            <c:set value="${pre.eventList}" var="evtList"/>
-                                            <c:if test="${empty evtList}">
-                                                    <td><a onclick="return confirm('Are You Still Want To Delete ?')"
-                                                           href="AdminPresenterCO?action=Delete&id=${pre.id}"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
-                                                    </c:if>
-                                                    <c:if test="${not empty evtList}">
-                                                <td><a href="">
-                                                        <img src="" alt="" title="" border="0" /></a></td>
-                                                    </c:if>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </c:if>
-
                     </div><!-- end of right content-->
-
-
                 </div>   <!--end of center content -->
-
-
-
-
                 <div class="clear"></div>
             </div> <!--end of main content-->
-
-
             <div class="footer">
-
                 <div class="left_footer">NLPP University ADMIN PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
             </div>
-
         </div>
     </body>
-
 </html>

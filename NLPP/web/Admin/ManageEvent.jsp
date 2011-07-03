@@ -21,6 +21,14 @@
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/additional-methods.js"></script>
+        <script type="text/javascript">
+            function confirmation() {
+                var answer = confirm("Are You Still Want To Delete ?")
+                if (answer){
+                    alert("Delete Successful!")
+                }
+            }
+        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -149,12 +157,11 @@
 
                                             <c:set value="${event.presenterList}" var="preList"/>
                                             <c:set value="${event.evtUserList}" var="evtUserList"/>
-                                            <c:set value="${event.awardList}" var="awardList"/>
-                                            <c:if test="${empty evtList and empty evtUserList and empty awardList}">
-                                                <td><a onclick="return confirm('Are You Still Want To Delete ?')" href="#" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                            <c:if test="${empty preList and empty evtUserList}">
+                                                <td><a onclick="confirmation();" href="AdminMNEventCO?action=deleteEvent&evtID=${event.id}" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                                     </c:if>
-                                                    <c:if test="${not empty evtList or not empty evtUserList or not empty awardList}">
-                                                <td><a href="#" class="ask"><img src="" alt="" title="" border="0" /></a></td>
+                                                    <c:if test="${not empty preList or not empty evtUserList or not empty awardList}">
+                                                <td><a href="#" class="ask"><img alt="" title="" border="0" /></a></td>
                                                     </c:if>
                                         </tr>
                                     </c:forEach>

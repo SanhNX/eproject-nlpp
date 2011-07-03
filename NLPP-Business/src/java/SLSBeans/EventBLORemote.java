@@ -7,6 +7,7 @@ package SLSBeans;
 
 import EL.Award;
 import EL.Event;
+import EL.EvtUser;
 import EL.Payment;
 import EL.Presenter;
 import EL.User;
@@ -26,7 +27,7 @@ public interface EventBLORemote {
 
     List<Event> getByTitle(String title);
 
-    boolean addUserForEvent(User u, Event evt, Payment pay);
+    boolean addUserForEvent(User u, Event evt, Payment pay,Award a);
 
     Payment getPaymentById(int id);
 
@@ -38,10 +39,10 @@ public interface EventBLORemote {
 
     boolean removePreForEvent(int evtID, int preID);
 
-    boolean addAwardForEvent(Award award, Event event);
-
-    boolean deleteAwardOfEvent(int id);
-
     boolean delUserOfEvent(User u, Event evt);
-    
+
+    boolean delWinnerForEvent(String email, int evtID);
+
+    boolean deleteEvent(int evtID);
+
 }

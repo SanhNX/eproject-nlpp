@@ -83,7 +83,6 @@ public class VisiterCO extends HttpServlet {
                 out.close();
             }
         } else if (action.equalsIgnoreCase("register")) {
-            String messege="";
             User u = null;
             Date birthday = null;
             DateFormat dateFormat = null;
@@ -106,18 +105,10 @@ public class VisiterCO extends HttpServlet {
                 u = new User(email, pass, fullName, birthday, gender, address, phone,true);
                 boolean result = userBLO.add(role, u);
                 if (result) {
-                    messege="";
                     response.sendRedirect("User-login-confirm.jsp");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                messege = "This email address is already registered !<br/>Please switch to the Login Page.";
-                request.setAttribute("messege", messege);
-                request.setAttribute("user", u);
-                String birthday1 = dateFormat.format(u.getBirthday());
-                request.setAttribute("birthday", birthday1);
-                RequestDispatcher rd = request.getRequestDispatcher("User-register.jsp");
-                rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("addMail")) {
             String email = request.getParameter("txtMailing");

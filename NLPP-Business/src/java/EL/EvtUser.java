@@ -30,28 +30,27 @@ public class EvtUser implements Serializable {
     @ManyToOne(optional = false)
     private User user;
     @JoinColumn(name = "PaymentID", referencedColumnName = "ID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Payment payment;
     @JoinColumn(name = "EvtID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Event event;
+    @JoinColumn(name = "AwardID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Award award;
 
     public EvtUser() {
     }
 
-    public EvtUser(User user, Payment payment, Event event) {
+    public EvtUser(EvtUserPK evtUserPK) {
+        this.evtUserPK = evtUserPK;
+    }
+
+    public EvtUser(User user, Payment payment, Event event, Award award) {
         this.user = user;
         this.payment = payment;
         this.event = event;
-    }
-
-    public EvtUser(User user, Event event) {
-        this.user = user;
-        this.event = event;
-    }
-
-    public EvtUser(EvtUserPK evtUserPK) {
-        this.evtUserPK = evtUserPK;
+        this.award = award;
     }
 
     public EvtUser(int evtID, String email) {
@@ -88,6 +87,14 @@ public class EvtUser implements Serializable {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Award getAward() {
+        return award;
+    }
+
+    public void setAward(Award award) {
+        this.award = award;
     }
 
     @Override

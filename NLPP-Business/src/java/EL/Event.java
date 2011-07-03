@@ -71,15 +71,9 @@ public class Event implements Serializable {
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Presenter> presenterList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "event")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<EvtWinner> evtWinnerList;
     @OneToMany(cascade={CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "event")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EvtUser> evtUserList;
-    @OneToMany(mappedBy = "event")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Award> awardList;
 
     public Event() {
     }
@@ -181,28 +175,12 @@ public class Event implements Serializable {
         this.presenterList = presenterList;
     }
 
-    public List<EvtWinner> getEvtWinnerList() {
-        return evtWinnerList;
-    }
-
-    public void setEvtWinnerList(List<EvtWinner> evtWinnerList) {
-        this.evtWinnerList = evtWinnerList;
-    }
-
     public List<EvtUser> getEvtUserList() {
         return evtUserList;
     }
 
     public void setEvtUserList(List<EvtUser> evtUserList) {
         this.evtUserList = evtUserList;
-    }
-
-    public List<Award> getAwardList() {
-        return awardList;
-    }
-
-    public void setAwardList(List<Award> awardList) {
-        this.awardList = awardList;
     }
 
     @Override
