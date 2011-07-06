@@ -9,6 +9,7 @@
 <%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -24,29 +25,31 @@
         <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
         <script type="text/javascript">
             window.onload = function(){
+                var current = new Date();
+                var day = current.getDate();
+                var month = current.getMonth();
+                var year = current.getFullYear();
                 new JsDatePick({
                     useMode:2,
                     target:"inputField",
                     isStripped:false,
                     selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
+                        year:year,
+                        month:month+1,
+                        day:day
                     },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
+                    yearsRange: new Array(year,year+1)
                 });
                 new JsDatePick({
                     useMode:2,
                     target:"inputField1",
                     isStripped:false,
                     selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
+                        year:year,
+                        month:month+1,
+                        day:day
                     },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
+                    yearsRange: new Array(year,year+1)
                 });
             };
         </script>
@@ -103,7 +106,7 @@
                     User user = (User) s.getAttribute("admin");
                     if (user == null) {
         %>
-        <jsp:forward page="Admin-login.jsp"/>
+        <jsp:forward page="login.jsp"/>
         <%}%>
         <div id="main_container">
             <div class="header">
@@ -133,12 +136,13 @@
                             <a class="menuitem submenuheader" href="#">Categories</a>
                             <div class="submenu">
                                 <ul>
-                                    <li><a href="../AdminUserCO?action=manageUser">Manage User</a></li>
-                                    <li><a href="../AdminMNEventCO?action=viewEvent">Manage Event</a></li>
-                                    <li><a href="../AdminPresenterCO?action=presenter">Manage Presenter</a></li>
-                                    <li><a href="../mailingCO?action=mailling">Manage Mailing List</a></li>
-                                    <li><a href="../AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
-                                    <li><a href="../AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
+                                    <li><a href="${requestScope.compare > 0 ? 'AdminUserCO?action=manageUser':'../AdminUserCO?action=manageUser'}">Manage User</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'AdminMNEventCO?action=viewEvent':'../AdminMNEventCO?action=viewEvent'}">Manage Event</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'AdminPresenterCO?action=presenter':'../AdminPresenterCO?action=presenter'}">Manage Presenter</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'AdminAwardCO?action=viewAward':'../AdminAwardCO?action=viewAward'}">Manage Awards</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'mailingCO?action=mailling':'../mailingCO?action=mailling'}">Manage Mailing List</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'AdminFeedBackCO?action=feedback':'../AdminFeedBackCO?action=feedback'}">Manage Feedback</a></li>
+                                    <li><a href="${requestScope.compare > 0 ?'AdminFAQCO?action=viewFAQ':'../AdminFAQCO?action=viewFAQ'}">Manage FAQ</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -180,24 +184,24 @@
                     <div class="right_content">
                         <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Event <span>Form</span></h2>
                         <div class="form">
-                            <form id="form" action="../AdminMNEventCO?action=addEvent" method="post" class="niceform">
+                            <form id="form" action="${requestScope.compare > 0?'AdminMNEventCO?action=addEvent':'../AdminMNEventCO?action=addEvent'}"  method="post" class="niceform">
                                 <fieldset>
                                     <dl>
                                         <dt><b>Event Title :</b></dt>
-                                        <dd><input type="text" name="txtTitle"  id="" size="54"/></dd>
+                                        <dd><input type="text" name="txtTitle" value="${requestScope.event.title}" size="54"/></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Fee :</b></dt>
-                                        <dd><input type="text" name="txtFee"  id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtFee"  value="${requestScope.event.fee}" size="54" /></dd>
                                     </dl>
-                                    
+
                                     <dl>
                                         <dt><b>Criteria :</b></dt>
-                                        <dd><input type="text" name="txtCriteria" id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtCriteria" value="${requestScope.event.criteria}" size="54" /></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Procedures :</b></dt>
-                                        <dd><input type="text" name="txtProcedures" id="" size="54" /></dd>
+                                        <dd><input type="text" name="txtProcedures" value="${requestScope.event.procedures}" size="54" /></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>Start Date :</b></dt>
@@ -207,23 +211,29 @@
                                         <dt><b>End Date :</b></dt>
                                         <dd><input type="text" name="txtEndDate" id="inputField1" size="54" readonly="true"/></dd>
                                     </dl>
-                                    <dl>
-                                        <dt><b>Description :</b></dt>
-                                        <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
-                                    </dl>
-                                    <dl class="submit">
-                                        <input align="right" type="submit" value="Create Event" />
-                                    </dl>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div><!-- end of right content-->
-                </div>   <!--end of center content -->
-                <div class="clear"></div>
-            </div> <!--end of main content-->
-            <div class="footer">
-                <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
-            </div>
+                                        <c:if test="${requestScope.compare > 0 }">
+                                        <dl>
+                                            <dt></dt>
+                                            <dd><h4><span style="color: red;">*  Please select the start date must be less than or equal to end date </span></h4></dd>
+                                        </dl>
+                                </c:if>
+                                <dl>
+                                    <dt><b>Description :</b></dt>
+                                    <dd><textarea name="txtDescription" rows="8" cols="70">${requestScope.event.description}</textarea></dd>
+                                </dl>
+                                <dl class="submit">
+                                    <input align="right" type="submit" value="Create Event" />
+                                </dl>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div><!-- end of right content-->
+            </div>   <!--end of center content -->
+            <div class="clear"></div>
+        </div> <!--end of main content-->
+        <div class="footer">
+            <div class="left_footer">NLPP University ADMINISTRATOR PANEL | Powered by <a href="#">Group 2 - FAT 3</a></div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

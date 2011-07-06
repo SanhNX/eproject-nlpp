@@ -55,10 +55,10 @@ public class AdminUserCO extends HttpServlet {
             // RequestDispatcher rd = request.getRequestDispatcher("Admin-Manage-User-Edit.jsp");
             //rd.forward(request, response);
         } else if (action.equalsIgnoreCase("search")) {
-            String keywork = request.getParameter("txtsearch");
-            List<User> users = adminUserBLO.searchUser(keywork);
+            String keyword = request.getParameter("txtsearch");
+            List<User> users = adminUserBLO.searchUser(keyword);
             request.setAttribute("users", users);
-            request.setAttribute("keywork", keywork);
+            request.setAttribute("keyword", keyword);
             RequestDispatcher rd = request.getRequestDispatcher("Admin/ManageUser.jsp");
             rd.forward(request, response);
         } else if (action.equalsIgnoreCase("updateStatus")) {

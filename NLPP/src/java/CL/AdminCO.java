@@ -61,7 +61,7 @@ public class AdminCO extends HttpServlet {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                response.sendRedirect("Admin/Admin-login.jsp");
+                response.sendRedirect("Admin/login.jsp");
             }
         } else if (action.equalsIgnoreCase("logout")) {
             session = request.getSession();

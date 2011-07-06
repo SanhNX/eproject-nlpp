@@ -9,6 +9,7 @@ import EL.Event;
 import EL.Payment;
 import EL.Presenter;
 import EL.User;
+import SLSBeans.AwardBLORemote;
 import SLSBeans.EventBLORemote;
 import SLSBeans.PresenterBLORemote;
 import SLSBeans.UserBLORemote;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
@@ -35,6 +37,7 @@ public class AdminMNEventCO extends HttpServlet {
     EventBLORemote eventBLO;
     PresenterBLORemote preBLO;
     UserBLORemote userBLO;
+    AwardBLORemote awardBLO;
 
     @Override
     public void init() throws ServletException {
@@ -47,6 +50,7 @@ public class AdminMNEventCO extends HttpServlet {
             eventBLO = (EventBLORemote) ctx.lookup("EventBLO/remote");
             preBLO = (PresenterBLORemote) ctx.lookup("PresenterBLO/remote");
             userBLO = (UserBLORemote) ctx.lookup("UserBLO/remote");
+            awardBLO = (AwardBLORemote) ctx.lookup("AwardBLO/remote");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -80,11 +84,21 @@ public class AdminMNEventCO extends HttpServlet {
                 Date endDate = (Date) dateFormat.parse(request.getParameter("txtEndDate").toString());
                 String description = request.getParameter("txtDescription");
                 Event event = new Event(title, fee, criteria, procedures, startDate, endDate, description);
-                boolean result = eventBLO.addEvent(event);
-                if (result) {
+                int compare = startDate.compareTo(endDate);
+                Date date = new Date();
+                int compareStartDate = date.compareTo(startDate);
+                if (compare > 0) {
                     request.setAttribute("event", event);
-                    RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=viewEvent");
+                    request.setAttribute("compare", compare);
+                    RequestDispatcher rd = request.getRequestDispatcher("Admin/createEvent.jsp");
                     rd.forward(request, response);
+                } else {
+                    boolean result = eventBLO.addEvent(event);
+                    if (result) {
+                        request.setAttribute("event", event);
+                        RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=viewEvent");
+                        rd.forward(request, response);
+                    }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -124,11 +138,19 @@ public class AdminMNEventCO extends HttpServlet {
                 Date endDate = (Date) dateFormat.parse(request.getParameter("txtEndDate").toString());
                 String description = request.getParameter("txtDescription");
                 Event event = new Event(id, title, fee, criteria, procedures, startDate, endDate, description);
-                boolean result = eventBLO.updateEvent(event);
-                if (result) {
-                    request.setAttribute("event", event);
+                int compare = startDate.compareTo(endDate);
+                if (compare > 0) {
+                    request.setAttribute("compare", compare);
+                    //request.setAttribute("event", event);
                     RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=formUpdateEvent&id=" + event.getId());
                     rd.forward(request, response);
+                } else {
+                    boolean result = eventBLO.updateEvent(event);
+                    if (result) {
+                        request.setAttribute("event", event);
+                        RequestDispatcher rd = request.getRequestDispatcher("AdminMNEventCO?action=formUpdateEvent&id=" + event.getId());
+                        rd.forward(request, response);
+                    }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -136,7 +158,7 @@ public class AdminMNEventCO extends HttpServlet {
         } else if (action.equalsIgnoreCase("deleteEvent")) {
             int evtID = Integer.parseInt(request.getParameter("evtID"));
             boolean result = eventBLO.deleteEvent(evtID);
-            if(result){
+            if (result) {
                 response.sendRedirect("AdminMNEventCO?action=viewEvent");
             }
         } else if (action.equalsIgnoreCase("listPresnter")) {
@@ -192,8 +214,21 @@ public class AdminMNEventCO extends HttpServlet {
             }
         } else if (action.equalsIgnoreCase("formAddWinner")) {
             int evtID = Integer.parseInt(request.getParameter("id"));
-            Event event = eventBLO.getByID(evtID);
-
+            String email = request.getParameter("email");
+            List<Award> awards = awardBLO.getAllAward();
+            request.setAttribute("evtID", evtID);
+            request.setAttribute("email", email);
+            request.setAttribute("awards", awards);
+            RequestDispatcher rd = request.getRequestDispatcher("Admin/updateWinner.jsp");
+            rd.forward(request, response);
+        } else if (action.equalsIgnoreCase("addWinner")) {
+            String email = request.getParameter("email");
+            int evtID = Integer.parseInt(request.getParameter("evtID"));
+            int awardID = Integer.parseInt(request.getParameter("rbtType"));
+            boolean result = eventBLO.addWinnerForEvent(email, evtID, awardID);
+            if (result) {
+                response.sendRedirect("AdminMNEventCO?action=formUpdateEvent&id=" + evtID);
+            }
         } else if (action.equalsIgnoreCase("delWinner")) {
             String email = request.getParameter("email");
             int evtID = Integer.parseInt(request.getParameter("evtID"));

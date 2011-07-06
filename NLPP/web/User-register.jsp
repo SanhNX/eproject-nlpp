@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : Jun 6, 2011, 11:02:14 PM
     Author     : XuanSanh_IT
@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="h"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -16,16 +17,21 @@
         <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
         <script type="text/javascript">
             window.onload = function(){
+                var yAge = 17;
+                var oAge = 61;
+                var currentYear = new Date();
+                var maxYear = currentYear.getFullYear()-yAge;
+                var minYear = currentYear.getFullYear()-oAge;
                 new JsDatePick({
                     useMode:2,
                     target:"inputField",
                     isStripped:false,
                     selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
+                        year:1993,
+                        month:1,
+                        day:1
                     },
-                    yearsRange: new Array(1945,1993),
+                    yearsRange: new Array(minYear,maxYear),
                     limitToToday:true
                 });
             };
@@ -178,7 +184,7 @@
                             Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit consequuntur magni. </li>
 
                         <br/>
-                        <form action="" method="POST" id="newsletter-form">
+                        <form action="VisiterCO?action=addMail" method="POST" id="newsletter-form">
                             <fieldset>
                                 <div class="rowElem">
                                     <h2>Newsletter</h2>
@@ -201,11 +207,16 @@
                         <h2><img src="images/icon_cube.png" width="64" height="95"/>Register <span>Form</span></h2>
                         <form id="contacts-form" action="VisiterCO?action=register" method="POST">
                             <table cellpadding="110" cellspacing="15">
+                                <c:if test="${requestScope.msg !=null}">
+                                    <tr class="field">
+                                        <td colspan="2"><h4> <span style="color: red;">${requestScope.msg}</span> </h4></td>
+                                </tr>
+                                </c:if>
                                 <tr class="field">
                                     <td>Your E-mail &nbsp;</td>
                                     <td>
-                                        <input type="text" id="txtEmail" name="txtEmail" value="" size="30"/>
-                                        <img src="" alt="" width="25px" height="25px" id="imgCheck"/>
+                                        <input type="text" id="txtEmail" name="txtEmail" value="${requestScope.user.email}" size="30"/>
+                                        <img width="25px" height="25px" id="imgCheck"/>
                                     </td>
                                 </tr>
                                 <tr class="field">
@@ -218,12 +229,12 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Birthday &nbsp;</td>
-                                    <td><input type="text" onblur="checkYear();" value=""
+                                    <td><input type="text" value="${requestScope.date}"
                                                name="txtBirthday" id="inputField" size="30" readonly="true"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Full Name &nbsp;</td>
-                                    <td><input type="text" name="txtFullname" value="" size="30"/></td>
+                                    <td><input type="text" name="txtFullname" value="${requestScope.user.fullName}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Gender &nbsp;</td>
@@ -234,11 +245,11 @@
                                 </tr>
                                 <tr class="field">
                                     <td>Address &nbsp;</td>
-                                    <td><input type="text" name="txtAddress" value="" size="30"/></td>
+                                    <td><input type="text" name="txtAddress" value="${requestScope.user.address}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td>Phone Number &nbsp;</td>
-                                    <td><input type="text" name="txtPhone" value="" size="30"/></td>
+                                    <td><input type="text" name="txtPhone" value="${requestScope.user.phone}" size="30"/></td>
                                 </tr>
                                 <tr class="field">
                                     <td></td>

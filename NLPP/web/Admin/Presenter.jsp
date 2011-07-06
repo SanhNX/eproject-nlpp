@@ -54,7 +54,7 @@
                     User user = (User) s.getAttribute("admin");
                     if (user == null) {
         %>
-        <jsp:forward page="Admin-login.jsp"/>
+        <jsp:forward page="login.jsp"/>
         <%}%>
         <div id="main_container">
 
@@ -90,6 +90,7 @@
                                     <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
                                     <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="AdminAwardCO?action=viewAward">Manage Awards</a></li>
                                     <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
                                     <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
                                     <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
@@ -135,7 +136,7 @@
                     <div class="right_content">
                         <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Presenter <span>List</span></h2>
                         <div>
-                            <a href="Admin/Admin-addPresenter.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Add New Presenter</strong><span class="bt_green_r"></span></a>
+                            <a href="Admin/addPresenter.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Add New Presenter</strong><span class="bt_green_r"></span></a>
                             <br/>
                             <div class="sidebar_search">
                                 <form action="AdminPresenterCO?action=search" method="post">

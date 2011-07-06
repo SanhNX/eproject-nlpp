@@ -145,6 +145,21 @@ public class EventBLO implements EventBLORemote {
         return true;
     }
 
+    public boolean addWinnerForEvent(String email, int evtID, int awardID){
+        EvtUserPK euPK = new EvtUserPK(evtID, email);
+        EvtUser evtUser = this.em.find(EvtUser.class, euPK);
+        if (evtUser != null) {
+            try {
+                Award award = new Award(awardID);
+                evtUser.setAward(award);
+                this.em.merge(evtUser);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return true;
+    }
+
     public boolean deleteEvent(int evtID) {
         Event event = getByID(evtID);
         if (event != null) {

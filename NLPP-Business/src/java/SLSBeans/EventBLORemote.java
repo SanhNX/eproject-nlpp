@@ -43,6 +43,8 @@ public interface EventBLORemote {
 
     boolean delWinnerForEvent(String email, int evtID);
 
+    boolean addWinnerForEvent(String email, int evtID, int awardID);
+
     boolean deleteEvent(int evtID);
 
 }
