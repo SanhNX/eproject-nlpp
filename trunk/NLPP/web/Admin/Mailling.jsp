@@ -41,7 +41,7 @@
                     User user = (User) s.getAttribute("admin");
                     if (user == null) {
         %>
-        <jsp:forward page="Admin-login.jsp"/>
+        <jsp:forward page="login.jsp"/>
         <%}%>
         <div id="main_container">
 
@@ -78,6 +78,7 @@
                                     <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
                                     <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="AdminAwardCO?action=viewAward">Manage Awards</a></li>
                                     <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
                                     <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
                                     <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>

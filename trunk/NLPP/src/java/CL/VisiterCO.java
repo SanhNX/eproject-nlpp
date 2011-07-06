@@ -6,7 +6,7 @@ package CL;
 
 import EL.*;
 import SLSBeans.*;
-import org.json.*;  
+import org.json.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -86,6 +86,7 @@ public class VisiterCO extends HttpServlet {
             User u = null;
             Date birthday = null;
             DateFormat dateFormat = null;
+            String msg = "";
             try {
                 String email = request.getParameter("txtEmail");
                 String pass = request.getParameter("txtPass");
@@ -102,13 +103,21 @@ public class VisiterCO extends HttpServlet {
                 String address = request.getParameter("txtAddress");
                 String phone = request.getParameter("txtPhone");
                 Role role = userBLO.getRole(2);
-                u = new User(email, pass, fullName, birthday, gender, address, phone,true);
+                u = new User(email, pass, fullName, birthday, gender, address, phone, true);
                 boolean result = userBLO.add(role, u);
                 if (result) {
+                    msg = "";
                     response.sendRedirect("User-login-confirm.jsp");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
+                msg = "This Email is already in use  !";
+                String date = dateFormat.format(u.getBirthday());
+                request.setAttribute("date", date);
+                request.setAttribute("user", u);
+                request.setAttribute("msg", msg);
+                RequestDispatcher rd = request.getRequestDispatcher("User-register.jsp");
+                rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("addMail")) {
             String email = request.getParameter("txtMailing");
@@ -116,6 +125,10 @@ public class VisiterCO extends HttpServlet {
             boolean result = mailingListBLO.add(mailingList);
             if (result) {
                 response.sendRedirect("index.jsp");
+            }else{
+                request.setAttribute("mailing", mailingList);
+                RequestDispatcher rd = request.getRequestDispatcher("User-MailingError.jsp");
+                rd.forward(request, response);
             }
         } else if (action.equalsIgnoreCase("viewFAQ")) {
             List<FAQ> faqs = faqBLO.getAll();

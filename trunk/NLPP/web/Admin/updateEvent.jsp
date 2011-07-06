@@ -33,8 +33,7 @@
                         month:4,
                         day:16
                     },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
+                    yearsRange: new Array(1971,2100)
                 });
                 new JsDatePick({
                     useMode:2,
@@ -45,8 +44,7 @@
                         month:4,
                         day:16
                     },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
+                    yearsRange: new Array(1971,2100)
                 });
             };
         </script>
@@ -95,15 +93,6 @@
                 });  //end validate
             }); //end function
         </script>
-        <script type="text/javascript">
-            function confirmation() {
-                var answer = confirm("Are You Still Want To Delete ?")
-                if (answer){
-                    alert("Delete Successful!")
-                }
-            }
-        </script>
-
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -112,7 +101,7 @@
                     User user = (User) s.getAttribute("admin");
                     if (user == null) {
         %>
-        <jsp:forward page="Admin-login.jsp"/>
+        <jsp:forward page="login.jsp"/>
         <%}%>
         <div id="main_container">
             <div class="header">
@@ -141,6 +130,7 @@
                                     <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
                                     <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="AdminAwardCO?action=viewAward">Manage Awards</a></li>
                                     <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
                                     <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
                                     <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
@@ -207,13 +197,19 @@
                                     <dl>
                                         <dt><b>Start Date :</b></dt>
                                         <dd><input type="text" name="txtStartDate" value="${requestScope.startDate}"
-                                                   id="inputField" size="54" readonly="true"/></dd>
+                                                   id="inputField" size="54" readonly="true" /></dd>
                                     </dl>
                                     <dl>
                                         <dt><b>End Date :</b></dt>
                                         <dd><input type="text" name="txtEndDate" value="${requestScope.endDate}"
                                                    id="inputField1" size="54" readonly="true"/></dd>
                                     </dl>
+                                    <c:if test="${requestScope.compare > 0 }">
+                                        <dl>
+                                            <dt></dt>
+                                            <dd><h4><span style="color: red;">*  Please select the start date must be less than or equal to end date </span></h4></dd>
+                                        </dl>
+                                    </c:if>
                                     <dl>
                                         <dt><b>Description :</b></dt>
                                         <dd><textarea name="txtDescription" rows="8" cols="70">${requestScope.event.description}</textarea></dd>
@@ -250,13 +246,13 @@
                                             <td>${pre.email}</td>
                                             <td>${pre.phone}</td>
                                             <td><a href="AdminMNEventCO?action=delPre&preID=${pre.id}&evtID=${requestScope.event.id}"
-                                                   onclick="confirmation();" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                   onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                         </tr>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${empty list}">
                                     <tr>
-                                        <td colspan="6"><h4><span style="color: red;">There is no data</span></h4></td>
+                                        <td colspan="6"><h4><span style="color: red;">There is no results</span></h4></td>
                                     </tr>
                                 </c:if>
                             </tbody>
@@ -272,7 +268,7 @@
                                     <th scope="col" class="rounded">Email</th>
                                     <th scope="col" class="rounded">Full Name</th>
                                     <th scope="col" class="rounded">Phone</th>
-                                    <th scope="col" class="rounded-q4">Delete</th>
+                                    <th scope="col" class="rounded-q4" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -286,15 +282,18 @@
                                             <td>${evtUser.user.email}</td>
                                             <td>${evtUser.user.fullName}</td>
                                             <td>${evtUser.user.phone}</td>
+                                            <td><a href="AdminMNEventCO?action=formAddWinner&id=${requestScope.event.id}&email=${evtUser.user.email}">
+                                                    <img src="images/user_edit.png"
+                                                         alt="Update Award For This User" title="" border="0" /></a></td>
                                             <td><a href="AdminMNEventCO?action=deleteUForE&email=${evtUser.user.email}&evtID=${requestScope.event.id}"
-                                                   onclick="confirmation();" class="ask">
+                                                   onclick="return confirm('Are You Still Want To Delete ?')" class="ask">
                                                     <img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                         </tr>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${empty evtList}">
                                     <tr>
-                                        <td colspan="6"><h4><span style="color: red;">There is no data</span></h4></td>
+                                        <td colspan="6"><h4><span style="color: red;">There is no results</span></h4></td>
                                     </tr>
                                 </c:if>
                             </tbody>
@@ -325,13 +324,12 @@
                                             <td >${evtUser.user.fullName}</td>
                                             <td >${evtUser.award.description}</td>
                                             <td><a href="AdminMNEventCO?action=delWinner&email=${evtUser.user.email}&evtID=${requestScope.event.id}"
-                                                   onclick="confirmation();" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                   onclick="return confirm('Are You Still Want To Delete ?')" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <a href="AdminMNEventCO?action=formAddWinner&id=${requestScope.event.id}" class="bt_green"><span class="bt_green_lft"></span><strong>Add Winner For This Event</strong><span class="bt_green_r"></span></a>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

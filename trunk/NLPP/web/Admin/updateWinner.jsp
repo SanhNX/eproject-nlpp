@@ -22,34 +22,7 @@
         <script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
         <link rel="stylesheet" type="text/css" media="all" href="jsDatePick/jsDatePick_ltr.min.css" />
         <script type="text/javascript" src="jsDatePick/jsDatePick.min.1.3.js"></script>
-        <script type="text/javascript">
-            window.onload = function(){
-                new JsDatePick({
-                    useMode:2,
-                    target:"inputField",
-                    isStripped:false,
-                    selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
-                    },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
-                });
-                new JsDatePick({
-                    useMode:2,
-                    target:"inputField1",
-                    isStripped:false,
-                    selectedDate:{
-                        year:2009,
-                        month:4,
-                        day:16
-                    },
-                    yearsRange: new Array(1971,2100),
-                    limitToToday:true
-                });
-            };
-        </script>
+
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/cufon-replace.js"></script>
         <script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
@@ -63,9 +36,29 @@
             $(document).ready(function(){
                 $("#form").validate({
                     rules:{
-                        txtDescription1:{
+                        txtTitle:{
+                            required:true,
+                            rangelength:[6,30]
+                        },
+                        txtFee:{
+                            required:true,
+                            digits:true,
+                            min:500,
+                            max:50000
+                        },
+                        txtCriteria:{
                             required:true,
                             minlength:10
+                        },
+                        txtProcedures:{
+                            required:true,
+                            minlength:10
+                        },
+                        txtStartDate:{
+                            required:true
+                        },
+                        txtEndDate:{
+                            required:true
                         },
                         txtDescription:{
                             required:true,
@@ -88,11 +81,7 @@
         <div id="main_container">
             <div class="header">
                 <div class="logo"><a href="#"><img src="images/logo.gif" alt="" title="" border="0" /></a></div>
-                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b>
-                    <a href="AdminCO?action=myProfile">View Profile</a>
-                    |
-                    <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a>
-                </div>
+                <div class="right_header">Welcome  <b style="font-size: 17px;"> ${sessionScope.admin.email} </b><a href="AdminCO?action=myProfile">View Profile</a>  | <a href="AdminCO?action=logout" class="logout" onclick="return confirm('Are You Still Want To Logout ?')">Logout</a></div>
                 <div class="jclock"></div>
             </div>
             <div class="main_content">
@@ -159,83 +148,45 @@
                         </div>
                     </div>
                     <div class="right_content">
-                        <c:set value="${requestScope.flag}" var="flag"/>
-                        <c:if test="${empty flag}">
-                            <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Create Award <span>Form</span></h2>
-                            </c:if>
-                            <c:if test="${not empty flag}">
-                            <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Update Award <span>Form</span></h2>
-                            </c:if>
-                        <div class="form">
-                            <c:set value="${requestScope.flag}" var="flag"/>
-                            <c:if test="${empty flag}">
-                                <form id="form" action="AdminAwardCO?action=addAward" method="post" class="niceform">
-                                    <fieldset>
-                                        <dl>
-                                            <dt><b>Description :</b></dt>
-                                            <dd><textarea name="txtDescription" rows="8" cols="70"></textarea></dd>
-                                        </dl>
-                                        <dl class="submit">
-                                            <input align="right" type="submit" value="Create Award" />
-                                        </dl>
-                                    </fieldset>
-                                </form>
-                            </c:if>
-                            <c:if test="${not empty flag}">
-
-                                <form id="form" action="AdminAwardCO?action=editAward&awardID=${requestScope.award.id}" method="post" class="niceform">
-                                    <fieldset>
-                                        <dl>
-                                            <dt><b>Description :</b></dt>
-                                            <dd><textarea name="txtDescription1" rows="8" cols="70">${requestScope.award.description}</textarea></dd>
-                                        </dl>
-                                        <dl class="submit">
-                                            <input align="right" type="submit" value="Update Award" />
-
-
-                                        </dl>
-                                    </fieldset>
-                                </form>
-
-                            </c:if>
-                        </div>
+                        <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>Winner <span>List</span></h2>
                         <br/>
-                        <h2>Award <span>List</span></h2>
-                        <table id="rounded-corner" >
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="rounded">No.</th>
-                                    <th scope="col" class="rounded">Description</th>
-                                    <th scope="col" class="rounded-q4" colspan="2" align="center">Action</th>
-                                    <!--                                    <th scope="col" class="rounded-q4">Delete</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:set var="count" value="-1"/>
-                                <c:forEach items="${requestScope.awards}" var="award">
-                                    <c:set var="count" value="${count + 1}"/>
-                                    <c:if test="${award.id != 1}">
+                        <form action="AdminMNEventCO?action=addWinner&email=${requestScope.email}&evtID=${requestScope.evtID}" method="POST">
+                            <table id="rounded-corner" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="rounded">No.</th>
+                                        <th scope="col" class="rounded">Description</th>
+                                        <th scope="col" class="rounded-q4" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:set value="${requestScope.awards}" var="awards"/>
+                                    <c:if test="${not empty awards}">
+                                        <c:set var="count" value="-1"/>
+                                        <c:forEach items="${requestScope.awards}" var="award">
+                                            <c:set var="count" value="${count + 1}"/>
+                                            <c:set var="default" value="default"/>
+                                            <c:if test="${award.description ne default}">
+                                                <tr>
+                                                    <td>${count}</td>
+                                                    <td>${award.description}</td>
+                                                    <td><input type="radio" name="rbtType" value="${award.id}"></td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${empty awards}">
                                         <tr>
-                                            <td>${count}</td>
-                                            <td>${award.description}</td>
-                                            <td><a href="AdminAwardCO?action=formEditAward&awardID=${award.id}"><img src="images/user_edit.png" alt="" title="" border="0" /></a></td>
-                                                    <c:set value="${award.evtUserList}" var="evtUser"/>
-                                                    <c:if test="${empty evtUser}">
-                                                <td><a onclick="return confirm('Are You Still Want To Delete ?')"
-                                                       href="AdminAwardCO?action=deleteAward&awardID=${award.id}" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
-                                                    </c:if>
-                                                    <c:if test="${not empty evtUser}">
-                                                <td><a href="#" class="ask"><img src="" alt="" title="" border="0" /></a></td>
-                                                    </c:if>
+                                            <td colspan="6"><h4><span style="color: red;">There is no results</span></h4></td>
                                         </tr>
                                     </c:if>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                        <c:set value="${requestScope.flag}" var="flag"/>
-                        <c:if test="${not empty flag}">
-                            <a href="AdminAwardCO?action=viewAward" class="bt_green"><span class="bt_green_lft"></span><strong>Redirect To Create Award Page</strong><span class="bt_green_r"></span></a>
-                        </c:if>
+                                    <tr class="field">
+                                        <td colspan="3" align="right"><input align="right" type="submit" value="Submit Now"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                        <a href="AdminMNEventCO?action=formUpdateEvent&id=${requestScope.evtID}" class="bt_green"><span class="bt_green_lft"></span><strong>Back To View Current Event Page</strong><span class="bt_green_r"></span></a>
                     </div><!-- end of right content-->
                 </div>   <!--end of center content -->
                 <div class="clear"></div>

@@ -21,14 +21,6 @@
         <script type="text/javascript" src="js/jquery-1.6.1.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/additional-methods.js"></script>
-        <script type="text/javascript">
-            function confirmation() {
-                var answer = confirm("Are You Still Want To Delete ?")
-                if (answer){
-                    alert("Delete Successful!")
-                }
-            }
-        </script>
         <title>National Level Paper Presentation</title>
     </head>
     <body>
@@ -37,7 +29,7 @@
                     User user = (User) s.getAttribute("admin");
                     if (user == null) {
         %>
-        <jsp:forward page="Admin-login.jsp"/>
+        <jsp:forward page="login.jsp"/>
         <%}%>
         <div id="main_container">
             <div class="header">
@@ -67,6 +59,7 @@
                                     <li><a href="AdminUserCO?action=manageUser">Manage User</a></li>
                                     <li><a href="AdminMNEventCO?action=viewEvent">Manage Event</a></li>
                                     <li><a href="AdminPresenterCO?action=presenter">Manage Presenter</a></li>
+                                    <li><a href="AdminAwardCO?action=viewAward">Manage Awards</a></li>
                                     <li><a href="mailingCO?action=mailling">Manage Mailing List</a></li>
                                     <li><a href="AdminFeedBackCO?action=feedback">Manage Feedback</a></li>
                                     <li><a href="AdminFAQCO?action=viewFAQ">Manage FAQ</a></li>
@@ -112,7 +105,7 @@
                         <h2><img alt="NLPP's Site"  src="images/icon_cube.png" width="64" height="95"/>MANAGE EVENTS <span>Form</span></h2>
                         <div>
                             <!--                            <a href="Admin-createEvent.jsp" class="bt_blue"><span class="bt_blue_lft"></span><strong>Create New Event</strong><span class="bt_blue_r"></span></a>-->
-                            <a href="Admin/Admin-createEvent.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Create New Event</strong><span class="bt_green_r"></span></a>
+                            <a href="Admin/createEvent.jsp" class="bt_green"><span class="bt_green_lft"></span><strong>Create New Event</strong><span class="bt_green_r"></span></a>
                             <br/>
                             <div class="sidebar_search">
                                 <form method="POST" action="AdminMNEventCO?action=searchEvent" id="search-event">
@@ -158,7 +151,7 @@
                                             <c:set value="${event.presenterList}" var="preList"/>
                                             <c:set value="${event.evtUserList}" var="evtUserList"/>
                                             <c:if test="${empty preList and empty evtUserList}">
-                                                <td><a onclick="confirmation();" href="AdminMNEventCO?action=deleteEvent&evtID=${event.id}" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
+                                                <td><a onclick="return confirm('Are You Still Want To Delete ?')" href="AdminMNEventCO?action=deleteEvent&evtID=${event.id}" class="ask"><img src="images/trash.png" alt="" title="" border="0" /></a></td>
                                                     </c:if>
                                                     <c:if test="${not empty preList or not empty evtUserList or not empty awardList}">
                                                 <td><a href="#" class="ask"><img alt="" title="" border="0" /></a></td>
